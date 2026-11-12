@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Dính Nhau — game vô tri cho hai người</title>
+
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Dính Nhau — Game Co-op 2 Người Đáng Yêu" />
+<meta property="og:description" content="Chơi online cùng người yêu! Hai đứa bị buộc vào nhau bằng một sợi dây vô hình — rời xa quá là không xong đâu." />
+<meta property="og:image" content="og-image.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Dính Nhau — Game Co-op 2 Người Đáng Yêu" />
+<meta name="twitter:description" content="Chơi online cùng người yêu! Nhấn vào link để cùng vào một phòng dính nhau." />
+<meta name="twitter:image" content="og-image.png" />
+
+<meta name="description" content="Một game co-op 2 người trên cùng bàn phím: hai đứa bị buộc vào nhau bằng một sợi dây, phải phối hợp để qua màn." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath d='M32 56C10 40 4 28 10 18c5-9 17-9 22 0 5-9 17-9 22 0 6 10 0 22-22 38z' fill='%23ff6f9c'/%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@500;600;700;800;900&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<div class="stage" id="stage">
+  <canvas id="game" width="1280" height="704" aria-label="Sân khấu game Dính Nhau"></canvas>
+
+  <div class="hud hidden" id="hud">
+    <div class="hud-left">
+      <div class="pill level-pill">
+        <span class="level-num" id="levelNum">1</span>
+        <span class="level-name" id="levelName">Làm quen</span>
+      </div>
+      <div class="pill timer-pill"><span class="dot"></span><span id="timer">00:00</span></div>
+      <div class="pill star-pill" id="starPill" title="Ngôi sao đã nhặt"><span class="star">★</span><span id="starCount">0/3</span></div>
+    </div>
+    <div class="hud-right">
+      <button class="icon-btn" id="btnSound" aria-label="Bật/tắt âm thanh" title="Âm thanh (M)">♪</button>
+      <button class="icon-btn" id="btnPause" aria-label="Tạm dừng" title="Tạm dừng (Esc)">❚❚</button>
+    </div>
+  </div>
+
+  <div class="banner" id="banner">
+    <div class="banner-kicker" id="bannerKicker">MÀN 1</div>
+    <div class="banner-title" id="bannerTitle">Làm quen</div>
+    <div class="banner-hint" id="bannerHint"></div>
+  </div>
+
+  <div class="screen" id="screenStart">
+    <div class="card start-card">
+      <div class="ribbon">2 NGƯỜI · 1 BÀN PHÍM · 0 CÃI NHAU</div>
+      <p class="kicker">GAME VÔ TRI DÀNH CHO HAI NGƯỜI</p>
+      <h1 class="logo">Dính<span>Nhau</span></h1>
+      <p class="lede">Hai đứa bị buộc vào nhau bằng một sợi dây vô hình.<br>Rời xa quá là… không xong đâu.</p>
+
+      <!-- Chế độ chơi -->
+      <div class="mode-tabs">
+        <button type="button" class="mode-tab active" id="tabLocal">🎮 Cùng một máy</button>
+        <button type="button" class="mode-tab" id="tabOnline">🌐 Chơi Online (Xa nhau)</button>
+      </div>
+
+      <!-- Tên 2 người chơi local -->
+      <div class="names" id="localNamesBlock">
+        <label class="name-field">
+          <span><i class="swatch pink"></i>Người chơi 1 (Hồng)</span>
+          <input id="name1" maxlength="12" value="Bông" autocomplete="off" spellcheck="false" />
+        </label>
+        <label class="name-field">
+          <span><i class="swatch blue"></i>Người chơi 2 (Xanh)</span>
+          <input id="name2" maxlength="12" value="Bắp" autocomplete="off" spellcheck="false" />
+        </label>
+      </div>
+
+      <!-- Khung Chơi Online qua Firebase -->
+      <div class="online-box hidden" id="onlineBox">
+        <div class="online-header-row">
+          <label class="name-field flex-1">
+            <span>Tên của bạn</span>
+            <input id="onlineMyName" maxlength="12" value="Bông" autocomplete="off" spellcheck="false" />
+          </label>
+          
+        </div>
+
+        <div class="online-actions">
+          <div class="online-col">
+            <button type="button" class="btn btn-primary btn-room" id="btnCreateRoom">🏠 Tạo phòng mới</button>
+            <p class="room-tip">Làm chủ phòng và chia sẻ mã</p>
+          </div>
+          <div class="online-col">
+            <div class="join-group">
+              <input id="inputRoomCode" placeholder="Nhập mã phòng" maxlength="8" autocomplete="off" />
+              <button type="button" class="btn btn-secondary btn-room" id="btnJoinRoom">🚀 Vào phòng</button>
+            </div>
+            <p class="room-tip">Nhập mã phòng người yêu gửi</p>
+          </div>
+        </div>
+
+        <div class="room-status hidden" id="roomStatus">
+          <div class="status-top">
+            <span class="badge-room" id="badgeRoomRole">Chủ phòng (P1 - Hồng)</span>
+            <span class="room-code-tag">Mã: <b id="roomCodeText">----</b></span>
+          </div>
+          <div class="share-actions-row">
+            <button type="button" class="btn btn-share-link" id="btnShareLink">🔗 Gửi link mời người yêu</button>
+            <button type="button" class="btn btn-copy-code" id="btnCopyCode" title="Sao chép mã">📋 Chép mã</button>
+          </div>
+          <p class="status-note" id="statusNote">Đang chờ người yêu kết nối vào phòng...</p>
+          <button type="button" class="btn btn-ghost btn-cancel-room" id="btnCancelRoom">Hủy phòng</button>
+        </div>
+      </div>
+
+      <button class="btn btn-primary btn-start" id="btnStart">Bắt đầu dính nhau</button>
+
+      <div class="controls">
+        <div class="control-col p1">
+          <div class="control-name"><i class="swatch pink"></i><span id="ctrlName1">Bông</span></div>
+          <div class="keys">
+            <span><kbd>A</kbd><kbd>D</kbd> đi</span>
+            <span><kbd>W</kbd> nhảy</span>
+            <span><kbd>S</kbd> neo</span>
+          </div>
+        </div>
+        <div class="control-col p2">
+          <div class="control-name"><i class="swatch blue"></i><span id="ctrlName2">Bắp</span></div>
+          <div class="keys">
+            <span><kbd>←</kbd><kbd>→</kbd> đi</span>
+            <span><kbd>↑</kbd> nhảy</span>
+            <span><kbd>↓</kbd> neo</span>
+          </div>
+        </div>
+      </div>
+      <p class="fineprint">Giữ <b>S</b> / <b>↓</b> để <b>neo</b> — làm điểm tựa, không bị kéo đi. Cần 2 người ngồi cùng một máy. Chơi bằng bàn phím.</p>
+    </div>
+  </div>
+
+  <div class="screen hidden" id="screenPause">
+    <div class="card small-card">
+      <p class="kicker">NGHỈ MỘT CHÚT</p>
+      <h2 class="h2">Tạm dừng</h2>
+      <p class="muted">Uống ngụm nước, nắm tay cái đã.</p>
+      <div class="stack">
+        <button class="btn btn-primary" id="btnResume">Chơi tiếp</button>
+        <button class="btn btn-ghost" id="btnRestartLevel">Chơi lại màn này</button>
+        <button class="btn btn-ghost" id="btnQuit">Về màn hình chính</button>
+      </div>
+      <p class="tiny">Esc / P để chơi tiếp · M để tắt tiếng</p>
+    </div>
+  </div>
+
+  <div class="screen hidden" id="screenClear">
+    <div class="card small-card clear-card">
+      <p class="kicker" id="clearKicker">MÀN 1 XONG</p>
+      <h2 class="h2" id="clearTitle">Qua rồi!</h2>
+      <p class="muted" id="clearLine">Hai đứa dính nhau ghê.</p>
+      <div class="stats" id="clearStats"></div>
+      <button class="btn btn-primary" id="btnNext">Màn tiếp theo</button>
+      <p class="tiny">Enter để đi tiếp</p>
+    </div>
+  </div>
+
+  <div class="screen hidden" id="screenEnd">
+    <div class="card end-card">
+      <p class="kicker">HẾT MÀN RỒI ĐÓ</p>
+      <h2 class="h2 end-title" id="endTitle">Hai đứa về tới nhà!</h2>
+      <div class="big-heart" aria-hidden="true">♥</div>
+      <p class="muted" id="endLine">Giờ thì ôm nhau một cái đi.</p>
+      <div class="stats" id="endStats"></div>
+      <p class="rank" id="endRank"></p>
+      <div class="stack row">
+        <button class="btn btn-primary" id="btnReplay">Chơi lại từ đầu</button>
+        <button class="btn btn-ghost" id="btnHome">Về màn hình chính</button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Thanh Biểu Cảm Nhanh (Quick Emotes) -->
+  <div class="emote-bar hidden" id="emoteBar">
+    <button type="button" class="emote-btn" data-emote="love" title="Thả tim (Phím 1)">❤️</button>
+    <button type="button" class="emote-btn" data-emote="kiss" title="Hôn cái (Phím 2)">😘</button>
+    <button type="button" class="emote-btn" data-emote="cry" title="Khóc nhè (Phím 3)">😭</button>
+    <button type="button" class="emote-btn" data-emote="angry" title="Dỗi/Quạo (Phím 4)">😤</button>
+    <button type="button" class="emote-btn" data-emote="sos" title="Cứu em! (Phím 5)">🆘</button>
+  </div>
+
+  
+  </div>
+  <div class="error-banner hidden" id="errorBanner"></div>
+</div>
+
+<div class="rotate-note">Trò này cần bàn phím nha — rủ người yêu ngồi cạnh rồi mở trên laptop nhé.</div>
+
+
+  <!-- Firebase Realtime Database SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+  <script src="network.js"></script>
+  <script src="game.js"></script>
+
+</body>
+</html>
