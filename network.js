@@ -29,9 +29,24 @@
     currentRoomId: null,
     remoteKeys: { left: false, right: false, jump: false, anchor: false },
     remoteEmote: null,
+    onPartnerDisconnect: null,
+    onRoomClosed: null,
+
+    _lastKeys: null,
+    _lastSendT: 0,
 
     init() {
       this.setupFirebase(DEFAULT_FIREBASE_CONFIG);
+    },
+
+    loadConfig() {
+      return DEFAULT_FIREBASE_CONFIG;
+    },
+
+    saveConfig(cfg) {
+      if (cfg && cfg.databaseURL) {
+        this.setupFirebase(cfg);
+      }
     },
 
     setupFirebase(cfg) {
@@ -65,55 +80,68 @@
         return;
       }
 
-      const roomId = this.generateRoomCode();
-      this.currentRoomId = roomId;
-      isHost = true;
-      myRole = 0;
-      this.isOnline = true;
-      this.isHost = true;
-      this.role = 0;
+      try {
+        const roomId = this.generateRoomCode();
+        this.currentRoomId = roomId;
+        isHost = true;
+        myRole = 0;
+        this.isOnline = true;
+        this.isHost = true;
+        this.role = 0;
+        this._lastKeys = null;
+        this._lastSendT = 0;
 
-      roomRef = fbDb.ref('rooms/' + roomId);
-      await roomRef.set({
-        createdAt: Date.now(),
-        status: 'waiting',
-        levelIndex: 0,
-        p1: { name: hostName || 'Bông', ready: true, connected: true },
-        p2: null,
-        state: null,
-        inputP2: { left: false, right: false, jump: false, anchor: false },
-        emote: null
-      });
+        roomRef = fbDb.ref('rooms/' + roomId);
+        await roomRef.set({
+          createdAt: Date.now(),
+          status: 'waiting',
+          levelIndex: 0,
+          p1: { name: hostName || 'Bông', ready: true, connected: true },
+          p2: null,
+          state: null,
+          inputP2: { left: false, right: false, jump: false, anchor: false },
+          emote: null
+        });
 
-      // Lắng nghe người yêu vào phòng
-      roomRef.child('p2').on('value', (snap) => {
-        const val = snap.val();
-        if (val && val.connected) {
-          roomRef.update({ status: 'playing' });
-          if (onReady) onReady({ roomId, isHost: true, partnerName: val.name || 'Bắp' });
-        }
-      });
+        // Lắng nghe người yêu vào phòng
+        let hasStarted = false;
+        roomRef.child('p2').on('value', (snap) => {
+          const val = snap.val();
+          if (val && val.connected) {
+            if (!hasStarted) {
+              hasStarted = true;
+              roomRef.update({ status: 'playing' });
+              if (onReady) onReady({ roomId, isHost: true, partnerName: val.name || 'Bắp' });
+            }
+          } else if (hasStarted && val && !val.connected) {
+            if (this.onPartnerDisconnect) this.onPartnerDisconnect();
+          }
+        });
 
-      // Lắng nghe input từ Guest
-      roomRef.child('inputP2').on('value', (snap) => {
-        const keys = snap.val();
-        if (keys) {
-          Network.remoteKeys = keys;
-        }
-      });
+        // Lắng nghe input từ Guest
+        roomRef.child('inputP2').on('value', (snap) => {
+          const keys = snap.val();
+          if (keys) {
+            Network.remoteKeys = keys;
+          }
+        });
 
-      // Lắng nghe emote biểu cảm
-      roomRef.child('emote').on('value', (snap) => {
-        const em = snap.val();
-        if (em && em.from !== myRole && Date.now() - em.time < 3000) {
-          Network.remoteEmote = em;
-          if (window.__triggerEmote) window.__triggerEmote(em.from, em.type);
-        }
-      });
+        // Lắng nghe emote biểu cảm
+        roomRef.child('emote').on('value', (snap) => {
+          const em = snap.val();
+          if (em && em.from !== myRole && Date.now() - em.time < 3000) {
+            Network.remoteEmote = em;
+            if (window.__triggerEmote) window.__triggerEmote(em.from, em.type);
+          }
+        });
 
-      // Dọn phòng khi Host thoát
-      roomRef.onDisconnect().remove();
-      return roomId;
+        // Dọn phòng khi Host thoát
+        roomRef.onDisconnect().remove();
+        return roomId;
+      } catch (err) {
+        console.error('Lỗi tạo phòng:', err);
+        if (onError) onError(err.message || 'Lỗi kết nối Firebase');
+      }
     },
 
     // Vào phòng của người yêu (Guest)
@@ -123,71 +151,101 @@
         return;
       }
 
-      roomRef = fbDb.ref('rooms/' + roomId);
-      const snap = await roomRef.once('value');
-      const data = snap.val();
+      try {
+        roomRef = fbDb.ref('rooms/' + roomId);
+        const snap = await roomRef.once('value');
+        const data = snap.val();
 
-      if (!data) {
-        if (onError) onError('Không tìm thấy phòng số ' + roomId);
-        return;
+        if (!data) {
+          if (onError) onError('Không tìm thấy phòng số ' + roomId);
+          return;
+        }
+        if (data.p2 && data.p2.connected) {
+          if (onError) onError('Phòng này đã có đủ 2 người rồi!');
+          return;
+        }
+
+        this.currentRoomId = roomId;
+        isHost = false;
+        myRole = 1;
+        this.isOnline = true;
+        this.isHost = false;
+        this.role = 1;
+        this._lastKeys = null;
+        this._lastSendT = 0;
+
+        await roomRef.child('p2').set({
+          name: guestName || 'Bắp',
+          ready: true,
+          connected: true
+        });
+
+        roomRef.child('p2').onDisconnect().update({ connected: false });
+
+        // Lắng nghe trạng thái phòng bị giải tán (Host thoát)
+        roomRef.on('value', (rSnap) => {
+          if (!rSnap.exists() && this.isOnline) {
+            if (this.onRoomClosed) this.onRoomClosed();
+          }
+        });
+
+        // Nhận state từ Host và render
+        roomRef.child('state').on('value', (sSnap) => {
+          const st = sSnap.val();
+          if (st && window.__applyNetworkState) {
+            window.__applyNetworkState(st);
+          }
+        });
+
+        // Đồng bộ màn chơi
+        roomRef.child('levelIndex').on('value', (lvlSnap) => {
+          const lvl = lvlSnap.val();
+          if (typeof lvl === 'number' && window.__setNetworkLevel) {
+            window.__setNetworkLevel(lvl);
+          }
+        });
+
+        // Nhận emote
+        roomRef.child('emote').on('value', (eSnap) => {
+          const em = eSnap.val();
+          if (em && em.from !== myRole && Date.now() - em.time < 3000) {
+            Network.remoteEmote = em;
+            if (window.__triggerEmote) window.__triggerEmote(em.from, em.type);
+          }
+        });
+
+        if (onSuccess) onSuccess({ roomId, isHost: false, partnerName: data.p1 ? data.p1.name : 'Bông' });
+      } catch (err) {
+        console.error('Lỗi vào phòng:', err);
+        if (onError) onError(err.message || 'Lỗi kết nối Firebase');
       }
-      if (data.p2 && data.p2.connected) {
-        if (onError) onError('Phòng này đã có đủ 2 người rồi!');
-        return;
-      }
-
-      this.currentRoomId = roomId;
-      isHost = false;
-      myRole = 1;
-      this.isOnline = true;
-      this.isHost = false;
-      this.role = 1;
-
-      await roomRef.child('p2').set({
-        name: guestName || 'Bắp',
-        ready: true,
-        connected: true
-      });
-
-      roomRef.child('p2').onDisconnect().update({ connected: false });
-
-      // Nhận state từ Host và render
-      roomRef.child('state').on('value', (sSnap) => {
-        const st = sSnap.val();
-        if (st && window.__applyNetworkState) {
-          window.__applyNetworkState(st);
-        }
-      });
-
-      // Đồng bộ màn chơi
-      roomRef.child('levelIndex').on('value', (lvlSnap) => {
-        const lvl = lvlSnap.val();
-        if (typeof lvl === 'number' && window.__setNetworkLevel) {
-          window.__setNetworkLevel(lvl);
-        }
-      });
-
-      // Nhận emote
-      roomRef.child('emote').on('value', (eSnap) => {
-        const em = eSnap.val();
-        if (em && em.from !== myRole && Date.now() - em.time < 3000) {
-          Network.remoteEmote = em;
-          if (window.__triggerEmote) window.__triggerEmote(em.from, em.type);
-        }
-      });
-
-      if (onSuccess) onSuccess({ roomId, isHost: false, partnerName: data.p1 ? data.p1.name : 'Bông' });
     },
 
-    // Gửi Input của Guest
+    // Gửi Input của Guest (có debounce/dedup tránh spam kết nối)
     sendGuestInput(keys) {
       if (this.isOnline && !this.isHost && roomRef) {
-        roomRef.child('inputP2').set({
+        const now = Date.now();
+        const lk = this._lastKeys;
+        const changed = !lk ||
+          lk.left !== !!keys.left ||
+          lk.right !== !!keys.right ||
+          lk.jump !== !!keys.jump ||
+          lk.anchor !== !!keys.anchor;
+
+        // Chỉ gửi nếu có phím thay đổi, hoặc định kỳ 300ms 1 lần để duy trì heartbeat
+        if (!changed && this._lastSendT && (now - this._lastSendT < 300)) {
+          return;
+        }
+
+        this._lastKeys = {
           left: !!keys.left,
           right: !!keys.right,
           jump: !!keys.jump,
           anchor: !!keys.anchor
-        });
+        };
+        this._lastSendT = now;
+
+        roomRef.child('inputP2').set(this._lastKeys);
       }
     },
 
@@ -201,7 +259,7 @@
     // Đổi màn chơi
     changeLevel(levelIndex) {
       if (this.isOnline && this.isHost && roomRef) {
-        roomRef.update({ levelIndex });
+        roomRef.update({ levelIndex, state: null });
       }
     },
 
@@ -219,16 +277,27 @@
     // Rời phòng
     leaveRoom() {
       if (roomRef) {
-        if (isHost) roomRef.remove();
-        else roomRef.child('p2').remove();
+        try {
+          roomRef.off();
+          if (isHost) {
+            roomRef.remove();
+          } else {
+            roomRef.child('p2').remove();
+          }
+        } catch (e) {}
         roomRef = null;
       }
       this.isOnline = false;
       this.isHost = false;
       this.currentRoomId = null;
+      this._lastKeys = null;
+      this.remoteKeys = { left: false, right: false, jump: false, anchor: false };
     }
   };
 
   window.GameNetwork = Network;
   window.addEventListener('DOMContentLoaded', () => Network.init());
+  window.addEventListener('beforeunload', () => {
+    if (Network.isOnline) Network.leaveRoom();
+  });
 })();

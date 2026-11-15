@@ -553,8 +553,15 @@
     }
     if (code === 'KeyM') { toggleSound(); return; }
     if (G.mode === 'playing') {
-      if (code === KEYS[0].jump) G.players[0].jumpBuffer = 0.14;
-      if (code === KEYS[1].jump) G.players[1].jumpBuffer = 0.14;
+      const isOnlineHost = !!(window.GameNetwork && window.GameNetwork.isOnline && window.GameNetwork.isHost);
+      if (isOnlineHost) {
+        if (code === 'KeyW' || code === 'ArrowUp' || code === 'Space') {
+          if (G.players[0]) G.players[0].jumpBuffer = 0.16;
+        }
+      } else {
+        if (code === KEYS[0].jump && G.players[0]) G.players[0].jumpBuffer = 0.14;
+        if (code === KEYS[1].jump && G.players[1]) G.players[1].jumpBuffer = 0.14;
+      }
       if (code === 'KeyR' && e.altKey) { restartLevel(); }
     } else if (G.mode === 'clear') {
       if ((code === 'Enter' || code === 'Space') && G.uiReady) nextLevel();
@@ -567,8 +574,13 @@
     held.delete(code);
     if (code === 'KeyM') return;
     if (G.mode !== 'playing') return;
-    if (code === KEYS[0].jump) cutJump(G.players[0]);
-    if (code === KEYS[1].jump) cutJump(G.players[1]);
+    const isOnlineHost = !!(window.GameNetwork && window.GameNetwork.isOnline && window.GameNetwork.isHost);
+    if (isOnlineHost) {
+      if ((code === 'KeyW' || code === 'ArrowUp' || code === 'Space') && G.players[0]) cutJump(G.players[0]);
+    } else {
+      if (code === KEYS[0].jump && G.players[0]) cutJump(G.players[0]);
+      if (code === KEYS[1].jump && G.players[1]) cutJump(G.players[1]);
+    }
   });
   window.addEventListener('blur', () => {
     held.clear();
@@ -736,6 +748,19 @@
     dom.timer.textContent = '00:00';
     showBanner(L, idx);
     updateHUD();
+
+    if (dom.emoteBar) {
+      if (window.GameNetwork && window.GameNetwork.isOnline) {
+        dom.emoteBar.classList.remove('hidden');
+      } else {
+        dom.emoteBar.classList.add('hidden');
+      }
+    }
+
+    if (window.GameNetwork && window.GameNetwork.isOnline && window.GameNetwork.isHost) {
+      window.GameNetwork.changeLevel(idx);
+    }
+
     setTimeout(() => { G.uiReady = true; }, 350);
   }
 
@@ -769,6 +794,9 @@
     G.totalTauts = Math.max(0, G.totalTauts - G.levelTauts);
     hideScreensOnly();
     buildLevel(G.levelIndex);
+    if (window.GameNetwork && window.GameNetwork.isOnline && window.GameNetwork.isHost) {
+      window.GameNetwork.changeLevel(G.levelIndex);
+    }
   }
   function hideScreensOnly() {
     screenHideAll();
@@ -801,11 +829,143 @@
     dom.hud.classList.add('hidden');
     dom.banner.classList.remove('show');
     if (dom.btnStart) dom.btnStart.blur();
+    if (dom.emoteBar) dom.emoteBar.classList.add('hidden');
+    if (window.GameNetwork && window.GameNetwork.isOnline) {
+      window.GameNetwork.leaveRoom();
+    }
+    if (dom.roomStatus) dom.roomStatus.classList.add('hidden');
+    if (dom.btnCreateRoom) dom.btnCreateRoom.disabled = false;
   }
+
+  // ------------------------------------------------------------------- network sync payload helper
+  function getHostSyncPayload(customMode) {
+    const ps = G.players || [];
+    const p1 = ps[0] || {};
+    const p2 = ps[1] || {};
+    return {
+      p1: {
+        x: Math.round(p1.x || 0),
+        y: Math.round(p1.y || 0),
+        vx: Math.round(p1.vx || 0),
+        vy: Math.round(p1.vy || 0),
+        onGround: !!p1.onGround,
+        anchored: !!p1.anchored,
+        face: p1.face || 1,
+        walk: Math.round((p1.walk || 0) * 100) / 100,
+        squash: Math.round((p1.squash || 0) * 100) / 100,
+        bubble: p1.bubble ? { text: p1.bubble.text } : null
+      },
+      p2: {
+        x: Math.round(p2.x || 0),
+        y: Math.round(p2.y || 0),
+        vx: Math.round(p2.vx || 0),
+        vy: Math.round(p2.vy || 0),
+        onGround: !!p2.onGround,
+        anchored: !!p2.anchored,
+        face: p2.face || 1,
+        walk: Math.round((p2.walk || 0) * 100) / 100,
+        squash: Math.round((p2.squash || 0) * 100) / 100,
+        bubble: p2.bubble ? { text: p2.bubble.text } : null
+      },
+      doors: (G.doors || []).map(d => ({ opened: !!d.opened, openT: Math.round(d.openT * 100) / 100 })),
+      plates: (G.plates || []).map(pl => ({ on: !!pl.on, live: !!pl.live, pressT: Math.round(pl.pressT * 100) / 100 })),
+      heart: G.heart ? { x: Math.round(G.heart.x), y: Math.round(G.heart.y), held: !!G.heart.held } : null,
+      seesaw: G.seesaw ? { tilt: Math.round((G.seesaw.tilt || 0) * 100) / 100 } : null,
+      stars: (G.stars || []).map(s => !!s.got),
+      levelIndex: G.levelIndex,
+      levelTime: Math.round((G.levelTime || 0) * 10) / 10,
+      levelStars: G.levelStars || 0,
+      levelFalls: G.levelFalls || 0,
+      levelTauts: G.levelTauts || 0,
+      shake: G.shake || 0,
+      flash: G.flash || 0,
+      dead: !!G.dead,
+      mode: customMode || G.mode || 'playing'
+    };
+  }
+
+  let prevRkJump = false;
 
   // ------------------------------------------------------------------- physics
   function update(dt) {
     if (G.mode !== 'playing') return;
+
+    const isOnline = !!(window.GameNetwork && window.GameNetwork.isOnline);
+    const isHost = !isOnline || window.GameNetwork.isHost;
+    const isGuest = isOnline && !window.GameNetwork.isHost;
+
+    if (isGuest) {
+      // GUEST CLIENT-SIDE: Gửi phím và nội suy mượt từ Host (không chạy vật lý độc lập)
+      const guestKeys = {
+        left: held.has('KeyA') || held.has('ArrowLeft'),
+        right: held.has('KeyD') || held.has('ArrowRight'),
+        jump: held.has('KeyW') || held.has('ArrowUp') || held.has('Space'),
+        anchor: held.has('KeyS') || held.has('ArrowDown'),
+      };
+      window.GameNetwork.sendGuestInput(guestKeys);
+
+      const ps = G.players;
+      for (const p of ps) {
+        p.wasGround = p.onGround;
+        p.blink -= dt;
+        if (p.blink <= 0) { p.blink = rnd(2.2, 5.5); p.blinkT = 0.13; }
+        if (p.blinkT > 0) p.blinkT = Math.max(0, p.blinkT - dt);
+        if (p.bubble) { p.bubble.t -= dt; if (p.bubble.t <= 0) p.bubble = null; }
+        p.squash += (0 - p.squash) * Math.min(1, dt * 16);
+
+        if (p.targetX !== undefined && p.targetY !== undefined) {
+          const d = Math.hypot(p.targetX - p.x, p.targetY - p.y);
+          if (d > 140) {
+            p.x = p.targetX;
+            p.y = p.targetY;
+          } else {
+            const lerpRate = Math.min(1, dt * 26);
+            p.x += (p.targetX - p.x) * lerpRate;
+            p.y += (p.targetY - p.y) * lerpRate;
+          }
+        }
+      }
+
+      if (G.heart && G.heart.targetX !== undefined && G.heart.targetY !== undefined) {
+        const lerpRate = Math.min(1, dt * 24);
+        G.heart.x += (G.heart.targetX - G.heart.x) * lerpRate;
+        G.heart.y += (G.heart.targetY - G.heart.y) * lerpRate;
+      }
+
+      if (G.seesaw) seesawTick(dt);
+
+      if (G.doors) {
+        for (const d of G.doors) {
+          if (d.targetOpenT !== undefined) {
+            d.openT += (d.targetOpenT - d.openT) * Math.min(1, dt * 12);
+          }
+        }
+      }
+      if (G.plates) {
+        for (const pl of G.plates) {
+          if (pl.targetPressT !== undefined) {
+            pl.pressT += (pl.targetPressT - pl.pressT) * Math.min(1, dt * 12);
+          }
+        }
+      }
+
+      G.flash = Math.max(0, G.flash - dt * 3);
+      G.fade = Math.max(0, G.fade - dt * 3.2);
+
+      if (ps[0] && ps[1]) {
+        G.ropeDist = Math.hypot(ps[1].x - ps[0].x, ps[1].y - ps[0].y);
+      }
+
+      if (G.stars) {
+        for (const s of G.stars) {
+          if (!s.got) s.phase += dt * 3;
+        }
+      }
+
+      return;
+    }
+
+    // AUTHORITATIVE SIMULATION (HOST & LOCAL)
     G.levelTime += dt;
     G.tautCd = Math.max(0, G.tautCd - dt);
     G.flash = Math.max(0, G.flash - dt * 3);
@@ -827,29 +987,29 @@
       if (p.bubble) { p.bubble.t -= dt; if (p.bubble.t <= 0) p.bubble = null; }
     }
 
-    // Cập nhật input mạng nếu đang chơi online
-    if (window.GameNetwork && window.GameNetwork.isOnline) {
-      if (window.GameNetwork.isHost) {
-        // Host nhận keys của Player 2 từ network
-        const rk = window.GameNetwork.remoteKeys || {};
-        if (rk.jump && ps[1].onGround && ps[1].jumpBuffer <= 0) ps[1].jumpBuffer = 0.14;
-      } else {
-        // Guest gửi keys của mình lên mạng
-        const myKeys = {
-          left: held.has(KEYS[1].left) || held.has(KEYS[0].left),
-          right: held.has(KEYS[1].right) || held.has(KEYS[0].right),
-          jump: held.has(KEYS[1].jump) || held.has(KEYS[0].jump),
-          anchor: held.has(KEYS[1].anchor) || held.has(KEYS[0].anchor)
-        };
-        window.GameNetwork.sendGuestInput(myKeys);
+    // Host nhận phím từ Guest Player 2
+    if (isOnline && isHost) {
+      const rk = window.GameNetwork.remoteKeys || {};
+      if (rk.jump && !prevRkJump) {
+        ps[1].jumpBuffer = 0.18;
       }
+      if (!rk.jump && prevRkJump) {
+        cutJump(ps[1]);
+      }
+      prevRkJump = !!rk.jump;
     }
 
     // anchor (chỉ có tác dụng khi đang đứng trên mặt đất)
     for (const p of ps) {
-      let isHoldingAnchor = held.has(KEYS[p.i].anchor);
-      if (window.GameNetwork && window.GameNetwork.isOnline && window.GameNetwork.isHost && p.i === 1) {
-        isHoldingAnchor = !!(window.GameNetwork.remoteKeys && window.GameNetwork.remoteKeys.anchor);
+      let isHoldingAnchor = false;
+      if (isOnline && isHost) {
+        if (p.i === 0) {
+          isHoldingAnchor = held.has('KeyS') || held.has('ArrowDown');
+        } else {
+          isHoldingAnchor = !!(window.GameNetwork.remoteKeys && window.GameNetwork.remoteKeys.anchor);
+        }
+      } else {
+        isHoldingAnchor = held.has(KEYS[p.i].anchor);
       }
       p.anchored = p.onGround && isHoldingAnchor;
     }
@@ -877,12 +1037,19 @@
     for (const p of ps) {
       p.onGround = false;
       p.standingOn = null;
-      const k = KEYS[p.i];
-      let dir = (held.has(k.right) ? 1 : 0) - (held.has(k.left) ? 1 : 0);
-      if (window.GameNetwork && window.GameNetwork.isOnline && window.GameNetwork.isHost && p.i === 1) {
-        const rk = window.GameNetwork.remoteKeys || {};
-        dir = (rk.right ? 1 : 0) - (rk.left ? 1 : 0);
+      let dir = 0;
+      if (isOnline && isHost) {
+        if (p.i === 0) {
+          dir = (held.has('KeyD') || held.has('ArrowRight') ? 1 : 0) - (held.has('KeyA') || held.has('ArrowLeft') ? 1 : 0);
+        } else {
+          const rk = window.GameNetwork.remoteKeys || {};
+          dir = (rk.right ? 1 : 0) - (rk.left ? 1 : 0);
+        }
+      } else {
+        const k = KEYS[p.i];
+        dir = (held.has(k.right) ? 1 : 0) - (held.has(k.left) ? 1 : 0);
       }
+
       if (p.anchored) {
         p.vx = approach(p.vx, 0, 6000 * dt);
       } else if (dir !== 0) {
@@ -917,20 +1084,12 @@
     updateStars(dt);
     updateGoal();
 
-    // Host đồng bộ state xuống Guest qua Firebase (gửi dạng tối ưu)
-    if (window.GameNetwork && window.GameNetwork.isOnline && window.GameNetwork.isHost && G.mode === 'playing') {
+    // Host đồng bộ state xuống Guest qua Firebase (20 lần / giây)
+    if (isOnline && isHost) {
       G._netSyncT = (G._netSyncT || 0) + dt;
-      if (G._netSyncT >= 0.04) { // 25 lần / giây siêu mượt
+      if (G._netSyncT >= 0.05) {
         G._netSyncT = 0;
-        window.GameNetwork.broadcastHostState({
-          p1: { x: ps[0].x, y: ps[0].y, vx: ps[0].vx, vy: ps[0].vy, onGround: ps[0].onGround, anchored: ps[0].anchored, face: ps[0].face, walk: ps[0].walk, squash: ps[0].squash },
-          p2: { x: ps[1].x, y: ps[1].y, vx: ps[1].vx, vy: ps[1].vy, onGround: ps[1].onGround, anchored: ps[1].anchored, face: ps[1].face, walk: ps[1].walk, squash: ps[1].squash },
-          doors: (G.doors || []).map(d => ({ opened: d.opened, openT: d.openT })),
-          plates: (G.plates || []).map(pl => ({ on: pl.on, live: pl.live, pressT: pl.pressT })),
-          heart: G.heart ? { x: G.heart.x, y: G.heart.y, held: G.heart.held } : null,
-          seesaw: G.seesaw ? { tilt: G.seesaw.tilt } : null,
-          shake: G.shake
-        });
+        window.GameNetwork.broadcastHostState(getHostSyncPayload());
       }
     }
   }
@@ -1162,6 +1321,10 @@
     }
     say(pick(G.players), pick(LINES.death));
     sfx('die');
+
+    if (window.GameNetwork && window.GameNetwork.isOnline && window.GameNetwork.isHost) {
+      window.GameNetwork.broadcastHostState(getHostSyncPayload());
+    }
   }
   function resetPlayers() {
     G.dead = false;
@@ -1312,10 +1475,27 @@
       <div class="stat"><div class="v">${G.levelFalls}</div><div class="k">LẦN NGÃ</div></div>
       <div class="stat"><div class="v">${G.levelTauts}</div><div class="k">DÂY CĂNG</div></div>
       <div class="stat"><div class="v">★ ${G.levelStars}/${G.stars.length}</div><div class="k">NGÔI SAO</div></div>`;
-    dom.btnNext.textContent = G.levelIndex + 1 >= LEVELS.length ? 'Về đích thôi' : 'Màn tiếp theo';
+
+    const isOnline = !!(window.GameNetwork && window.GameNetwork.isOnline);
+    const isGuest = isOnline && !window.GameNetwork.isHost;
+
+    if (isGuest) {
+      dom.btnNext.textContent = 'Chờ chủ phòng bấm tiếp...';
+      dom.btnNext.disabled = true;
+    } else {
+      dom.btnNext.textContent = G.levelIndex + 1 >= LEVELS.length ? 'Về đích thôi' : 'Màn tiếp theo';
+      dom.btnNext.disabled = false;
+      if (isOnline && window.GameNetwork.isHost) {
+        window.GameNetwork.broadcastHostState(getHostSyncPayload('clear'));
+      }
+    }
+
     dom.screenClear.classList.remove('hidden');
     G.uiReady = false;
-    setTimeout(() => { G.uiReady = true; dom.btnNext.focus({ preventScroll: true }); }, 420);
+    setTimeout(() => {
+      G.uiReady = true;
+      if (!isGuest) dom.btnNext.focus({ preventScroll: true });
+    }, 420);
   }
 
   function nextLevel() {
@@ -1362,6 +1542,10 @@
     G.uiReady = false;
     setTimeout(() => { G.uiReady = true; dom.btnReplay.focus({ preventScroll: true }); }, 500);
     confettiBurst(160);
+
+    if (window.GameNetwork && window.GameNetwork.isOnline && window.GameNetwork.isHost) {
+      window.GameNetwork.broadcastHostState(getHostSyncPayload('ending'));
+    }
   }
 
   function replay() {
@@ -2795,6 +2979,13 @@
         G.respawnT -= dt;
         if (G.respawnT <= 0) resetPlayers();
         acc = 0;
+        if (window.GameNetwork && window.GameNetwork.isOnline && window.GameNetwork.isHost) {
+          G._netSyncT = (G._netSyncT || 0) + dt;
+          if (G._netSyncT >= 0.05) {
+            G._netSyncT = 0;
+            window.GameNetwork.broadcastHostState(getHostSyncPayload());
+          }
+        }
       } else {
         acc += dt;
         let steps = 0;
@@ -2854,27 +3045,121 @@
   };
 
   window.__applyNetworkState = function(st) {
-    if (!window.GameNetwork || !window.GameNetwork.isOnline || window.GameNetwork.isHost) return;
-    // Client áp dụng state từ Host
+    if (!window.GameNetwork || !window.GameNetwork.isOnline || window.GameNetwork.isHost || !st) return;
+
+    // Đồng bộ màn nếu lệch
+    if (typeof st.levelIndex === 'number' && st.levelIndex !== G.levelIndex) {
+      buildLevel(st.levelIndex);
+      return;
+    }
+
+    // Đồng bộ trạng thái chơi / kết thúc màn / kết game
+    if (st.mode === 'clear' && G.mode !== 'clear') {
+      G.levelTime = st.levelTime || G.levelTime;
+      G.levelFalls = st.levelFalls || G.levelFalls;
+      G.levelTauts = st.levelTauts || G.levelTauts;
+      G.levelStars = st.levelStars || G.levelStars;
+      completeLevel();
+      return;
+    }
+    if (st.mode === 'playing' && G.mode === 'clear') {
+      dom.screenClear.classList.add('hidden');
+      G.mode = 'playing';
+    }
+    if (st.mode === 'ending' && G.mode !== 'ending') {
+      showEnding();
+      return;
+    }
+
+    // Đồng bộ chết / hồi sinh
+    if (st.dead && !G.dead) {
+      die();
+    } else if (!st.dead && G.dead) {
+      resetPlayers();
+    }
+
+    // Cập nhật vị trí đích để nội suy mượt 60fps trên Guest
     if (st.p1 && G.players[0]) {
-      Object.assign(G.players[0], st.p1);
+      const p = G.players[0];
+      p.targetX = st.p1.x;
+      p.targetY = st.p1.y;
+      p.vx = st.p1.vx;
+      p.vy = st.p1.vy;
+      p.onGround = st.p1.onGround;
+      p.anchored = st.p1.anchored;
+      p.face = st.p1.face;
+      p.walk = st.p1.walk;
+      p.squash = st.p1.squash;
+      if (st.p1.bubble && (!p.bubble || p.bubble.text !== st.p1.bubble.text)) {
+        say(p, st.p1.bubble.text);
+      }
     }
     if (st.p2 && G.players[1]) {
-      Object.assign(G.players[1], st.p2);
+      const p = G.players[1];
+      p.targetX = st.p2.x;
+      p.targetY = st.p2.y;
+      p.vx = st.p2.vx;
+      p.vy = st.p2.vy;
+      p.onGround = st.p2.onGround;
+      p.anchored = st.p2.anchored;
+      p.face = st.p2.face;
+      p.walk = st.p2.walk;
+      p.squash = st.p2.squash;
+      if (st.p2.bubble && (!p.bubble || p.bubble.text !== st.p2.bubble.text)) {
+        say(p, st.p2.bubble.text);
+      }
     }
+
+    // Đồng bộ cửa
     if (st.doors && G.doors) {
-      st.doors.forEach((d, idx) => { if (G.doors[idx]) Object.assign(G.doors[idx], d); });
+      st.doors.forEach((d, idx) => {
+        if (G.doors[idx]) {
+          G.doors[idx].opened = d.opened;
+          G.doors[idx].targetOpenT = d.openT;
+        }
+      });
     }
+
+    // Đồng bộ công tắc
     if (st.plates && G.plates) {
-      st.plates.forEach((pl, idx) => { if (G.plates[idx]) Object.assign(G.plates[idx], pl); });
+      st.plates.forEach((pl, idx) => {
+        if (G.plates[idx]) {
+          G.plates[idx].on = pl.on;
+          G.plates[idx].live = pl.live;
+          G.plates[idx].targetPressT = pl.pressT;
+        }
+      });
     }
+
+    // Đồng bộ sao
+    if (st.stars && G.stars) {
+      st.stars.forEach((got, idx) => {
+        if (G.stars[idx]) {
+          if (!G.stars[idx].got && got) {
+            spawnHearts(G.stars[idx].x, G.stars[idx].y, 5);
+            sfx('star');
+          }
+          G.stars[idx].got = got;
+        }
+      });
+    }
+
+    // Đồng bộ tim
     if (st.heart && G.heart) {
-      Object.assign(G.heart, st.heart);
+      G.heart.targetX = st.heart.x;
+      G.heart.targetY = st.heart.y;
+      G.heart.held = st.heart.held;
     }
+
+    // Đồng bộ bập bênh
     if (st.seesaw && G.seesaw) {
-      Object.assign(G.seesaw, st.seesaw);
+      G.seesaw.tilt = st.seesaw.tilt;
     }
-    if (st.shake) G.shake = st.shake;
+
+    if (typeof st.shake === 'number') G.shake = st.shake;
+    if (typeof st.flash === 'number' && st.flash > G.flash) G.flash = st.flash;
+    if (typeof st.levelTime === 'number') G.levelTime = st.levelTime;
+    if (typeof st.levelStars === 'number') G.levelStars = st.levelStars;
   };
 
   window.__setNetworkLevel = function(lvl) {
@@ -2884,8 +3169,21 @@
     }
   };
 
+  if (window.GameNetwork) {
+    window.GameNetwork.onPartnerDisconnect = () => {
+      if (dom.statusNote) {
+        dom.statusNote.textContent = 'Người yêu đã tạm ngắt kết nối. Đang chờ kết nối lại...';
+        dom.roomStatus.classList.remove('hidden');
+      }
+    };
+    window.GameNetwork.onRoomClosed = () => {
+      alert('Chủ phòng đã rời hoặc kết thúc phòng chơi.');
+      goMenu();
+    };
+  }
 
   // ------------------------------------------------------------------- ONLINE & LOBBY EVENTS
+  const fineprintEl = document.querySelector('.fineprint');
   if (dom.tabLocal && dom.tabOnline) {
     dom.tabLocal.addEventListener('click', () => {
       dom.tabLocal.classList.add('active');
@@ -2893,7 +3191,10 @@
       dom.localNamesBlock.classList.remove('hidden');
       dom.onlineBox.classList.add('hidden');
       dom.btnStart.classList.remove('hidden');
+      if (fineprintEl) fineprintEl.innerHTML = 'Giữ <b>S</b> / <b>↓</b> để <b>neo</b> — làm điểm tựa, không bị kéo đi. Cần 2 người ngồi cùng một máy. Chơi bằng bàn phím.';
       if (window.GameNetwork) window.GameNetwork.leaveRoom();
+      if (dom.roomStatus) dom.roomStatus.classList.add('hidden');
+      if (dom.btnCreateRoom) dom.btnCreateRoom.disabled = false;
     });
 
     dom.tabOnline.addEventListener('click', () => {
@@ -2902,36 +3203,16 @@
       dom.localNamesBlock.classList.add('hidden');
       dom.onlineBox.classList.remove('hidden');
       dom.btnStart.classList.add('hidden');
-      const cfg = window.GameNetwork ? window.GameNetwork.loadConfig() : null;
-      if (cfg && cfg.databaseURL) {
-        if (dom.fbDbUrl) dom.fbDbUrl.value = cfg.databaseURL || '';
-        if (dom.fbApiKey) dom.fbApiKey.value = cfg.apiKey || '';
-        if (dom.fbProjectId) dom.fbProjectId.value = cfg.projectId || '';
-      }
+      if (fineprintEl) fineprintEl.innerHTML = '🌐 <b>Chơi Online:</b> Mỗi người chơi trên máy của mình. Bạn có thể dùng phím <kbd>A</kbd><kbd>D</kbd> hoặc <kbd>←</kbd><kbd>→</kbd> để đi, <kbd>W</kbd>/<kbd>↑</kbd>/<kbd>Space</kbd> nhảy, <kbd>S</kbd>/<kbd>↓</kbd> neo.';
     });
   }
 
-  // Cấu hình Firebase Modal
-  if (dom.btnConfigFirebase && dom.modalFirebase) {
-    dom.btnConfigFirebase.addEventListener('click', () => {
-      dom.modalFirebase.classList.remove('hidden');
-      const cfg = window.GameNetwork ? window.GameNetwork.loadConfig() : null;
-      if (cfg) {
-        dom.fbDbUrl.value = cfg.databaseURL || '';
-        dom.fbApiKey.value = cfg.apiKey || '';
-        dom.fbProjectId.value = cfg.projectId || '';
+  if (dom.inputRoomCode) {
+    dom.inputRoomCode.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        if (dom.btnJoinRoom) dom.btnJoinRoom.click();
       }
-    });
-    dom.btnCloseFirebase.addEventListener('click', () => dom.modalFirebase.classList.add('hidden'));
-    dom.btnSaveFirebase.addEventListener('click', () => {
-      const cfg = {
-        databaseURL: (dom.fbDbUrl.value || '').trim(),
-        apiKey: (dom.fbApiKey.value || '').trim(),
-        projectId: (dom.fbProjectId.value || '').trim(),
-      };
-      if (window.GameNetwork) window.GameNetwork.saveConfig(cfg);
-      dom.modalFirebase.classList.add('hidden');
-      sfx('star');
     });
   }
 
@@ -3050,14 +3331,38 @@
         url: shareUrl
       };
 
-      if (navigator.share) {
-        navigator.share(shareData).catch(() => {});
-      } else {
-        navigator.clipboard.writeText(shareUrl).then(() => {
+      const copyToClipboard = () => {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(shareUrl).then(() => {
+            const oldText = dom.btnShareLink.textContent;
+            dom.btnShareLink.textContent = '✅ Đã chép link mời!';
+            setTimeout(() => { dom.btnShareLink.textContent = oldText; }, 2000);
+          }).catch(() => fallbackCopy(shareUrl));
+        } else {
+          fallbackCopy(shareUrl);
+        }
+      };
+
+      const fallbackCopy = (text) => {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        try {
+          document.execCommand('copy');
           const oldText = dom.btnShareLink.textContent;
           dom.btnShareLink.textContent = '✅ Đã chép link mời!';
           setTimeout(() => { dom.btnShareLink.textContent = oldText; }, 2000);
-        });
+        } catch (e) {}
+        document.body.removeChild(ta);
+      };
+
+      if (navigator.share && /mobile|android|iphone|ipad/i.test(navigator.userAgent)) {
+        navigator.share(shareData).catch(() => copyToClipboard());
+      } else {
+        copyToClipboard();
       }
     });
   }
@@ -3068,6 +3373,7 @@
     const roomParam = params.get('room');
     if (roomParam && dom.inputRoomCode) {
       dom.inputRoomCode.value = roomParam;
+      if (dom.roomCodeText) dom.roomCodeText.textContent = roomParam;
       if (dom.tabOnline) dom.tabOnline.click();
       if (dom.statusNote) {
         dom.statusNote.textContent = 'Đã nhận link mời phòng ' + roomParam + '. Bấm "Vào phòng" để dính nhau!';
