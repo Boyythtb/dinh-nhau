@@ -116,7 +116,7 @@
     tag: 'bước đầu gắn kết',
     hint: 'Hai bạn bị buộc lại với nhau bởi Sợi Dây Tơ Hồng. Cùng nhau bước đi, làm quen cự ly và nhảy qua chông gai!',
     theme: 'day',
-    ropeMax: 300,
+    ropeMax: 320,
     spawn: [{ x: 120, y: 640 }, { x: 200, y: 640 }],
     tiles: [
       '....................',
@@ -127,14 +127,14 @@
       '....................',
       '....................',
       '....................',
-      '....................',
-      '.........^^.........',
+      '............###.....',
+      '.......^^...........',
       '####################',
     ],
     stars: [
       { x: 380, y: 560 },
       { x: 640, y: 490 },
-      { x: 880, y: 560 },
+      { x: 880, y: 460 },
     ],
     goal: { x: 17.5 * T, y: 640, w: 130, h: 190 },
     sign: { x: 280, y: 640, text: 'A/D di chuyển, W hoặc Space để nhảy. Đừng để dây bị kéo quá căng nha!' },
@@ -146,6 +146,40 @@
     tag: 'bật nhảy tình yêu',
     hint: 'Bức tường quá cao! Hãy để một bạn làm bệ đỡ, bạn kia nhảy lên đầu để được BOOST nhảy cực cao!',
     theme: 'day',
+    ropeMax: 350,
+    spawn: [{ x: 120, y: 640 }, { x: 200, y: 640 }],
+    tiles: [
+      '....................',
+      '....................',
+      '....................',
+      '....................',
+      '....................',
+      '....................',
+      '....................',
+      '.........##.........',
+      '.........##.........',
+      '.........##.........',
+      '####################',
+    ],
+    plates: [
+      { id: 'p1', kind: 'button', x: 9.3 * T, y: 380, w: 52, h: 52, latchOn: true },
+    ],
+    doors: [{ x: 13 * T, y: 384, w: 1.5 * T, h: 256, needs: ['p1'] }],
+    stars: [
+      { x: 320, y: 550 },
+      { x: 608, y: 320 },
+      { x: 950, y: 550 },
+    ],
+    goal: { x: 17.5 * T, y: 640, w: 130, h: 190 },
+    sign: { x: 280, y: 640, text: 'Nhảy lên đầu người yêu để được bật lên bục đá đạp nút mở cổng!' },
+  },
+
+  // Level 3: Bế em
+  {
+    name: 'Bế em',
+    tag: 'ôm trọn yêu thương',
+    hint: 'Trái Tim Tình Yêu đã xuất hiện! Hai bạn phải luôn đi sát cạnh nhau để cùng nâng niu Trái Tim về đích.',
+    theme: 'day',
     ropeMax: 320,
     spawn: [{ x: 120, y: 640 }, { x: 200, y: 640 }],
     tiles: [
@@ -155,50 +189,16 @@
       '....................',
       '....................',
       '....................',
-      '.........##.........',
-      '.........##.........',
-      '.........##.........',
-      '.........##.........',
+      '....................',
+      '......####..........',
+      '....................',
+      '....................',
       '####################',
     ],
-    plates: [
-      { id: 'p1', kind: 'button', x: 9.3 * T, y: 310, w: 52, h: 52, latchOn: true },
-    ],
-    doors: [{ x: 9 * T, y: 384, w: 2 * T, h: 256, needs: ['p1'] }],
-    stars: [
-      { x: 320, y: 550 },
-      { x: 608, y: 240 },
-      { x: 950, y: 550 },
-    ],
-    goal: { x: 17.5 * T, y: 640, w: 130, h: 190 },
-    sign: { x: 280, y: 640, text: 'Nhảy lên đầu người yêu để được bật lên thật cao đạp nút mở cổng!' },
-  },
-
-  // Level 3: Bế em
-  {
-    name: 'Bế em',
-    tag: 'ôm trọn yêu thương',
-    hint: 'Trái Tim Tình Yêu đã xuất hiện! Hai bạn phải luôn đi sát cạnh nhau để cùng nâng niu Trái Tim về đích.',
-    theme: 'day',
-    ropeMax: 300,
-    spawn: [{ x: 120, y: 640 }, { x: 200, y: 640 }],
-    tiles: [
-      '....................',
-      '....................',
-      '....................',
-      '....................',
-      '....................',
-      '....................',
-      '........###.........',
-      '....................',
-      '....................',
-      '....^^.......^^.....',
-      '####################',
-    ],
-    heart: { x: 9.5 * T, y: 320 },
+    heart: { x: 8 * T, y: 380 },
     stars: [
       { x: 350, y: 550 },
-      { x: 608, y: 310 },
+      { x: 512, y: 380 },
       { x: 920, y: 550 },
     ],
     goal: { x: 17.5 * T, y: 640, w: 130, h: 190 },
@@ -209,9 +209,9 @@
   {
     name: 'Bập bênh',
     tag: 'nhịp điệu phối hợp',
-    hint: 'Một bạn đứng ở đầu bập bênh, bạn kia leo lên cao nhảy dậm xuống đầu còn lại để phóng người yêu bay lên mây!',
+    hint: 'Một bạn đứng ở đầu bập bênh, bạn kia leo lên cao nhảy dậm xuống đầu còn lại để phóng người yêu bay lên vách đá!',
     theme: 'golden',
-    ropeMax: 350,
+    ropeMax: 380,
     spawn: [{ x: 120, y: 640 }, { x: 200, y: 640 }],
     tiles: [
       '....................',
@@ -220,7 +220,7 @@
       '....................',
       '..###...............',
       '....................',
-      '..............###...',
+      '...........#########',
       '....................',
       '....................',
       '....................',
@@ -232,7 +232,7 @@
       { x: 510, y: 360 },
       { x: 950, y: 320 },
     ],
-    goal: { x: 17.5 * T, y: 640, w: 130, h: 190 },
+    goal: { x: 17.5 * T, y: 384, w: 130, h: 190 },
     sign: { x: 280, y: 640, text: 'Một người đứng đầu bập bênh, người kia nhảy từ bậc cao giáng xuống!' },
   },
 
@@ -240,9 +240,9 @@
   {
     name: 'Về nhà',
     tag: 'đồng tâm hiệp lực',
-    hint: 'Hai công tắc mở hai cánh cổng liên hoàn. Hãy phân chia nhau: ai giữ chốt, ai đi trước.',
+    hint: 'Hai công tắc mở hai cánh cổng liên hoàn. Hãy phân chia nhau: ai mở cổng trước, ai mở cổng sau.',
     theme: 'mint',
-    ropeMax: 320,
+    ropeMax: 350,
     spawn: [{ x: 120, y: 640 }, { x: 200, y: 640 }],
     tiles: [
       '....................',
@@ -250,28 +250,28 @@
       '....................',
       '....................',
       '....................',
-      '.....###.....###....',
       '....................',
+      '....###......###....',
       '....................',
       '....................',
       '....................',
       '####################',
     ],
     plates: [
-      { id: 'p1', kind: 'plate', x: 6 * T, y: 640, w: 84 },
-      { id: 'p2', kind: 'button', x: 12 * T, y: 250, w: 52, h: 52, latchOn: true },
+      { id: 'p1', kind: 'button', x: 5.5 * T, y: 310, w: 52, h: 52, latchOn: true },
+      { id: 'p2', kind: 'button', x: 12 * T, y: 310, w: 52, h: 52, latchOn: true },
     ],
     doors: [
-      { x: 8.5 * T, y: 384, w: 1.5 * T, h: 256, needs: ['p1'] },
+      { x: 8 * T, y: 384, w: 1.5 * T, h: 256, needs: ['p1'] },
       { x: 14.5 * T, y: 384, w: 1.5 * T, h: 256, needs: ['p2'] },
     ],
     stars: [
-      { x: 400, y: 550 },
-      { x: 770, y: 260 },
+      { x: 350, y: 320 },
+      { x: 770, y: 320 },
       { x: 1100, y: 550 },
     ],
     goal: { x: 17.5 * T, y: 640, w: 130, h: 190 },
-    sign: { x: 280, y: 640, text: 'Một người đứng đè công tắc cho người kia đi qua bấm nút mở đường!' },
+    sign: { x: 280, y: 640, text: 'Bông nhảy lên đập nút 1 mở cổng 1, Bắp đập nút 2 mở cổng 2 về đích!' },
   },
 
   // Level 6: Đu dây vực sâu
@@ -291,17 +291,17 @@
       '....................',
       '....................',
       '....................',
-      '....................',
-      '.....^^^^^^^^^^.....',
+      '........##..........',
+      '.....^^^..^^^^^.....',
       '#####..........#####',
     ],
     stars: [
       { x: 300, y: 550 },
-      { x: 640, y: 480 },
+      { x: 544, y: 440 },
       { x: 1000, y: 550 },
     ],
     goal: { x: 17.5 * T, y: 640, w: 130, h: 190 },
-    sign: { x: 260, y: 640, text: 'Giữ phím S để CẮM NEO làm điểm tựa cho bạn mình nhảy đu qua vực!' },
+    sign: { x: 260, y: 640, text: 'Nhảy sang đảo đá giữa vực, cắm mỏ neo (phím S) làm điểm tựa cho bạn!' },
   },
 
   // Level 7: Bậc thang đôi
@@ -310,25 +310,25 @@
     tag: 'từng bước nhịp nhàng',
     hint: 'Những hòn đảo lơ lửng trên vực thẳm. Đi từng bước một, đừng chạy quá xa kẻo kéo bạn mình rơi xuống vực!',
     theme: 'mint',
-    ropeMax: 330,
+    ropeMax: 350,
     spawn: [{ x: 120, y: 640 }, { x: 200, y: 640 }],
     tiles: [
       '....................',
       '....................',
       '....................',
-      '..........###.......',
-      '......###...........',
       '....................',
-      '..###.........###...',
+      '........##...##.....',
+      '....................',
+      '.....##.........##..',
       '....................',
       '....................',
       '.....^^^^^^^^^^.....',
       '#####..........#####',
     ],
     stars: [
-      { x: 220, y: 320 },
-      { x: 500, y: 200 },
-      { x: 800, y: 140 },
+      { x: 350, y: 320 },
+      { x: 544, y: 200 },
+      { x: 800, y: 200 },
     ],
     goal: { x: 17.5 * T, y: 640, w: 130, h: 190 },
     sign: { x: 260, y: 640, text: 'Leo bậc thang cẩn thận, căn khoảng cách sợi dây thật chuẩn nha!' },
@@ -340,46 +340,46 @@
     tag: 'chạm tới vì sao',
     hint: 'Bập bênh phóng người yêu lên vách núi cao nhặt Trái Tim, rồi cùng nhau nhảy xuống ôm Tim về đích!',
     theme: 'night',
-    ropeMax: 380,
+    ropeMax: 400,
     spawn: [{ x: 120, y: 640 }, { x: 200, y: 640 }],
     tiles: [
       '....................',
       '....................',
+      '....................',
       '..###...............',
-      '....................',
-      '..............###...',
-      '....................',
+      '..........###.......',
       '....................',
       '....................',
       '....................',
-      '.........^^.........',
+      '....................',
+      '....................',
       '####################',
     ],
     seesaw: { x: 420, w: 180, y: 640 },
-    heart: { x: 15.5 * T, y: 200 },
+    heart: { x: 11 * T, y: 200 },
     stars: [
-      { x: 180, y: 80 },
+      { x: 180, y: 140 },
       { x: 510, y: 350 },
-      { x: 1000, y: 200 },
+      { x: 704, y: 200 },
     ],
     goal: { x: 17.5 * T, y: 640, w: 130, h: 190 },
-    sign: { x: 280, y: 640, text: 'Bật bập bênh lấy Tim trên vách đá cao rồi cùng nhau về đích!' },
+    sign: { x: 280, y: 640, text: 'Bật bập bênh lấy Tim trên mây rồi nhảy xuống cùng nhau về đích!' },
   },
 
   // Level 9: Thử thách mê cung
   {
     name: 'Thử thách mê cung',
     tag: 'chia đôi ngả đường',
-    hint: 'Một người đi tầng trên, một người đi tầng dưới. Mỗi người gỡ chướng ngại vật cho người kia!',
+    hint: 'Một người đi tầng trên, một người đi tầng dưới. Mở cửa cho nhau rồi đoàn tụ ở đích đến!',
     theme: 'lavender',
-    ropeMax: 360,
+    ropeMax: 380,
     spawn: [{ x: 120, y: 640 }, { x: 200, y: 640 }],
     tiles: [
       '....................',
       '....................',
       '....................',
       '..###...............',
-      '.....###############',
+      '.....##########.....',
       '....................',
       '....................',
       '....................',
@@ -388,49 +388,52 @@
       '####################',
     ],
     plates: [
-      { id: 'up_btn', kind: 'button', x: 12 * T, y: 190, w: 52, h: 52, latchOn: true },
-      { id: 'down_plate', kind: 'plate', x: 8 * T, y: 640, w: 84 },
+      { id: 'btn_lower', kind: 'button', x: 6 * T, y: 550, w: 52, h: 52, latchOn: true },
+      { id: 'btn_upper', kind: 'button', x: 11 * T, y: 190, w: 52, h: 52, latchOn: true },
     ],
     doors: [
-      { x: 15 * T, y: 64, w: 1.5 * T, h: 192, needs: ['down_plate'] },
-      { x: 15 * T, y: 384, w: 1.5 * T, h: 256, needs: ['up_btn'] },
+      { x: 8.5 * T, y: 64, w: 1.5 * T, h: 192, needs: ['btn_lower'] },
+      { x: 14.5 * T, y: 384, w: 1.5 * T, h: 256, needs: ['btn_upper'] },
     ],
-    heart: { x: 17.5 * T, y: 190 },
     stars: [
       { x: 300, y: 550 },
-      { x: 800, y: 190 },
+      { x: 600, y: 190 },
       { x: 1100, y: 550 },
     ],
     goal: { x: 17.5 * T, y: 640, w: 130, h: 190 },
-    sign: { x: 280, y: 640, text: 'Bông boost Bắp nhảy lên tầng trên, phối hợp mở 2 cánh cổng!' },
+    sign: { x: 280, y: 640, text: 'Người tầng dưới đập nút mở cửa tầng trên, người tầng trên đập nút mở cửa đích!' },
   },
 
   // Level 10: Bất biến tình yêu
   {
     name: 'Bất biến tình yêu',
     tag: 'cột mốc thử thách',
-    hint: 'Vực sâu, bập bênh, chông nhọn và Trái Tim! Tổng hòa toàn bộ kỹ năng của chặng đường đầu tiên.',
+    hint: 'Bập bênh phóng lên tháp đá lấy Tim và đập nút mở cổng sắt phía dưới cho hai bạn đoàn tụ!',
     theme: 'golden',
-    ropeMax: 400,
+    ropeMax: 420,
     spawn: [{ x: 120, y: 640 }, { x: 200, y: 640 }],
     tiles: [
       '....................',
       '....................',
-      '..###...............',
       '....................',
+      '..###...............',
       '.........###........',
       '....................',
       '....................',
       '....................',
       '....................',
-      '.............^^.....',
-      '#######..###########',
+      '...............^^...',
+      '####################',
     ],
     seesaw: { x: 300, w: 170, y: 640 },
-    heart: { x: 9.5 * T, y: 200 },
+    plates: [
+      { id: 'tower_btn', kind: 'button', x: 10 * T, y: 200, w: 52, h: 52, latchOn: true },
+    ],
+    doors: [{ x: 13 * T, y: 384, w: 1.5 * T, h: 256, needs: ['tower_btn'] }],
+    heart: { x: 10 * T, y: 140 },
     stars: [
-      { x: 180, y: 80 },
-      { x: 610, y: 200 },
+      { x: 180, y: 140 },
+      { x: 640, y: 200 },
       { x: 950, y: 550 },
     ],
     goal: { x: 17.5 * T, y: 640, w: 130, h: 190 },
@@ -452,7 +455,7 @@
       '....................',
       '....................',
       '....................',
-      '......######........',
+      '......~~~~~~........',
       '....................',
       '....................',
       '............^^......',
@@ -473,7 +476,7 @@
     tag: 'cưỡi gió lượn mây',
     hint: 'Cột gió khổng lồ ở giữa vực sẽ đẩy hai bạn bay vút lên bầu trời! Nhảy vào luồng gió để bay sang bờ bên kia.',
     theme: 'day',
-    ropeMax: 380,
+    ropeMax: 400,
     spawn: [{ x: 120, y: 640 }, { x: 200, y: 640 }],
     tiles: [
       '....................',
@@ -488,10 +491,10 @@
       '.....^^^^^^^^^^.....',
       '#####..........#####',
     ],
-    vents: [{ x: 8 * T, y: 1 * T, w: 3 * T, h: 9 * T, power: 1700 }],
+    vents: [{ x: 7 * T, y: 1 * T, w: 4 * T, h: 9 * T, power: 1750 }],
     stars: [
       { x: 300, y: 550 },
-      { x: 608, y: 220 },
+      { x: 576, y: 200 },
       { x: 1000, y: 550 },
     ],
     goal: { x: 17.5 * T, y: 640, w: 130, h: 190 },
@@ -502,7 +505,7 @@
   {
     name: 'Băng chuyền ngược dòng',
     tag: 'ngược dòng thử thách',
-    hint: 'Băng chuyền đang chạy ngược chiều! Một người neo chắc trên bờ, kéo người kia bơi ngược dòng bấm công tắc!',
+    hint: 'Băng chuyền đang chạy ngược chiều! Cùng nhau leo lên bục đá giữa dòng để đập nút mở cổng!',
     theme: 'sunset',
     ropeMax: 390,
     spawn: [{ x: 120, y: 640 }, { x: 200, y: 640 }],
@@ -514,31 +517,31 @@
       '....................',
       '....................',
       '....................',
-      '....................',
+      '........###.........',
       '....................',
       '....................',
       '#####<<<<<<<<<<#####',
     ],
     plates: [
-      { id: 'conv_btn', kind: 'button', x: 12 * T, y: 540, w: 52, h: 52, latchOn: true },
+      { id: 'conv_btn', kind: 'button', x: 9.3 * T, y: 380, w: 52, h: 52, latchOn: true },
     ],
     doors: [{ x: 14.5 * T, y: 384, w: 1.5 * T, h: 256, needs: ['conv_btn'] }],
     stars: [
       { x: 360, y: 550 },
-      { x: 640, y: 500 },
-      { x: 920, y: 500 },
+      { x: 608, y: 380 },
+      { x: 950, y: 550 },
     ],
     goal: { x: 17.5 * T, y: 640, w: 130, h: 190 },
-    sign: { x: 260, y: 640, text: 'Băng chuyền đẩy lùi! Phối hợp kéo nhau tiến lên đập nút mở cổng!' },
+    sign: { x: 260, y: 640, text: 'Băng chuyền đẩy lùi! Nhảy lên đảo đá đập nút mở cổng!' },
   },
 
   // Level 14: Cổng thời không
   {
     name: 'Cổng thời không',
     tag: 'vượt qua không gian',
-    hint: 'Bức tường chia cách đôi bờ! Chui vào Cổng Thời Không màu hồng để dịch chuyển sang căn phòng bên kia.',
+    hint: 'Bức tường chia cách đôi bờ! Chui vào Cổng Thời Không để sang bên kia mở toang cổng cho hai bạn đoàn tụ.',
     theme: 'night',
-    ropeMax: 400,
+    ropeMax: 380,
     spawn: [{ x: 120, y: 640 }, { x: 200, y: 640 }],
     tiles: [
       '.........##.........',
@@ -553,27 +556,27 @@
       '.........##.........',
       '####################',
     ],
-    portals: [{ a: { x: 3.5 * T, y: 580 }, b: { x: 12 * T, y: 580 } }],
+    portals: [{ a: { x: 7 * T, y: 580 }, b: { x: 12 * T, y: 580 } }],
     plates: [
-      { id: 'gate_btn', kind: 'button', x: 14 * T, y: 380, w: 52, h: 52, latchOn: true },
+      { id: 'gate_btn', kind: 'button', x: 14 * T, y: 440, w: 52, h: 52, latchOn: true },
     ],
     doors: [{ x: 9 * T, y: 384, w: 2 * T, h: 256, needs: ['gate_btn'] }],
     stars: [
-      { x: 300, y: 400 },
-      { x: 800, y: 520 },
-      { x: 1050, y: 320 },
+      { x: 300, y: 520 },
+      { x: 768, y: 520 },
+      { x: 1050, y: 440 },
     ],
     goal: { x: 17.5 * T, y: 640, w: 130, h: 190 },
     sign: { x: 240, y: 640, text: 'Chui vào Cổng Thời Không để dịch chuyển sang phòng bên kia mở cổng!' },
   },
 
-  // Level 15: Đếm ngược 4 giây
+  // Level 15: Đếm ngược 5 giây
   {
-    name: 'Đếm ngược 4 giây',
+    name: 'Đếm ngược 5 giây',
     tag: 'chạy đua với thời gian',
-    hint: 'Nút bấm hẹn giờ chỉ mở cổng trong 4.5 giây! Bông ấn nút, hai đứa dắt tay nhau phi nước đại qua cổng.',
+    hint: 'Nút bấm hẹn giờ mở cổng trong 6.5 giây! Bông ấn nút, hai đứa dắt tay nhau phi nước đại qua cổng.',
     theme: 'golden',
-    ropeMax: 370,
+    ropeMax: 380,
     spawn: [{ x: 120, y: 640 }, { x: 200, y: 640 }],
     tiles: [
       '....................',
@@ -589,7 +592,7 @@
       '####################',
     ],
     plates: [
-      { id: 'timer_btn', kind: 'button', x: 2.5 * T, y: 190, w: 52, h: 52, timer: 4.8 },
+      { id: 'timer_btn', kind: 'button', x: 2.5 * T, y: 190, w: 52, h: 52, timer: 6.5 },
     ],
     doors: [{ x: 14 * T, y: 384, w: 1.5 * T, h: 256, needs: ['timer_btn'] }],
     stars: [
@@ -598,7 +601,7 @@
       { x: 850, y: 550 },
     ],
     goal: { x: 17.5 * T, y: 640, w: 130, h: 190 },
-    sign: { x: 240, y: 640, text: 'Nút hẹn giờ trên cao chỉ mở cổng trong gần 5 giây! Chạy thật nhanh qua!' },
+    sign: { x: 240, y: 640, text: 'Nút hẹn giờ trên cao mở cổng trong 6.5 giây! Cùng chạy thật nhanh qua!' },
   },
 
   // Level 16: Đêm đen soi bóng
@@ -608,7 +611,7 @@
     hint: 'Màn đêm buông xuống, chỉ ngọn lửa tình yêu quanh hai bạn mới thấu suốt đường đi. Hãy luôn đi sát nhau!',
     theme: 'night',
     darkness: true,
-    ropeMax: 320,
+    ropeMax: 350,
     spawn: [{ x: 120, y: 640 }, { x: 200, y: 640 }],
     tiles: [
       '....................',
@@ -616,17 +619,17 @@
       '....................',
       '....................',
       '....................',
-      '........###.........',
+      '........####........',
       '....................',
       '....................',
       '....................',
       '.....^^.......^^....',
       '####################',
     ],
-    heart: { x: 9.5 * T, y: 260 },
+    heart: { x: 9.5 * T, y: 440 },
     stars: [
       { x: 380, y: 550 },
-      { x: 608, y: 200 },
+      { x: 608, y: 440 },
       { x: 880, y: 550 },
     ],
     goal: { x: 17.5 * T, y: 640, w: 130, h: 190 },
@@ -681,24 +684,24 @@
     tiles: [
       '....................',
       '....................',
-      '..###...............',
       '....................',
       '....................',
       '....................',
       '....................',
+      '...............#####',
       '....................',
       '....................',
-      '............^^......',
-      '#####~~~~~~~~~~#####',
+      '....................',
+      '####~~~~####...#####',
     ],
-    seesaw: { x: 380, w: 180, y: 640 },
+    seesaw: { x: 480, w: 180, y: 640 },
     vents: [{ x: 11 * T, y: 2 * T, w: 2.5 * T, h: 8 * T, power: 1800 }],
-    heart: { x: 12.2 * T, y: 140 },
-    goal: { x: 17.5 * T, y: 640, w: 135, h: 190 },
+    heart: { x: 12.2 * T, y: 200 },
+    goal: { x: 17.5 * T, y: 384, w: 135, h: 190 },
     stars: [
-      { x: 200, y: 80 },
+      { x: 200, y: 550 },
       { x: 500, y: 350 },
-      { x: 780, y: 100 },
+      { x: 780, y: 200 },
     ],
     sign: { x: 250, y: 640, text: 'Trượt băng bật bập bênh bay vào luồng gió đón Trái Tim!' },
   },
@@ -707,43 +710,43 @@
   {
     name: 'Vực thẳm thời gian',
     tag: 'thử thách cực hạn',
-    hint: 'Băng chuyền ngược dòng, cổng thời không và công tắc hẹn giờ! Hai đứa ôm Trái Tim vượt cạm bẫy cuối cùng.',
+    hint: 'Băng chuyền đẩy tới, cổng thời không và công tắc hẹn giờ! Hai đứa ôm Trái Tim vượt cạm bẫy cuối cùng.',
     theme: 'golden',
     ropeMax: 420,
     spawn: [{ x: 120, y: 640 }, { x: 200, y: 640 }],
     tiles: [
-      '.........##.........',
-      '.........##.........',
-      '.........##.........',
-      '....###..##.........',
-      '.........##.........',
-      '.........##.........',
-      '.........##.........',
-      '.........##.........',
       '....................',
       '....................',
-      '#####<<<<<<<<<<#####',
+      '....................',
+      '....................',
+      '....................',
+      '....................',
+      '..####...##.........',
+      '.........##.........',
+      '.........##.........',
+      '.........##.........',
+      '####>>>>####...#####',
     ],
-    portals: [{ a: { x: 3.5 * T, y: 580 }, b: { x: 12 * T, y: 280 } }],
+    portals: [{ a: { x: 3 * T, y: 580 }, b: { x: 3 * T, y: 340 } }],
     plates: [
-      { id: 'end_timer', kind: 'button', x: 4 * T, y: 150, w: 52, h: 52, timer: 6.0 },
+      { id: 'end_timer', kind: 'button', x: 4.5 * T, y: 340, w: 52, h: 52, timer: 7.0 },
     ],
-    doors: [{ x: 14.5 * T, y: 384, w: 1.5 * T, h: 256, needs: ['end_timer'] }],
-    heart: { x: 2.5 * T, y: 520 },
+    doors: [{ x: 9 * T, y: 384, w: 2 * T, h: 256, needs: ['end_timer'] }],
+    heart: { x: 2 * T, y: 580 },
     stars: [
-      { x: 250, y: 100 },
-      { x: 800, y: 200 },
+      { x: 250, y: 300 },
+      { x: 800, y: 520 },
       { x: 1050, y: 520 },
     ],
     goal: { x: 17.5 * T, y: 640, w: 135, h: 190 },
-    sign: { x: 250, y: 640, text: 'Chui cổng bấm nút hẹn giờ, bế Trái Tim vượt băng chuyền về đích!' },
+    sign: { x: 250, y: 640, text: 'Chui cổng bấm nút hẹn giờ 7 giây, bế Trái Tim vượt cổng về đích!' },
   },
 
   // Level 20: Lâu đài định mệnh
   {
     name: 'Lâu đài định mệnh',
     tag: 'chạm tới hạnh phúc',
-    hint: 'Đại Lâu Đài Tình Yêu ngập tràn pháo hoa rực rỡ! Hai bạn cùng bước lên bục vinh quang, kết duyên trọn đời trọn kiếp.',
+    hint: 'Đại Lâu Đài Tình Yêu ngập tràn pháo hoa rực rỡ! Hai bạn cùng leo hai bên tháp, đạp mở Cổng Lễ Đường kết duyên trọn đời!',
     theme: 'day',
     ropeMax: 450,
     spawn: [{ x: 120, y: 640 }, { x: 200, y: 640 }],
@@ -751,129 +754,30 @@
       '....................',
       '....................',
       '....................',
-      '........####........',
-      '..###...####...###..',
-      '..###..........###..',
-      '..###..........###..',
+      '....................',
+      '....................',
+      '....................',
+      '......##....##......',
       '....................',
       '....................',
       '....................',
       '####################',
     ],
     plates: [
-      { id: 'castle_left', kind: 'plate', x: 2.8 * T, y: 240, w: 84, latchOn: true },
-      { id: 'castle_right', kind: 'plate', x: 15.8 * T, y: 240, w: 84, latchOn: true },
+      { id: 'castle_left', kind: 'plate', x: 6.2 * T, y: 380, w: 84, latchOn: true },
+      { id: 'castle_right', kind: 'plate', x: 12.2 * T, y: 380, w: 84, latchOn: true },
     ],
-    doors: [{ x: 8.8 * T, y: 64, w: 2.4 * T, h: 192, needs: ['castle_left', 'castle_right'] }],
-    heart: { x: 10 * T, y: 550 },
-    goal: { x: 8.8 * T, y: 240, w: 2.4 * T, h: 190 },
+    doors: [{ x: 8.8 * T, y: 384, w: 2.4 * T, h: 256, needs: ['castle_left', 'castle_right'] }],
+    heart: { x: 10 * T, y: 560 },
+    goal: { x: 16.5 * T, y: 640, w: 160, h: 190 },
     stars: [
-      { x: 3 * T, y: 160 },
-      { x: 10 * T, y: 380 },
-      { x: 17 * T, y: 160 },
+      { x: 6.5 * T, y: 300 },
+      { x: 10 * T, y: 480 },
+      { x: 12.5 * T, y: 300 },
     ],
-    sign: { x: 250, y: 640, text: 'Cùng bế Trái Tim lên Đỉnh Tháp Lâu Đài, hai bạn là của nhau mãi mãi!' },
+    sign: { x: 250, y: 640, text: 'Leo hai bên tháp đạp mở Cổng Lâu Đài, bế Trái Tim về đích kết duyên!' },
   },
 ];;
-
-  // ------------------------------------------------------------------ themes
-  const THEMES = {
-    day: {
-      skyTop: '#ffe4ef', skyBottom: '#d4efff', sun: '#fff1b0', sunGlow: 'rgba(255,235,160,.55)',
-      hillFar: '#cdeadd', hillMid: '#b3e2ca', hillNear: '#95d5b4',
-      grass: '#8bdb9f', grassDark: '#63c184', dirt: '#e2b083', dirtDark: '#c99064',
-      cloud: '#ffffff', cloudAlpha: 0.85, star: false, bird: true,
-      tree: '#7fce9f', treeDark: '#5eb184', trunk: '#b98a6a',
-      tint: 'rgba(255,240,220,.10)',
-    },
-    golden: {
-      skyTop: '#ffd3c1', skyBottom: '#ffecc0', sun: '#ffd98a', sunGlow: 'rgba(255,200,120,.6)',
-      hillFar: '#ecc9bd', hillMid: '#e0b3a4', hillNear: '#cf9c8e',
-      grass: '#c8d98c', grassDark: '#a8bd69', dirt: '#d9a07c', dirtDark: '#bd8462',
-      cloud: '#fff3e3', cloudAlpha: 0.8, star: false, bird: true,
-      tree: '#c3cd83', treeDark: '#a3af66', trunk: '#a97a5c',
-      tint: 'rgba(255,180,120,.10)',
-    },
-    mint: {
-      skyTop: '#d9f7ee', skyBottom: '#fff2d3', sun: '#fff4bb', sunGlow: 'rgba(255,240,170,.5)',
-      hillFar: '#c6e9d8', hillMid: '#a9ddc6', hillNear: '#8dcdb3',
-      grass: '#83d6b0', grassDark: '#5db994', dirt: '#d8b18e', dirtDark: '#bd9272',
-      cloud: '#ffffff', cloudAlpha: 0.9, star: false, bird: true,
-      tree: '#78cbab', treeDark: '#59ae90', trunk: '#b08d70',
-      tint: 'rgba(200,255,235,.08)',
-    },
-    night: {
-      skyTop: '#25254b', skyBottom: '#5b5686', sun: '#fff3cf', sunGlow: 'rgba(255,243,207,.25)',
-      hillFar: '#3e3d6d', hillMid: '#34335d', hillNear: '#2b2b4f',
-      grass: '#5fb392', grassDark: '#438a72', dirt: '#5c4b67', dirtDark: '#473a50',
-      cloud: '#a7a2cf', cloudAlpha: 0.35, star: true, bird: false,
-      tree: '#3d6f62', treeDark: '#2e574e', trunk: '#3d3048',
-      tint: 'rgba(120,110,200,.10)',
-    },
-  };
-
-  // ------------------------------------------------------------------- state
-  const G = {
-    mode: 'menu',
-    levelIndex: 0, level: null, theme: THEMES.day,
-    players: [], plates: [], doors: [], heart: null, goal: null,
-    time: 0, animT: 0, levelTime: 0, levelFalls: 0, levelTauts: 0, tautCd: 0,
-    totalTime: 0, totalFalls: 0, totalTauts: 0, totalStars: 0,
-    stars: [], levelStars: 0, ropeMax: 300, seesaw: null,
-    particles: [], shake: 0, fade: 1, flash: 0, respawnT: 0, dead: false,
-    names: ['Bông', 'Bắp'], sound: true, uiReady: true,
-    clouds: [], decor: { tufts: [], flowers: [] }, trees: [], skyStars: [],
-    menuPlayers: [], bannerTO: null, lastTimer: '',
-    stats: [], ranks: null,
-  };
-
-  // ------------------------------------------------------------------- audio
-  let actx = null;
-  function initAudio() {
-    if (!actx) {
-      try { actx = new (window.AudioContext || window.webkitAudioContext)(); } catch (e) { actx = null; }
-    }
-    if (actx && actx.state === 'suspended') actx.resume();
-  }
-  function tone(freq, dur, type = 'sine', vol = 0.05, freq2 = null, delay = 0) {
-    if (!actx || !G.sound) return;
-    const t0 = actx.currentTime + delay;
-    const o = actx.createOscillator();
-    const g = actx.createGain();
-    o.type = type;
-    o.frequency.setValueAtTime(freq, t0);
-    if (freq2) o.frequency.exponentialRampToValueAtTime(Math.max(20, freq2), t0 + dur);
-    g.gain.setValueAtTime(0, t0);
-    g.gain.linearRampToValueAtTime(vol, t0 + 0.012);
-    g.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
-    o.connect(g).connect(actx.destination);
-    o.start(t0); o.stop(t0 + dur + 0.02);
-  }
-  function sfx(name) {
-    if (!actx || !G.sound) return;
-    switch (name) {
-      case 'jump': tone(430, 0.13, 'sine', 0.05, 660); break;
-      case 'boost': tone(520, 0.18, 'triangle', 0.06, 980); tone(880, 0.2, 'sine', 0.03, 1320, 0.05); break;
-      case 'land': tone(150, 0.08, 'sine', 0.045, 90); break;
-      case 'plate': tone(880, 0.08, 'triangle', 0.045); tone(1320, 0.12, 'sine', 0.035, null, 0.07); break;
-      case 'door': tone(240, 0.35, 'sine', 0.05, 520); tone(720, 0.25, 'triangle', 0.025, 900, 0.12); break;
-      case 'heart': tone(660, 0.1, 'sine', 0.045); tone(990, 0.16, 'sine', 0.035, null, 0.08); break;
-      case 'star': tone(1046, 0.08, 'triangle', 0.04); tone(1568, 0.14, 'sine', 0.03, null, 0.05); break;
-      case 'boing': tone(110, 0.2, 'sine', 0.08, 320); tone(320, 0.24, 'triangle', 0.045, 620, 0.03); break;
-      case 'die': tone(320, 0.4, 'sawtooth', 0.035, 70); break;
-      case 'clear': [523, 659, 784, 1047].forEach((f, i) => tone(f, 0.22, 'triangle', 0.045, null, i * 0.09)); break;
-      case 'win': [523, 659, 784, 1047, 1319].forEach((f, i) => tone(f, 0.35, 'triangle', 0.04, null, i * 0.1)); break;
-      case 'click': tone(600, 0.05, 'square', 0.02); break;
-      default: break;
-    }
-  }
-
-  // ------------------------------------------------------------------- input
-  const held = new Set();
-  const KEYS = [
-    { left: 'KeyA', right: 'KeyD', jump: 'KeyW', anchor: 'KeyS' },
-    { left: 'ArrowLeft', right: 'ArrowRight', jump: 'ArrowUp', anchor: 'ArrowDown' },
-  ];
   const GAME_CODES = new Set([
     'KeyA', 'KeyD', 'KeyW', 'KeyS', 'ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Space',
   ]);
