@@ -89,6 +89,9 @@
     clearKicker: $('clearKicker'), clearTitle: $('clearTitle'), clearLine: $('clearLine'), clearStats: $('clearStats'),
     btnNext: $('btnNext'), endTitle: $('endTitle'), endLine: $('endLine'), endStats: $('endStats'), endRank: $('endRank'),
     btnReplay: $('btnReplay'), btnHome: $('btnHome'), errorBanner: $('errorBanner'),
+    screenLevelSelect: $('screenLevelSelect'), levelGrid: $('levelGrid'),
+    btnOpenLevelSelect: $('btnOpenLevelSelect'), btnPauseLevelSelect: $('btnPauseLevelSelect'),
+    btnCloseLevelSelect: $('btnCloseLevelSelect'),
     // Online Lobby elements
     tabLocal: $('tabLocal'), tabOnline: $('tabOnline'), localNamesBlock: $('localNamesBlock'),
     onlineBox: $('onlineBox'), onlineMyName: $('onlineMyName'), btnConfigFirebase: $('btnConfigFirebase'),
@@ -438,6 +441,342 @@
       goal: { x: 17.5 * T, y: 640, w: 135, h: 190 },
       sign: { x: 320, y: 640, text: 'Vượt qua màn này, hai bạn chính là định mệnh của đời nhau!' },
     },
+    {
+      name: 'Đường trượt băng tuyết',
+      tag: 'cẩn thận trượt té',
+      hint: 'Đường băng trơn tuột dẫn thẳng xuống hố chông! Một đứa đứng chắc neo chân (S/↓) kéo dây giữ người yêu lại.',
+      theme: 'mint',
+      ropeMax: 380,
+      spawn: [{ x: 140, y: 384 }, { x: 230, y: 384 }],
+      tiles: [
+        '....................',
+        '....................',
+        '....................',
+        '....................',
+        '....................',
+        '####................',
+        '....~~~~~~~~........',
+        '............###.....',
+        '.................##.',
+        '....^^^^^^^^........',
+        '####################',
+      ],
+      plates: [
+        { id: 'ice_btn', kind: 'button', x: 12.8 * T, y: 400, w: 52, h: 52, latchOn: true },
+      ],
+      doors: [{ x: 17 * T, y: 440, w: 1.5 * T, h: 204, needs: ['ice_btn'] }],
+      stars: [
+        { x: 6 * T, y: 320 },
+        { x: 8.5 * T, y: 420 },
+        { x: 14.5 * T, y: 380 },
+      ],
+      goal: { x: 17.8 * T, y: 640, w: 120, h: 190 },
+      sign: { x: 280, y: 384, text: 'Đứng vững trên đất neo chân, để người yêu trượt băng qua vực!' },
+    },
+    {
+      name: 'Gió cuốn bay cao',
+      tag: 'ngọn gió tình yêu',
+      hint: 'Luồng gió thổi tung nóc nhà! Người dưới đất phải kéo dây ghì người yêu lại để không va trúng trần gai.',
+      theme: 'day',
+      ropeMax: 390,
+      spawn: [{ x: 140, y: 640 }, { x: 220, y: 640 }],
+      tiles: [
+        '.........^^^^.......',
+        '.........^^^^.......',
+        '....................',
+        '..###.........###...',
+        '....................',
+        '....................',
+        '....................',
+        '....................',
+        '....^^........^^....',
+        '....^^........^^....',
+        '####################',
+      ],
+      vents: [{ x: 9 * T, y: 2 * T, w: 2 * T, h: 8 * T, power: 1700 }],
+      plates: [
+        { id: 'wind_btn', kind: 'button', x: 13.8 * T, y: 150, w: 52, h: 52, latchOn: true },
+      ],
+      doors: [{ x: 16.5 * T, y: 384, w: 1.5 * T, h: 256, needs: ['wind_btn'] }],
+      stars: [
+        { x: 4 * T, y: 150 },
+        { x: 10 * T, y: 240 },
+        { x: 14 * T, y: 120 },
+      ],
+      goal: { x: 17.6 * T, y: 640, w: 130, h: 190 },
+      sign: { x: 280, y: 640, text: 'Nhảy vào luồng gió bay lên, người dưới giữ dây điều hướng!' },
+    },
+    {
+      name: 'Băng chuyền ngược dòng',
+      tag: 'chạy ngược dòng đời',
+      hint: 'Băng chuyền cuộn liên tục kéo vào bẫy gai! Phải cõng nhau hoặc neo chân làm điểm tựa để vượt qua.',
+      theme: 'mint',
+      ropeMax: 380,
+      spawn: [{ x: 140, y: 640 }, { x: 220, y: 640 }],
+      tiles: [
+        '....................',
+        '....................',
+        '....................',
+        '.....###....###.....',
+        '....................',
+        '....................',
+        '....................',
+        '....<<<<<<<<<<<<....',
+        '..^^............^^..',
+        '..^^............^^..',
+        '####............####',
+      ],
+      plates: [
+        { id: 'conv_btn', kind: 'button', x: 11 * T, y: 150, w: 52, h: 52, latchOn: true },
+      ],
+      doors: [{ x: 16.5 * T, y: 384, w: 1.5 * T, h: 256, needs: ['conv_btn'] }],
+      stars: [
+        { x: 6 * T, y: 150 },
+        { x: 10 * T, y: 380 },
+        { x: 15 * T, y: 150 },
+      ],
+      goal: { x: 17.6 * T, y: 640, w: 130, h: 190 },
+      sign: { x: 260, y: 640, text: 'Băng chuyền trôi về gai nhọn! Cõng nhau chạy nhanh hơn lực đẩy.' },
+    },
+    {
+      name: 'Cổng thời không',
+      tag: 'xuyên không tìm nhau',
+      hint: 'Chui qua cổng dịch chuyển sang phòng bên cạnh! Sợi dây vẫn nối xuyên không gian, phối hợp dẫm 2 nút cùng lúc.',
+      theme: 'night',
+      ropeMax: 360,
+      spawn: [{ x: 140, y: 640 }, { x: 220, y: 640 }],
+      tiles: [
+        '.........##.........',
+        '.........##.........',
+        '.........##.........',
+        '....###..##..###....',
+        '.........##.........',
+        '.........##.........',
+        '.........##.........',
+        '.........##.........',
+        '..^^.....##.....^^..',
+        '..^^.....##.....^^..',
+        '####################',
+      ],
+      portals: [{ a: { x: 3.5 * T, y: 9 * T }, b: { x: 13.5 * T, y: 3 * T } }],
+      plates: [
+        { id: 'port_a', kind: 'plate', x: 6 * T, y: 640, w: 88, latchOn: true },
+        { id: 'port_b', kind: 'plate', x: 16 * T, y: 640, w: 88, latchOn: true },
+      ],
+      doors: [{ x: 17 * T, y: 384, w: 1.5 * T, h: 256, needs: ['port_a', 'port_b'] }],
+      stars: [
+        { x: 5 * T, y: 150 },
+        { x: 13.5 * T, y: 150 },
+        { x: 18 * T, y: 320 },
+      ],
+      goal: { x: 17.8 * T, y: 640, w: 120, h: 190 },
+      sign: { x: 260, y: 640, text: 'Cổng A dịch chuyển sang Cổng B. Một người ở mỗi phòng dẫm nút!' },
+    },
+    {
+      name: 'Đếm ngược 4 giây',
+      tag: 'chạy đua với thời gian',
+      hint: 'Công tắc hẹn giờ kêu tích tắc 4 giây là đóng cửa! Một đứa bấm nút, đứa kia phải lao qua cửa ngay lập tức.',
+      theme: 'golden',
+      ropeMax: 400,
+      spawn: [{ x: 140, y: 640 }, { x: 220, y: 640 }],
+      tiles: [
+        '....................',
+        '....................',
+        '....................',
+        '..###...............',
+        '....................',
+        '.......###..........',
+        '....................',
+        '............###.....',
+        '....................',
+        '.......^^^^.........',
+        '####################',
+      ],
+      plates: [
+        { id: 'timer_sw', kind: 'button', x: 3 * T, y: 150, w: 52, h: 52, timer: 4.8 },
+        { id: 'lock_btn', kind: 'plate', x: 14.5 * T, y: 640, w: 88, latchOn: true },
+      ],
+      doors: [
+        { x: 12 * T, y: 384, w: 1.5 * T, h: 256, needs: ['timer_sw'] },
+        { x: 16.5 * T, y: 384, w: 1.5 * T, h: 256, needs: ['lock_btn'] },
+      ],
+      stars: [
+        { x: 3 * T, y: 100 },
+        { x: 8 * T, y: 260 },
+        { x: 15 * T, y: 380 },
+      ],
+      goal: { x: 17.8 * T, y: 640, w: 120, h: 190 },
+      sign: { x: 260, y: 640, text: 'Nút hẹn giờ đếm ngược 4.8s. Chạy nhanh qua cửa trước khi sập!' },
+    },
+    {
+      name: 'Đêm đen soi bóng',
+      tag: 'hào quang gắn kết',
+      hint: 'Bóng tối bao trùm khắp nơi! Chỉ khi ở gần nhau hào quang mới sáng rực soi rõ đường đi và chông gai.',
+      theme: 'night',
+      darkness: true,
+      ropeMax: 320,
+      spawn: [{ x: 130, y: 640 }, { x: 210, y: 640 }],
+      tiles: [
+        '....................',
+        '....................',
+        '....................',
+        '....###.....###.....',
+        '....................',
+        '........###.........',
+        '....................',
+        '....................',
+        '..^^^^.......^^^^...',
+        '..^^^^.......^^^^...',
+        '##....#######....###',
+      ],
+      plates: [
+        { id: 'dark_a', kind: 'button', x: 5 * T, y: 150, w: 52, h: 52, latchOn: true },
+        { id: 'dark_b', kind: 'button', x: 14 * T, y: 150, w: 52, h: 52, latchOn: true },
+      ],
+      doors: [{ x: 15.5 * T, y: 384, w: 1.8 * T, h: 256, needs: ['dark_a', 'dark_b'] }],
+      stars: [
+        { x: 5 * T, y: 100 },
+        { x: 9.5 * T, y: 260 },
+        { x: 14 * T, y: 100 },
+      ],
+      goal: { x: 17.6 * T, y: 640, w: 130, h: 190 },
+      sign: { x: 280, y: 640, text: 'Nắm tay nhau thật chặt, rời xa là trời tối đen không thấy gai đâu!' },
+    },
+    {
+      name: 'Tia sáng phân sắc',
+      tag: 'hồng xanh tương trợ',
+      hint: 'Laze màu hồng Bông đi qua được, laze màu xanh Bắp đi qua được. Thay phiên nhau đi trước gạt nút tắt đèn cho người yêu.',
+      theme: 'night',
+      ropeMax: 370,
+      spawn: [{ x: 130, y: 640 }, { x: 210, y: 640 }],
+      tiles: [
+        '....................',
+        '....................',
+        '....................',
+        '....................',
+        '....................',
+        '....................',
+        '....................',
+        '....................',
+        '........^^^^........',
+        '........^^^^........',
+        '####################',
+      ],
+      lasers: [
+        { x: 6 * T, y: 2 * T, w: 12, h: 8 * T, color: 'pink' },
+        { x: 12 * T, y: 2 * T, w: 12, h: 8 * T, color: 'blue', needs: 'blue_off' },
+      ],
+      plates: [
+        { id: 'blue_off', kind: 'button', x: 9 * T, y: 380, w: 52, h: 52, latchOn: true },
+      ],
+      stars: [
+        { x: 4 * T, y: 480 },
+        { x: 9 * T, y: 320 },
+        { x: 15 * T, y: 480 },
+      ],
+      goal: { x: 17.6 * T, y: 640, w: 130, h: 190 },
+      sign: { x: 280, y: 640, text: 'Bông đi xuyên qua laze hồng đạp nút tắt laze xanh cho Bắp!' },
+    },
+    {
+      name: 'Băng giá & Bão gió',
+      tag: 'bão tuyết cuồng nhiệt',
+      hint: 'Trượt băng tốc độ cao lao vào bập bênh, bật người yêu bay vút vào luồng gió nhặt Trái Tim trên đỉnh mây!',
+      theme: 'mint',
+      ropeMax: 410,
+      spawn: [{ x: 120, y: 640 }, { x: 200, y: 640 }],
+      tiles: [
+        '....................',
+        '....................',
+        '....................',
+        '....................',
+        '....................',
+        '###~~~~~~~~.........',
+        '....................',
+        '....................',
+        '........^^^^^^^^....',
+        '........^^^^^^^^....',
+        '########........####',
+      ],
+      seesaw: { x: 380, w: 180, y: 640 },
+      vents: [{ x: 11 * T, y: 2 * T, w: 2 * T, h: 8 * T, power: 1800 }],
+      heart: { x: 12 * T, y: 150 },
+      goal: { x: 17.5 * T, y: 640, w: 135, h: 190 },
+      stars: [
+        { x: 4 * T, y: 260 },
+        { x: 12 * T, y: 90 },
+        { x: 15 * T, y: 380 },
+      ],
+      sign: { x: 250, y: 640, text: 'Trượt băng bật bập bênh, bay vào luồng gió đón Trái Tim!' },
+    },
+    {
+      name: 'Vực thẳm thời gian',
+      tag: 'thử thách cực hạn',
+      hint: 'Vừa băng chuyền, vừa cổng thời không, vừa công tắc hẹn giờ! Hai đứa ôm Trái Tim vượt cạm bẫy cuối cùng.',
+      theme: 'golden',
+      ropeMax: 410,
+      spawn: [{ x: 120, y: 640 }, { x: 200, y: 640 }],
+      tiles: [
+        '.........##.........',
+        '.........##.........',
+        '.........##.........',
+        '....###..##..###....',
+        '.........##.........',
+        '....<<<<.##.>>>>....',
+        '.........##.........',
+        '.........##.........',
+        '..^^^^...##...^^^^..',
+        '..^^^^...##...^^^^..',
+        '####.....##.....####',
+      ],
+      portals: [{ a: { x: 3 * T, y: 8 * T }, b: { x: 13 * T, y: 3 * T } }],
+      plates: [
+        { id: 'end_timer', kind: 'button', x: 5 * T, y: 150, w: 52, h: 52, timer: 5.5 },
+      ],
+      doors: [{ x: 16.5 * T, y: 384, w: 1.5 * T, h: 256, needs: ['end_timer'] }],
+      heart: { x: 2.5 * T, y: 460 },
+      stars: [
+        { x: 5 * T, y: 100 },
+        { x: 13 * T, y: 100 },
+        { x: 15 * T, y: 380 },
+      ],
+      goal: { x: 17.5 * T, y: 640, w: 135, h: 190 },
+      sign: { x: 250, y: 640, text: 'Chui cổng bấm nút hẹn giờ, bế Trái Tim vượt băng chuyền về đích!' },
+    },
+    {
+      name: 'Lâu đài định mệnh',
+      tag: 'chạm tới hạnh phúc',
+      hint: 'Đại Lâu Đài Tình Yêu ngập tràn pháo hoa rực rỡ! Cùng bước lên bục vinh quang, kết duyên trọn đời trọn kiếp.',
+      theme: 'day',
+      ropeMax: 440,
+      spawn: [{ x: 120, y: 640 }, { x: 200, y: 640 }],
+      tiles: [
+        '.........##.........',
+        '.......######.......',
+        '....############....',
+        '....############....',
+        '..###..######..###..',
+        '..###..######..###..',
+        '..###..######..###..',
+        '..###~~~~~~~~~~###..',
+        '..^^^^........^^^^..',
+        '..^^^^........^^^^..',
+        '####################',
+      ],
+      portals: [{ a: { x: 2.5 * T, y: 8.5 * T }, b: { x: 5.5 * T, y: 2.8 * T } }],
+      plates: [
+        { id: 'castle_left', kind: 'plate', x: 4 * T, y: 240, w: 88, latchOn: true },
+        { id: 'castle_right', kind: 'plate', x: 14 * T, y: 240, w: 88, latchOn: true },
+      ],
+      doors: [{ x: 8.5 * T, y: 64, w: 3 * T, h: 192, needs: ['castle_left', 'castle_right'] }],
+      heart: { x: 10 * T, y: 480 },
+      goal: { x: 8.6 * T, y: 192, w: 2.8 * T, h: 190 },
+      stars: [
+        { x: 2.5 * T, y: 200 },
+        { x: 10 * T, y: 120 },
+        { x: 17.5 * T, y: 200 },
+      ],
+      sign: { x: 240, y: 640, text: 'Cùng bế Trái Tim lên Đỉnh Tháp Lâu Đài, hai bạn là của nhau mãi mãi!' },
+    },
   ];
 
   // ------------------------------------------------------------------ themes
@@ -593,7 +932,9 @@
 
   // ------------------------------------------------------------------- state helpers
   function screenHideAll() {
-    [dom.screenStart, dom.screenPause, dom.screenClear, dom.screenEnd].forEach((el) => el.classList.add('hidden'));
+    [dom.screenStart, dom.screenPause, dom.screenClear, dom.screenEnd, dom.screenLevelSelect].forEach((el) => {
+      if (el) el.classList.add('hidden');
+    });
   }
   function updateNames() {
     dom.ctrlName1.textContent = G.names[0];
@@ -636,10 +977,17 @@
   function isSolid(x, y) {
     if (x < 0 || x >= COLS) return true;
     if (y < 0 || y >= ROWS) return false;
-    return tileAt(G.level, x, y) === '#';
+    const c = tileAt(G.level, x, y);
+    return c === '#' || c === '~' || c === '>' || c === '<';
   }
   function isSpike(x, y) {
     return tileAt(G.level, x, y) === '^';
+  }
+  function getGroundTile(p) {
+    if (!G.level) return '.';
+    const tx = Math.floor((p.x + p.w / 2) / T);
+    const ty = Math.floor((p.y + p.h + 2) / T);
+    return tileAt(G.level, tx, ty);
   }
 
   function makePlayer(i, sp) {
@@ -652,7 +1000,7 @@
       coyote: 0, jumpBuffer: 0, standingOn: null, anchored: false,
       squash: 0, blink: rnd(1.2, 4), blinkT: 0, walk: 0, face: 1,
       bubble: null, spawn: { x: sp.x, y: sp.y },
-      landImpact: 0, launched: 0,
+      landImpact: 0, launched: 0, portalCooldown: 0,
     };
   }
 
@@ -722,6 +1070,10 @@
     G.goal = { ...L.goal };
     G.seesaw = L.seesaw ? { ...L.seesaw, tilt: 0, cd: 0, pulse: 0 } : null;
     G.ropeMax = L.ropeMax || 300;
+    G.vents = (L.vents || []).map(v => ({ ...v }));
+    G.portals = (L.portals || []).map(p => ({ ...p }));
+    G.lasers = (L.lasers || []).map(lz => ({ ...lz, opened: false }));
+    G.darkness = !!L.darkness;
     G.levelTime = 0;
     G.levelFalls = 0;
     G.levelTauts = 0;
@@ -869,6 +1221,7 @@
       },
       doors: (G.doors || []).map(d => ({ opened: !!d.opened, openT: Math.round(d.openT * 100) / 100 })),
       plates: (G.plates || []).map(pl => ({ on: !!pl.on, live: !!pl.live, pressT: Math.round(pl.pressT * 100) / 100 })),
+      lasers: (G.lasers || []).map(lz => ({ opened: !!lz.opened })),
       heart: G.heart ? { x: Math.round(G.heart.x), y: Math.round(G.heart.y), held: !!G.heart.held } : null,
       seesaw: G.seesaw ? { tilt: Math.round((G.seesaw.tilt || 0) * 100) / 100 } : null,
       stars: (G.stars || []).map(s => !!s.got),
@@ -912,6 +1265,7 @@
         if (p.blinkT > 0) p.blinkT = Math.max(0, p.blinkT - dt);
         if (p.bubble) { p.bubble.t -= dt; if (p.bubble.t <= 0) p.bubble = null; }
         p.squash += (0 - p.squash) * Math.min(1, dt * 16);
+        p.portalCooldown = Math.max(0, (p.portalCooldown || 0) - dt);
 
         if (p.targetX !== undefined && p.targetY !== undefined) {
           const d = Math.hypot(p.targetX - p.x, p.targetY - p.y);
@@ -1058,8 +1412,22 @@
       } else if (p.launched > 0) {
         // giữ đà bật bập bênh, không hãm ngang
       } else {
-        p.vx = approach(p.vx, 0, (p.wasGround ? FRICTION : AIR_DRAG) * dt);
+        const gt = p.wasGround ? getGroundTile(p) : '.';
+        const f = gt === '~' ? 120 : (p.wasGround ? FRICTION : AIR_DRAG);
+        p.vx = approach(p.vx, 0, f * dt);
       }
+
+      // Băng chuyền đẩy (Conveyor belt push)
+      if (p.onGround || p.wasGround) {
+        const gt = getGroundTile(p);
+        if (gt === '>') {
+          p.vx = approach(p.vx, RUN * 1.15, 900 * dt);
+        } else if (gt === '<') {
+          p.vx = approach(p.vx, -RUN * 1.15, 900 * dt);
+        }
+      }
+
+      p.portalCooldown = Math.max(0, (p.portalCooldown || 0) - dt);
       p.vy = Math.min(MAX_FALL, p.vy + (p.vy > 0 ? GRAV_DOWN : GRAV_UP) * dt);
       p.x += p.vx * dt;
       p.y += p.vy * dt;
@@ -1068,6 +1436,66 @@
     resolvePlayers();
     applyRope();
     for (const p of ps) collide(p);
+
+    // Cột gió đẩy lên (Wind Vents)
+    if (G.vents) {
+      for (const v of G.vents) {
+        for (const p of ps) {
+          if (p.x + p.w > v.x && p.x < v.x + v.w && p.y + p.h > v.y && p.y < v.y + v.h) {
+            p.vy -= (v.power || 1600) * dt;
+            p.onGround = false;
+            if (Math.random() < 0.25) {
+              spawnDust(p.x + rnd(2, p.w - 2), p.y + p.h, 1, '#bae6fd');
+            }
+          }
+        }
+      }
+    }
+
+    // Cổng dịch chuyển thời không (Portals)
+    if (G.portals) {
+      for (const pt of G.portals) {
+        for (const p of ps) {
+          if ((p.portalCooldown || 0) <= 0) {
+            const pcx = p.x + p.w / 2, pcy = p.y + p.h / 2;
+            const da = Math.hypot(pcx - pt.a.x, pcy - pt.a.y);
+            const db = Math.hypot(pcx - pt.b.x, pcy - pt.b.y);
+            if (da < 36) {
+              p.x = pt.b.x - p.w / 2;
+              p.y = pt.b.y - p.h / 2;
+              p.portalCooldown = 0.9;
+              burst(pt.b.x, pt.b.y, 14, '#c084fc', 1.2);
+              spawnHearts(pt.b.x, pt.b.y, 4);
+              sfx('boost');
+            } else if (db < 36) {
+              p.x = pt.a.x - p.w / 2;
+              p.y = pt.a.y - p.h / 2;
+              p.portalCooldown = 0.9;
+              burst(pt.a.x, pt.a.y, 14, '#38bdf8', 1.2);
+              spawnHearts(pt.a.x, pt.a.y, 4);
+              sfx('boost');
+            }
+          }
+        }
+      }
+    }
+
+    // Tia Laser nguy hiểm (Lasers)
+    if (G.lasers) {
+      for (const lz of G.lasers) {
+        if (lz.opened) continue;
+        for (const p of ps) {
+          if (lz.color === 'pink' && p.i === 0) continue;
+          if (lz.color === 'blue' && p.i === 1) continue;
+          const bx1 = p.x + 6, bx2 = p.x + p.w - 6;
+          const by1 = p.y + 6, by2 = p.y + p.h - 2;
+          if (bx2 > lz.x && bx1 < lz.x + lz.w && by2 > lz.y && by1 < lz.y + lz.h) {
+            die();
+            return;
+          }
+        }
+      }
+    }
 
     // đứng trên đất thì có coyote time cho bước sau
     for (const p of ps) {
@@ -1161,7 +1589,7 @@
 
     // cổng năng lượng
     for (const d of G.doors) {
-      if (d.opened) continue;
+      if (d.opened || (d.openT !== undefined && d.openT > 0.7)) continue;
       if (!aabb(p, d)) continue;
       const ox1 = (p.x + p.w) - d.x, ox2 = (d.x + d.w) - p.x;
       const oy1 = (p.y + p.h) - d.y, oy2 = (d.y + d.h) - p.y;
@@ -1362,22 +1790,56 @@
         if (pl.kind === 'button') say(pick(ps), pick(LINES.plate));
       }
       if (pl.latchOn && live) pl.on = true;
+      if (pl.timer) {
+        if (live && !pl.wasLive) {
+          pl.timeLeft = pl.timer;
+          pl.on = true;
+        }
+        if (pl.timeLeft > 0) {
+          pl.timeLeft -= dt;
+          if (pl.timeLeft <= 0) {
+            pl.timeLeft = 0;
+            pl.on = false;
+          }
+        }
+      }
       pl.pressT = approach(pl.pressT || 0, live ? 1 : 0, dt * 9);
     }
+
+    // Cập nhật trạng thái mở tia Laser từ công tắc/nút bấm
+    if (G.lasers) {
+      for (const lz of G.lasers) {
+        if (lz.needs) {
+          const needsArr = Array.isArray(lz.needs) ? lz.needs : [lz.needs];
+          const ok = needsArr.every(id => {
+            const pl = G.plates.find(q => q.id === id);
+            return pl && (pl.timer ? (pl.timeLeft > 0) : (pl.latchOn ? pl.on : pl.live));
+          });
+          lz.opened = ok;
+        }
+      }
+    }
+
     for (const d of G.doors) {
-      if (d.opened) { d.openT = Math.min(1, d.openT + dt * 1.6); continue; }
       const ok = d.needs.every((id) => {
         const pl = G.plates.find((q) => q.id === id);
-        return pl && (pl.latchOn ? pl.on : pl.live);
+        return pl && (pl.timer ? (pl.timeLeft > 0) : (pl.latchOn ? pl.on : pl.live));
       });
-      if (ok) {
-        d.opened = true;
-        d.openT = 0;
-        G.shake = Math.max(G.shake, 5);
-        sfx('door');
-        burst(d.x + d.w / 2, d.y + d.h - 60, 22, '#ffe6a8', 1.2);
-        spawnHearts(d.x + d.w / 2, d.y + 150, 8);
-        say(pick(ps), pick(LINES.door));
+      const hasTimer = d.needs.some(id => G.plates.find(q => q.id === id && q.timer));
+      if (hasTimer) {
+        d.opened = ok;
+        d.openT = approach(d.openT || 0, ok ? 1 : 0, dt * 2.5);
+      } else {
+        if (d.opened) { d.openT = Math.min(1, d.openT + dt * 1.6); continue; }
+        if (ok) {
+          d.opened = true;
+          d.openT = 0;
+          G.shake = Math.max(G.shake, 5);
+          sfx('door');
+          burst(d.x + d.w / 2, d.y + d.h - 60, 22, '#ffe6a8', 1.2);
+          spawnHearts(d.x + d.w / 2, d.y + 150, 8);
+          say(pick(ps), pick(LINES.door));
+        }
       }
     }
   }
@@ -1458,6 +1920,7 @@
     for (const p of G.players) p.bubble = null;
     G.totalTime += G.levelTime;
     G.stats[G.levelIndex] = { time: G.levelTime, falls: G.levelFalls, tauts: G.levelTauts };
+    saveLevelProgress(G.levelIndex, G.levelStars);
     sfx('clear');
     for (let i = 0; i < 5; i++) burst(rnd(200, W - 200), rnd(160, 420), 14, pick(['#ff8fb1', '#ffd66e', '#9fd8f5', '#c9b6ff']), 1.3);
     confettiBurst(80);
@@ -1776,6 +2239,9 @@
     if (G.goal) drawGoal(t);
     if (G.doors) for (const d of G.doors) drawDoor(d, t);
     if (G.plates) for (const p of G.plates) drawPlate(p, t);
+    if (G.vents) for (const v of G.vents) drawWindVent(v, t);
+    if (G.portals) for (const pt of G.portals) drawPortal(pt, t);
+    if (G.lasers) for (const lz of G.lasers) drawLaser(lz, t);
     if (G.seesaw) drawSeesaw(t);
     if (G.level && G.level.sign) drawSign(G.level.sign, t);
 
@@ -1798,6 +2264,7 @@
       }
       ctx.globalAlpha = 1;
     }
+    if (G.darkness) drawDarkness(t);
     drawVignette();
   }
 
@@ -1809,6 +2276,9 @@
         const c = tileAt(L, x, y);
         if (c === '#') drawDirtTile(x, y, th);
         else if (c === '^') drawSpikes(x, y, t);
+        else if (c === '~') drawIceTile(x, y, t);
+        else if (c === '>') drawConveyorTile(x, y, t, 1);
+        else if (c === '<') drawConveyorTile(x, y, t, -1);
       }
     }
     // viền trên của đất + cỏ
@@ -1875,6 +2345,216 @@
     }
     ctx.fillStyle = 'rgba(255,255,255,.35)';
     ctx.fillRect(px + 6, py + T - 6, T - 12, 2);
+  }
+
+  function drawIceTile(x, y, t) {
+    const px = x * T, py = y * T;
+    const grad = ctx.createLinearGradient(px, py, px, py + T);
+    grad.addColorStop(0, '#e0f2fe');
+    grad.addColorStop(0.5, '#bae6fd');
+    grad.addColorStop(1, '#7dd3fc');
+    ctx.fillStyle = grad;
+    ctx.fillRect(px, py, T, T);
+
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.75)';
+    ctx.fillRect(px, py, T, 5);
+
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.4)';
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.moveTo(px + 8, py + 14);
+    ctx.lineTo(px + 24, py + 42);
+    ctx.moveTo(px + 36, py + 10);
+    ctx.lineTo(px + 52, py + 38);
+    ctx.stroke();
+
+    ctx.fillStyle = 'rgba(12, 74, 110, 0.15)';
+    ctx.fillRect(px, py + T - 4, T, 4);
+  }
+
+  function drawConveyorTile(x, y, t, dir) {
+    const px = x * T, py = y * T;
+    ctx.fillStyle = '#334155';
+    ctx.fillRect(px, py, T, T);
+
+    ctx.fillStyle = '#1e293b';
+    ctx.fillRect(px, py, T, 16);
+
+    const offset = ((t * 90 * dir) % 20 + 20) % 20;
+    ctx.strokeStyle = '#38bdf8';
+    ctx.lineWidth = 2.5;
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+
+    for (let ox = -20; ox <= T + 20; ox += 20) {
+      const cx = px + ox + offset;
+      if (cx >= px + 4 && cx <= px + T - 4) {
+        ctx.beginPath();
+        if (dir > 0) {
+          ctx.moveTo(cx - 4, py + 4);
+          ctx.lineTo(cx + 2, py + 8);
+          ctx.lineTo(cx - 4, py + 12);
+        } else {
+          ctx.moveTo(cx + 4, py + 4);
+          ctx.lineTo(cx - 2, py + 8);
+          ctx.lineTo(cx + 4, py + 12);
+        }
+        ctx.stroke();
+      }
+    }
+
+    ctx.fillStyle = '#64748b';
+    ellipse(px + 16, py + 38, 9, 9); ctx.fill();
+    ellipse(px + T - 16, py + 38, 9, 9); ctx.fill();
+    ctx.fillStyle = '#94a3b8';
+    ellipse(px + 16, py + 38, 4, 4); ctx.fill();
+    ellipse(px + T - 16, py + 38, 4, 4); ctx.fill();
+  }
+
+  function drawWindVent(v, t) {
+    const by = v.y + v.h - 16;
+    ctx.fillStyle = '#475569';
+    rr(v.x + 4, by, v.w - 8, 16, 4); ctx.fill();
+    ctx.fillStyle = '#94a3b8';
+    ctx.fillRect(v.x + 10, by + 3, v.w - 20, 3);
+    ctx.fillRect(v.x + 10, by + 8, v.w - 20, 3);
+
+    ctx.save();
+    const grad = ctx.createLinearGradient(v.x, by, v.x, v.y);
+    grad.addColorStop(0, 'rgba(165, 243, 252, 0.45)');
+    grad.addColorStop(0.7, 'rgba(186, 230, 253, 0.25)');
+    grad.addColorStop(1, 'rgba(224, 242, 254, 0.02)');
+    ctx.fillStyle = grad;
+    ctx.fillRect(v.x + 6, v.y, v.w - 12, v.h - 16);
+
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.65)';
+    ctx.lineWidth = 2;
+    for (let i = 0; i < 3; i++) {
+      const lx = v.x + 14 + i * ((v.w - 28) / 2);
+      const shift = ((t * 220 + i * 70) % (v.h - 24));
+      const ly = by - shift;
+      ctx.beginPath();
+      ctx.moveTo(lx, ly);
+      ctx.lineTo(lx, ly - 28);
+      ctx.stroke();
+    }
+    ctx.restore();
+  }
+
+  function drawPortalRing(cx, cy, color1, color2, t) {
+    ctx.save();
+    const pulse = Math.sin(t * 4) * 3;
+    const rx = 22 + pulse;
+    const ry = 36 + pulse * 0.6;
+
+    const aura = ctx.createRadialGradient(cx, cy, 6, cx, cy, rx + 14);
+    aura.addColorStop(0, color1);
+    aura.addColorStop(0.7, color2);
+    aura.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.fillStyle = aura;
+    ctx.beginPath();
+    ctx.ellipse(cx, cy, rx + 14, ry + 14, 0, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.fillStyle = '#0f172a';
+    ctx.beginPath();
+    ctx.ellipse(cx, cy, rx, ry, 0, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.strokeStyle = color1;
+    ctx.lineWidth = 3.5;
+    ctx.beginPath();
+    ctx.ellipse(cx, cy, rx, ry, t * 2, 0, Math.PI * 2);
+    ctx.stroke();
+
+    ctx.fillStyle = '#ffffff';
+    ellipse(cx + Math.cos(t * 5) * (rx * 0.4), cy + Math.sin(t * 5) * (ry * 0.4), 3, 3);
+    ctx.fill();
+
+    ctx.restore();
+  }
+
+  function drawPortal(pt, t) {
+    drawPortalRing(pt.a.x, pt.a.y, '#f43f5e', 'rgba(244, 63, 94, 0.25)', t);
+    drawPortalRing(pt.b.x, pt.b.y, '#06b6d4', 'rgba(6, 182, 212, 0.25)', t + Math.PI);
+  }
+
+  function drawLaser(lz, t) {
+    ctx.save();
+    const isOff = !!lz.opened;
+    const col = lz.color === 'pink' ? '#ff3377' : (lz.color === 'blue' ? '#00b4d8' : '#ef4444');
+    const glowCol = lz.color === 'pink' ? 'rgba(255, 51, 119, 0.45)' : (lz.color === 'blue' ? 'rgba(0, 180, 216, 0.45)' : 'rgba(239, 68, 68, 0.45)');
+
+    ctx.fillStyle = '#1e293b';
+    ctx.fillRect(lz.x - 4, lz.y, lz.w + 8, 8);
+    ctx.fillRect(lz.x - 4, lz.y + lz.h - 8, lz.w + 8, 8);
+
+    if (isOff) {
+      ctx.fillStyle = '#22c55e';
+      ellipse(lz.x + lz.w / 2, lz.y + 4, 2.5, 2.5); ctx.fill();
+      ellipse(lz.x + lz.w / 2, lz.y + lz.h - 4, 2.5, 2.5); ctx.fill();
+      ctx.restore();
+      return;
+    }
+
+    const beamW = lz.w + Math.sin(t * 18) * 2;
+    const cx = lz.x + lz.w / 2;
+
+    ctx.fillStyle = glowCol;
+    ctx.fillRect(cx - beamW * 1.5, lz.y + 8, beamW * 3, lz.h - 16);
+
+    ctx.fillStyle = col;
+    ctx.fillRect(cx - beamW / 2, lz.y + 8, beamW, lz.h - 16);
+
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(cx - 1.5, lz.y + 8, 3, lz.h - 16);
+
+    if (Math.random() < 0.3) {
+      const py = lz.y + rnd(10, lz.h - 10);
+      ellipse(cx + rnd(-5, 5), py, 2, 2);
+      ctx.fill();
+    }
+    ctx.restore();
+  }
+
+  function drawDarkness(t) {
+    ctx.save();
+    const overlayCanvas = document.createElement('canvas');
+    overlayCanvas.width = W;
+    overlayCanvas.height = H;
+    const octx = overlayCanvas.getContext('2d');
+
+    octx.fillStyle = 'rgba(10, 15, 28, 0.94)';
+    octx.fillRect(0, 0, W, H);
+
+    octx.globalCompositeOperation = 'destination-out';
+
+    for (const p of G.players) {
+      const pcx = p.x + p.w / 2, pcy = p.y + p.h / 2;
+      const rad = 175 + Math.sin(t * 3 + p.i) * 6;
+      const g = octx.createRadialGradient(pcx, pcy, 30, pcx, pcy, rad);
+      g.addColorStop(0, 'rgba(0,0,0,1)');
+      g.addColorStop(0.7, 'rgba(0,0,0,0.85)');
+      g.addColorStop(1, 'rgba(0,0,0,0)');
+      octx.fillStyle = g;
+      octx.beginPath();
+      octx.arc(pcx, pcy, rad, 0, Math.PI * 2);
+      octx.fill();
+    }
+
+    if (G.goal) {
+      const gcx = G.goal.x + G.goal.w / 2, gcy = G.goal.y + G.goal.h / 2;
+      const g = octx.createRadialGradient(gcx, gcy, 20, gcx, gcy, 120);
+      g.addColorStop(0, 'rgba(0,0,0,0.9)');
+      g.addColorStop(1, 'rgba(0,0,0,0)');
+      octx.fillStyle = g;
+      octx.beginPath();
+      octx.arc(gcx, gcy, 120, 0, Math.PI * 2);
+      octx.fill();
+    }
+
+    ctx.drawImage(overlayCanvas, 0, 0);
+    ctx.restore();
   }
   function drawDecorBack(t) {
     const th = G.theme;
@@ -2278,6 +2958,13 @@
         ctx.globalAlpha = 0.35;
         ctx.fillStyle = '#fff3b0';
         ellipse(0, 0, 27, 27); ctx.fill();
+      }
+      if (pl.timer && pl.timeLeft > 0) {
+        ctx.globalAlpha = 1;
+        ctx.fillStyle = '#ffffff';
+        ctx.font = 'bold 13px Nunito, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText(Math.ceil(pl.timeLeft) + 's', 0, -32);
       }
       ctx.restore();
       return;
@@ -3004,6 +3691,74 @@
     updateHUD();
   }
 
+  // ------------------------------------------------------------------- level select & progress
+  function getLevelRecords() {
+    try {
+      const raw = localStorage.getItem('dinhnhau.progress');
+      if (raw) return JSON.parse(raw);
+    } catch (e) {}
+    return { maxUnlocked: 0, stars: {} };
+  }
+
+  function saveLevelProgress(lvlIdx, starsCount) {
+    try {
+      const rec = getLevelRecords();
+      rec.stars = rec.stars || {};
+      rec.stars[lvlIdx] = Math.max(rec.stars[lvlIdx] || 0, starsCount || 0);
+      rec.maxUnlocked = Math.max(rec.maxUnlocked || 0, lvlIdx + 1);
+      localStorage.setItem('dinhnhau.progress', JSON.stringify(rec));
+    } catch (e) {}
+  }
+
+  function renderLevelGrid() {
+    if (!dom.levelGrid) return;
+    const rec = getLevelRecords();
+    dom.levelGrid.innerHTML = '';
+
+    LEVELS.forEach((lvl, idx) => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'level-card-btn' + (idx === G.levelIndex ? ' active' : '');
+      const starsEarned = (rec.stars && rec.stars[idx]) || 0;
+      const starText = '★'.repeat(starsEarned) + '☆'.repeat(3 - starsEarned);
+
+      btn.innerHTML = `
+        <span class="lvl-num">${idx + 1}</span>
+        <span class="lvl-name">${lvl.name}</span>
+        <span class="lvl-tag">${lvl.tag || ''}</span>
+        <span class="lvl-stars">${starText}</span>
+      `;
+
+      btn.addEventListener('click', () => {
+        closeLevelSelect();
+        if (window.GameNetwork && window.GameNetwork.isOnline && !window.GameNetwork.isHost) {
+          alert('Chỉ chủ phòng mới có thể chọn đổi màn chơi online!');
+          return;
+        }
+        buildLevel(idx);
+        canvas.focus({ preventScroll: true });
+      });
+
+      dom.levelGrid.appendChild(btn);
+    });
+  }
+
+  function openLevelSelect() {
+    renderLevelGrid();
+    dom.screenLevelSelect.classList.remove('hidden');
+    dom.screenPause.classList.add('hidden');
+    dom.screenStart.classList.add('hidden');
+  }
+
+  function closeLevelSelect() {
+    dom.screenLevelSelect.classList.add('hidden');
+    if (G.mode === 'paused') {
+      dom.screenPause.classList.remove('hidden');
+    } else if (G.mode === 'menu') {
+      dom.screenStart.classList.remove('hidden');
+    }
+  }
+
   // ------------------------------------------------------------------- UI wiring
   dom.btnStart.addEventListener('click', startGame);
   dom.btnResume.addEventListener('click', resumeGame);
@@ -3017,6 +3772,9 @@
   dom.btnHome.addEventListener('click', goMenu);
   dom.btnPause.addEventListener('click', () => { G.mode === 'paused' ? resumeGame() : pauseGame(); });
   dom.btnSound.addEventListener('click', toggleSound);
+  if (dom.btnOpenLevelSelect) dom.btnOpenLevelSelect.addEventListener('click', openLevelSelect);
+  if (dom.btnPauseLevelSelect) dom.btnPauseLevelSelect.addEventListener('click', openLevelSelect);
+  if (dom.btnCloseLevelSelect) dom.btnCloseLevelSelect.addEventListener('click', closeLevelSelect);
   for (const el of [dom.name1, dom.name2]) {
     el.addEventListener('keydown', (e) => {
       if (e.key === 'Enter') { e.preventDefault(); startGame(); }
@@ -3127,6 +3885,15 @@
           G.plates[idx].on = pl.on;
           G.plates[idx].live = pl.live;
           G.plates[idx].targetPressT = pl.pressT;
+        }
+      });
+    }
+
+    // Đồng bộ tia laze
+    if (st.lasers && G.lasers) {
+      st.lasers.forEach((lz, idx) => {
+        if (G.lasers[idx]) {
+          G.lasers[idx].opened = lz.opened;
         }
       });
     }

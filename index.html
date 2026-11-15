@@ -109,7 +109,10 @@
         </div>
       </div>
 
-      <button class="btn btn-primary btn-start" id="btnStart">Bắt đầu dính nhau</button>
+      <div class="start-actions-row">
+        <button class="btn btn-primary btn-start" id="btnStart">Bắt đầu dính nhau</button>
+        <button type="button" class="btn btn-level-select" id="btnOpenLevelSelect" title="Chọn màn chơi 1 - 20">🗺️ Chọn màn</button>
+      </div>
 
       <div class="controls">
         <div class="control-col p1">
@@ -141,6 +144,7 @@
       <div class="stack">
         <button class="btn btn-primary" id="btnResume">Chơi tiếp</button>
         <button class="btn btn-ghost" id="btnRestartLevel">Chơi lại màn này</button>
+        <button class="btn btn-ghost" id="btnPauseLevelSelect">🗺️ Chọn màn khác</button>
         <button class="btn btn-ghost" id="btnQuit">Về màn hình chính</button>
       </div>
       <p class="tiny">Esc / P để chơi tiếp · M để tắt tiếng</p>
@@ -169,6 +173,24 @@
       <div class="stack row">
         <button class="btn btn-primary" id="btnReplay">Chơi lại từ đầu</button>
         <button class="btn btn-ghost" id="btnHome">Về màn hình chính</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Màn Hình Chọn Màn Chơi (1 - 20) -->
+  <div class="screen hidden" id="screenLevelSelect">
+    <div class="card level-select-card">
+      <div class="level-select-top">
+        <div>
+          <p class="kicker">HÀNH TRÌNH TÌNH YÊU</p>
+          <h2 class="h2">Chọn màn chơi (1 - 20)</h2>
+        </div>
+        <button type="button" class="btn-close-select" id="btnCloseLevelSelect" title="Đóng">✕</button>
+      </div>
+      <p class="muted level-select-sub">Cùng nhau chinh phục trọn vẹn 20 màn thử thách!</p>
+      
+      <div class="level-grid" id="levelGrid">
+        <!-- JS render 20 màn chơi -->
       </div>
     </div>
   </div>
