@@ -110,15 +110,18 @@
   // ----------------------------------------------------------------- levels
   //  # = đất, ^ = bẫy, . = trống
   const LEVELS = [
-  // Level 1: Làm quen
+  // =========================================================================
+  // MÀN 1: Làm quen (Thảo nguyên Ban Mai)
+  // Nhập môn: Di chuyển, làm quen dây tơ hồng, nhảy qua mỏm đá 1 tầng và hố hoa gai
+  // =========================================================================
   {
     name: 'Làm quen',
     tag: 'bước đầu gắn kết',
     icon: '🪢',
     difficulty: 'Nhập môn',
-    hint: 'Hai bạn bị buộc lại bởi Sợi Dây Tơ Hồng. Cùng nhau bước đi, vượt qua mỏm đá thảo nguyên và nhảy qua hố hoa gai đầu tiên!',
+    hint: 'Chào mừng hai bạn! Dùng A/D (hoặc Mũi tên) để bước đi, W (hoặc Mũi tên lên) để nhảy. Nhấn Space để dắt tay bạn đời!',
     theme: 'day',
-    ropeMax: 340,
+    ropeMax: 350,
     spawn: [{ x: 96, y: 640 }, { x: 160, y: 640 }],
     goal: { x: 1120, y: 640, w: 130, h: 190 },
     tiles: [
@@ -129,48 +132,56 @@
       '....................',
       '....................',
       '....................',
-      '.......####.........',
-      '.......####.........',
-      '###########...^^....',
-      '###########...######',
+      '....................',
+      '.......##...........',
+      '.......##......^^...',
+      '#######..#####.#####',
     ],
   },
-  // Level 2: Cõng nhau
+
+  // =========================================================================
+  // MÀN 2: Cõng nhau (Bật nhảy tình yêu)
+  // Bông làm bệ đỡ, Bắp nhảy lên đầu để được BOOST vút lên đập nút mở cổng
+  // =========================================================================
   {
     name: 'Cõng nhau',
     tag: 'bật nhảy tình yêu',
     icon: '👟',
     difficulty: 'Cơ bản',
-    hint: 'Bức tường thành cổ cao 4 tầng chắn lối! Bông làm bệ đỡ, Bắp nhảy lên đầu để được BOOST vút lên đập nút mở cổng!',
+    hint: 'Bức tường thành cao 2 tầng chắn lối! Bông đứng sát chân tường, Bắp nhảy lên đầu Bông để được BOOST vút lên đập nút mở cổng!',
     theme: 'day',
     ropeMax: 360,
     spawn: [{ x: 96, y: 640 }, { x: 160, y: 640 }],
     goal: { x: 1120, y: 640, w: 130, h: 190 },
-    plates: [{"id":"p1","kind":"button","x":480,"y":307.2,"w":52,"h":52,"latchOn":true}],
-    doors: [{"x":768,"y":384,"w":96,"h":256,"needs":["p1"]}],
+    plates: [{ id: 'p1', kind: 'button', x: 512, y: 440, w: 52, latchOn: true }],
+    doors: [{ x: 768, y: 448, w: 80, h: 192, needs: ['p1'] }],
     tiles: [
       '....................',
       '....................',
       '....................',
       '....................',
       '....................',
-      '.......##...........',
-      '.......##...........',
-      '.......##...........',
-      '.......##...........',
-      '.......##...........',
+      '....................',
+      '....................',
+      '.......###..........',
+      '.......###..........',
+      '.......###..........',
       '####################',
     ],
   },
-  // Level 3: Bế em
+
+  // =========================================================================
+  // MÀN 3: Bế em (Nâng niu Trái Tim)
+  // Xuất hiện Trái Tim! Cùng nhau ôm Tim đi sát nhau vượt bậc thềm hoa về đích
+  // =========================================================================
   {
     name: 'Bế em',
-    tag: 'ôm trọn yêu thương',
+    tag: 'nâng niu trái tim',
     icon: '💖',
     difficulty: 'Khéo léo',
-    hint: 'Trái Tim Tình Yêu đã xuất hiện! Hai bạn phải luôn đi sát cạnh nhau để cùng nâng niu Trái Tim vượt các bậc đá hoa về đích.',
+    hint: 'Trái Tim Tình Yêu đã xuất hiện! Hai bạn đi gần nhau để cùng nâng niu Trái Tim vượt các bậc đá hoa về đích.',
     theme: 'golden',
-    ropeMax: 340,
+    ropeMax: 350,
     spawn: [{ x: 96, y: 640 }, { x: 160, y: 640 }],
     goal: { x: 1120, y: 640, w: 130, h: 190 },
     heart: { x: 288, y: 566 },
@@ -181,52 +192,67 @@
       '....................',
       '....................',
       '....................',
-      '..........##........',
+      '....................',
       '..........##........',
       '.......##.##.##.....',
       '.......##.##.##.....',
       '######...^......####',
     ],
   },
-  // Level 4: Bập bênh
+
+  // =========================================================================
+  // MÀN 4: Bập bênh (Đòn bẩy hạnh phúc)
+  // Cơ chế Seesaw: P1 nhảy dậm đầu trái phóng P2 đầu phải vút lên vách đá
+  // =========================================================================
   {
     name: 'Bập bênh',
-    tag: 'nhịp điệu phối hợp',
-    icon: '🪵',
+    tag: 'đòn bẩy hạnh phúc',
+    icon: '⚖️',
     difficulty: 'Khéo léo',
-    hint: 'Bông đứng sẵn ở đầu bập bênh, Bắp leo mỏm đá cao nhảy dậm thật mạnh xuống đầu kia phóng Bông bay vút lên cao nguyên!',
+    hint: 'Bông đứng ở đầu phải bập bênh, Bắp leo bậc thang nhảy dậm thật mạnh xuống đầu kia phóng Bông lên vách đá cao!',
     theme: 'golden',
     ropeMax: 380,
     spawn: [{ x: 96, y: 640 }, { x: 160, y: 640 }],
-    goal: { x: 1120, y: 384, w: 130, h: 190 },
-    seesaw: { x: 360, y: 640, w: 190 },
+    goal: { x: 1120, y: 448, w: 130, h: 190 },
+    seesaw: { x: 576, y: 596, w: 190, h: 20 },
+    plates: [{ id: 'see_btn', kind: 'button', x: 1024, y: 384, w: 52, latchOn: true }],
     tiles: [
       '....................',
       '....................',
       '....................',
       '....................',
       '....................',
-      '....................',
-      '..###...........####',
-      '..###...........####',
-      '..###...........####',
-      '..###...........####',
+      '................####',
+      '................####',
+      '....###.........####',
+      '....###.........####',
+      '....###.........####',
       '####################',
     ],
   },
-  // Level 5: Về nhà
+
+  // =========================================================================
+  // MÀN 5: Về nhà (Cổng liên hoàn)
+  // Hai phòng liên hoàn. Bông mở cổng cho Bắp, Bắp mở cổng cho Bông
+  // =========================================================================
   {
     name: 'Về nhà',
-    tag: 'đồng tâm hiệp lực',
-    icon: '⛩️',
+    tag: 'cổng vào tổ ấm',
+    icon: '🏡',
     difficulty: 'Khéo léo',
-    hint: 'Hai cánh cổng sắt liên hoàn. Hãy phân chia nhau: người mở cổng trước, người mở cổng sau để cùng nhau về mái ấm.',
+    hint: 'Hai cánh cổng sắt liên hoàn. Bông mở cổng trước cho Bắp vào phòng 2, Bắp đạp công tắc mở cổng tiếp theo để cùng về đích!',
     theme: 'mint',
     ropeMax: 360,
     spawn: [{ x: 96, y: 640 }, { x: 160, y: 640 }],
     goal: { x: 1120, y: 640, w: 130, h: 190 },
-    plates: [{"id":"p1","kind":"button","x":288,"y":460.8,"w":52,"h":52,"latchOn":true},{"id":"p2","kind":"button","x":736,"y":460.8,"w":52,"h":52,"latchOn":true}],
-    doors: [{"x":512,"y":384,"w":80,"h":256,"needs":["p1"]},{"x":960,"y":384,"w":80,"h":256,"needs":["p2"]}],
+    doors: [
+      { x: 512, y: 384, w: 80, h: 256, needs: ['p1'] },
+      { x: 960, y: 384, w: 80, h: 256, needs: ['p2'] },
+    ],
+    plates: [
+      { id: 'p1', kind: 'button', x: 320, y: 460, w: 52, latchOn: true },
+      { id: 'p2', kind: 'button', x: 736, y: 460, w: 52, latchOn: true },
+    ],
     tiles: [
       '........#......#....',
       '........#......#....',
@@ -241,13 +267,17 @@
       '####################',
     ],
   },
-  // Level 6: Đu dây vực sâu
+
+  // =========================================================================
+  // MÀN 6: Đu dây mạo hiểm (Mỏ neo tình yêu)
+  // Vực sâu 5 ô! P1 cắm mỏ neo (S / Down) cho P2 đu dây tơ hồng qua hòn đảo giữa
+  // =========================================================================
   {
     name: 'Đu dây vực sâu',
-    tag: 'neo chặt lòng tin',
-    icon: '🧗',
+    tag: 'vực thẳm lòng tin',
+    icon: '⚓',
     difficulty: 'Thử thách',
-    hint: 'Vực thẳm sâu hun hút! Nhấn S / Mũi tên xuống để CẮM MỎ NEO cho bạn mình đu dây tơ hồng qua mỏm đá giữa vực!',
+    hint: 'Vực sâu hun hút! Nhấn S / Mũi tên xuống để CẮM MỎ NEO cho bạn mình đu dây tơ hồng qua mỏm đá giữa vực an toàn!',
     theme: 'sunset',
     ropeMax: 400,
     spawn: [{ x: 96, y: 512 }, { x: 160, y: 512 }],
@@ -260,21 +290,25 @@
       '....................',
       '....................',
       '....................',
-      '....................',
-      '#####.......###.####',
-      '#####.......###.####',
-      '#####.^^^^..###^^^^#',
+      '......##............',
+      '#####.##....##.#####',
+      '#####.......##.#####',
+      '#####...^^..##.#####',
     ],
   },
-  // Level 7: Bậc thang đôi
+
+  // =========================================================================
+  // MÀN 7: Bậc thang đôi (Đồng lòng tiến bước)
+  // Bậc thang xen kẽ trên hố chông pha lê. Phải nhịp nhàng không giật dây nhau
+  // =========================================================================
   {
     name: 'Bậc thang đôi',
-    tag: 'từng bước nhịp nhàng',
-    icon: '🏝️',
+    tag: 'đồng điệu bước chân',
+    icon: '🪜',
     difficulty: 'Thử thách',
-    hint: 'Những hòn đảo lơ lửng trên biển chông nhọn. Nhảy từng nhịp một, đừng chạy quá xa kẻo kéo bạn mình rơi xuống vực!',
-    theme: 'mint',
-    ropeMax: 350,
+    hint: 'Các bậc đá nhỏ lơ lửng trên bẫy gai! Hai bạn phải lần lượt nhảy từng bước, đừng nhảy vội kẻo dây kéo bạn rơi xuống gai!',
+    theme: 'sunset',
+    ropeMax: 360,
     spawn: [{ x: 96, y: 640 }, { x: 160, y: 640 }],
     goal: { x: 1120, y: 640, w: 130, h: 190 },
     tiles: [
@@ -283,104 +317,124 @@
       '....................',
       '....................',
       '....................',
-      '........##..........',
-      '........##.##.......',
-      '.....##.##.##.##....',
-      '####.##.##.##.##.###',
-      '####.##.##.##.##.###',
+      '....................',
+      '..........##........',
+      '.......##....##.....',
+      '....##..........##..',
+      '....................',
       '####^^^^^^^^^^^^####',
     ],
   },
-  // Level 8: Nguyện ước bên nhau
+
+  // =========================================================================
+  // MÀN 8: Nguyện ước dưới sao (Bập bênh & Trái Tim)
+  // Ôm Trái Tim phóng qua bập bênh nhặt 3 ngôi sao băng lấp lánh
+  // =========================================================================
   {
     name: 'Nguyện ước bên nhau',
-    tag: 'chạm tới vì sao',
-    icon: '⭐',
+    tag: 'ngàn vì sao sáng',
+    icon: '🌟',
     difficulty: 'Thử thách',
-    hint: 'Bập bênh phóng người yêu lên đỉnh mây nhặt Trái Tim, sau đó cắm mỏ neo đu dây qua vực sâu về đích!',
+    hint: 'Ôm chặt Trái Tim cùng bước lên bập bênh! Phóng vút lên vách đá để thắp sáng ngôi sao ước nguyện của hai người.',
     theme: 'night',
     ropeMax: 420,
     spawn: [{ x: 96, y: 640 }, { x: 160, y: 640 }],
-    goal: { x: 1120, y: 640, w: 130, h: 190 },
-    heart: { x: 640, y: 140.8 },
-    seesaw: { x: 360, y: 640, w: 190 },
+    goal: { x: 1120, y: 448, w: 130, h: 190 },
+    heart: { x: 256, y: 566 },
+    seesaw: { x: 576, y: 596, w: 190, h: 20 },
     tiles: [
       '....................',
       '....................',
       '....................',
-      '.........###........',
       '....................',
       '....................',
-      '..###...............',
-      '..###...............',
-      '..###...............',
-      '..###...........####',
-      '######.^^^^^^^^.####',
+      '................####',
+      '................####',
+      '....###.........####',
+      '....###.........####',
+      '....###.........####',
+      '####################',
     ],
   },
-  // Level 9: Thử thách mê cung
+
+  // =========================================================================
+  // MÀN 9: Thử thách mê cung (Công tắc & Cửa sập)
+  // Mê cung 2 tầng: Bông đi tầng trên đạp nút tắt gai cho Bắp đi tầng dưới
+  // =========================================================================
   {
     name: 'Thử thách mê cung',
-    tag: 'chia đôi ngả đường',
-    icon: '🗝️',
-    difficulty: 'Thử thách',
-    hint: 'Mê cung 2 tầng chia đôi ngả đường. Người tầng dưới né chông ấn nút mở cửa tầng trên, người tầng trên mở cổng tầng dưới!',
+    tag: 'rẽ lối tìm nhau',
+    icon: '🧩',
+    difficulty: 'Gian nan',
+    hint: 'Hai tầng mê cung tách biệt! Người đi tầng trên phải dẫm công tắc mở lối đi an toàn cho người ở tầng dưới.',
     theme: 'lavender',
-    ropeMax: 400,
-    spawn: [{ x: 80, y: 640 }, { x: 140, y: 640 }],
-    goal: { x: 1120, y: 640, w: 130, h: 190 },
-    plates: [{"id":"btn_lower","kind":"button","x":512,"y":544,"w":52,"h":52,"latchOn":true},{"id":"btn_upper","kind":"button","x":704,"y":224,"w":52,"h":52,"latchOn":true}],
-    doors: [{"x":640,"y":128,"w":80,"h":192,"needs":["btn_lower"]},{"x":832,"y":384,"w":80,"h":256,"needs":["btn_upper"]}],
-    tiles: [
-      '..........#.........',
-      '..........#.........',
-      '....................',
-      '....................',
-      '....................',
-      '....#############...',
-      '....................',
-      '....................',
-      '...#....^^..........',
-      '..##....^^..........',
-      '####################',
-    ],
-  },
-  // Level 10: Bất biến tình yêu
-  {
-    name: 'Bất biến tình yêu',
-    tag: 'cột mốc thử thách',
-    icon: '🕰️',
-    difficulty: 'Nâng cao',
-    hint: 'Tháp Chuông sừng sững! Phóng bập bênh lên tầng 2, boost jump lên tầng 3 lấy Tim và gõ chuông tháp mở cổng!',
-    theme: 'golden',
-    ropeMax: 430,
+    ropeMax: 380,
     spawn: [{ x: 96, y: 640 }, { x: 160, y: 640 }],
     goal: { x: 1120, y: 640, w: 130, h: 190 },
-    heart: { x: 640, y: 96 },
-    seesaw: { x: 340, y: 640, w: 180 },
-    plates: [{"id":"tower_btn","kind":"button","x":672,"y":140.8,"w":52,"h":52,"latchOn":true}],
-    doors: [{"x":832,"y":384,"w":80,"h":256,"needs":["tower_btn"]}],
+    plates: [
+      { id: 'gate_btn', kind: 'button', x: 448, y: 320, w: 52, latchOn: true },
+      { id: 'gate_btn2', kind: 'button', x: 832, y: 320, w: 52, latchOn: true },
+    ],
+    doors: [
+      { x: 640, y: 448, w: 64, h: 192, needs: ['gate_btn'] },
+      { x: 960, y: 448, w: 64, h: 192, needs: ['gate_btn2'] },
+    ],
     tiles: [
       '....................',
       '....................',
-      '.........###........',
-      '.........###........',
       '....................',
       '....................',
-      '..###....###........',
-      '..###....###........',
-      '..###....###........',
-      '..###....###........',
+      '....######..######..',
+      '....######..######..',
+      '....................',
+      '....................',
+      '....................',
+      '....................',
       '####################',
     ],
   },
-  // Level 11: Đường trượt băng tuyết
+
+  // =========================================================================
+  // MÀN 10: Bất biến tình duyên (Dây xích ngắn 220px)
+  // Dây tơ hồng bị co ngắn! Hai bạn phải sát cánh từng bước không được rời xa
+  // =========================================================================
   {
-    name: 'Đường trượt băng tuyết',
-    tag: 'trượt băng vèo vèo',
+    name: 'Bất biến tình yêu',
+    tag: 'sợi tơ gắn kết',
+    icon: '💍',
+    difficulty: 'Gian nan',
+    hint: 'Sợi dây tơ hồng bị rút ngắn chỉ còn 220px! Hai bạn phải di chuyển cực kỳ đồng điệu, một bước lùi một bước tiến.',
+    theme: 'day',
+    ropeMax: 240,
+    spawn: [{ x: 96, y: 640 }, { x: 160, y: 640 }],
+    goal: { x: 1120, y: 640, w: 130, h: 190 },
+    plates: [{ id: 'lock_btn', kind: 'plate', x: 640, y: 440, w: 70, latchOn: true }],
+    doors: [{ x: 896, y: 448, w: 80, h: 192, needs: ['lock_btn'] }],
+    tiles: [
+      '....................',
+      '....................',
+      '....................',
+      '....................',
+      '....................',
+      '....................',
+      '....................',
+      '.........##.........',
+      '......##.##.##......',
+      '......##.##.##......',
+      '####..##.##.##..####',
+    ],
+  },
+
+  // =========================================================================
+  // MÀN 11: Dốc băng trơn trượt (Sân trượt băng)
+  // Giới thiệu cơ chế Băng (`~`): Ma sát cực thấp, trượt vun vút
+  // =========================================================================
+  {
+    name: 'Dốc băng trơn trượt',
+    tag: 'lướt gió cùng em',
     icon: '⛸️',
-    difficulty: 'Nâng cao',
-    hint: 'Sàn băng cực trơn! Trượt nhanh như bay nhưng cẩn thận nhấn S / Mũi tên xuống hãm phanh mỏ neo kẻo lao xuống hố chông!',
+    difficulty: 'Gian nan',
+    hint: 'Sàn băng ma sát cực trượt! Lấy đà phi nhanh qua hố chông băng, nhấn S để cắm mỏ neo dừng lại đúng lúc!',
     theme: 'mint',
     ropeMax: 380,
     spawn: [{ x: 96, y: 640 }, { x: 160, y: 640 }],
@@ -394,50 +448,88 @@
       '....................',
       '....................',
       '....................',
-      '....................',
-      '....~~~~..~~~..~~...',
-      '####~~~~^^~~~^^~~###',
+      '.......~~~~.........',
+      '..~~~~.~~~~..^^.....',
+      '######.####.########',
     ],
   },
-  // Level 12: Gió cuốn bay cao
+
+  // =========================================================================
+  // MÀN 12: Cơn gió tình ca (Cột gió Thung lũng)
+  // Giới thiệu cột gió thẳng đứng (`V` / vents): Bay bổng lên chín tầng mây
+  // =========================================================================
   {
-    name: 'Gió cuốn bay cao',
-    tag: 'cưỡi gió lượn mây',
-    icon: '🌪️',
-    difficulty: 'Nâng cao',
-    hint: 'Cột gió bão khổng lồ đẩy hai bạn bay vút lên trời! Cùng nhau nhảy vào luồng gió, lượn né chông đáp sang vách đá đối diện.',
+    name: 'Cơn gió tình ca',
+    tag: 'bay trên chín tầng mây',
+    icon: '🍃',
+    difficulty: 'Gian nan',
+    hint: 'Cột gió lốc đưa hai bạn bay bổng lên trời cao! Cùng nhau thả mình theo luồng gió để đáp xuống đài quan sát.',
     theme: 'day',
+    ropeMax: 400,
+    spawn: [{ x: 96, y: 640 }, { x: 160, y: 640 }],
+    goal: { x: 1120, y: 256, w: 130, h: 190 },
+    vents: [{ x: 384, y: 256, w: 128, h: 384, power: 1750 }],
+    tiles: [
+      '....................',
+      '....................',
+      '................####',
+      '................####',
+      '......####......####',
+      '......####......####',
+      '....................',
+      '....................',
+      '....................',
+      '....................',
+      '####............####',
+    ],
+  },
+
+  // =========================================================================
+  // MÀN 13: Băng chuyền ngược lối (Băng chuyền cơ học)
+  // Giới thiệu băng chuyền `<` và `>`: Bông chạy ngược dòng dẫm nút hỗ trợ Bắp
+  // =========================================================================
+  {
+    name: 'Băng chuyền ngược lối',
+    tag: 'ngược dòng tìm nhau',
+    icon: '⚙️',
+    difficulty: 'Thử thách cao',
+    hint: 'Băng chuyền cuộn ngược đẩy lùi người chơi! Một người neo chắc chân để người kia dốc sức đạp nút hãm băng chuyền!',
+    theme: 'sunset',
+    ropeMax: 380,
+    spawn: [{ x: 96, y: 640 }, { x: 160, y: 640 }],
+    goal: { x: 1120, y: 640, w: 130, h: 190 },
+    plates: [{ id: 'conv_btn', kind: 'button', x: 768, y: 396, w: 52, latchOn: true }],
+    doors: [{ x: 960, y: 448, w: 80, h: 192, needs: ['conv_btn'] }],
+    tiles: [
+      '....................',
+      '....................',
+      '....................',
+      '....................',
+      '....................',
+      '....................',
+      '...........##.......',
+      '...........##.......',
+      '.....<<<<<<##.......',
+      '.....<<<<<<##...^^..',
+      '#####<<<<<<##.######',
+    ],
+  },
+
+  // =========================================================================
+  // MÀN 14: Cổng không gian song sinh (Tinh vân Portal)
+  // Giới thiệu Portal (@): Bước vào cổng xanh, phóng ra cổng cam vút qua vực
+  // =========================================================================
+  {
+    name: 'Cổng không gian song sinh',
+    tag: 'vượt không gian',
+    icon: '🌀',
+    difficulty: 'Thử thách cao',
+    hint: 'Cổng dịch chuyển thời không! Bước vào cổng xanh ở bờ này, bạn sẽ lập tức bay vút ra từ cổng cam ở bờ bên kia!',
+    theme: 'lavender',
     ropeMax: 420,
     spawn: [{ x: 96, y: 640 }, { x: 160, y: 640 }],
-    goal: { x: 1120, y: 384, w: 130, h: 190 },
-    vents: [{"x":512,"y":64,"w":288,"h":576,"power":1800}],
-    tiles: [
-      '....................',
-      '....................',
-      '....................',
-      '.......^^...........',
-      '.......##...........',
-      '....................',
-      '................####',
-      '................####',
-      '................####',
-      '.....^^^^^^^^^^.####',
-      '#####..........#####',
-    ],
-  },
-  // Level 13: Băng chuyền ngược dòng
-  {
-    name: 'Băng chuyền ngược dòng',
-    tag: 'ngược dòng thử thách',
-    icon: '⚙️',
-    difficulty: 'Nâng cao',
-    hint: 'Băng chuyền cuốn ngược rất mạnh! Một người cắm neo làm trụ, người kia nhảy lên bục đá đạp nút mở cổng sắt.',
-    theme: 'sunset',
-    ropeMax: 400,
-    spawn: [{ x: 96, y: 640 }, { x: 160, y: 640 }],
     goal: { x: 1120, y: 640, w: 130, h: 190 },
-    plates: [{"id":"conv_btn","kind":"button","x":576,"y":396.8,"w":52,"h":52,"latchOn":true}],
-    doors: [{"x":960,"y":384,"w":80,"h":256,"needs":["conv_btn"]}],
+    portals: [{ a: { x: 384, y: 576 }, b: { x: 832, y: 448 } }],
     tiles: [
       '....................',
       '....................',
@@ -445,54 +537,30 @@
       '....................',
       '....................',
       '....................',
+      '............###.....',
+      '............###.....',
+      '............###.....',
       '....................',
-      '........###.........',
-      '........###.........',
-      '....<<<<<<<<<<<.....',
-      '####<<<<<<<<<<<#####',
+      '#####^^^^^^^^^^^####',
     ],
   },
-  // Level 14: Cổng thời không
+
+  // =========================================================================
+  // MÀN 15: Đồng hồ định mệnh (Đếm ngược 8 giây)
+  // Nút bấm có timer: 8 giây chạy nước rút vượt chướng ngại vật
+  // =========================================================================
   {
-    name: 'Cổng thời không',
-    tag: 'vượt qua không gian',
-    icon: '🌌',
-    difficulty: 'Thử thách',
-    hint: 'Bức tường chia cách đôi bờ! Bước vào Cổng Thời Không để dịch chuyển sang phòng bên cạnh đập nút mở toang cánh cửa lớn.',
-    theme: 'night',
-    ropeMax: 400,
-    spawn: [{ x: 96, y: 640 }, { x: 160, y: 640 }],
-    goal: { x: 1120, y: 640, w: 130, h: 190 },
-    portals: [{"a":{"x":384,"y":576},"b":{"x":832,"y":576}}],
-    plates: [{"id":"gate_btn","kind":"button","x":1024,"y":435.2,"w":52,"h":52,"latchOn":true}],
-    doors: [{"x":576,"y":384,"w":128,"h":256,"needs":["gate_btn"]}],
-    tiles: [
-      '.........##.........',
-      '.........##.........',
-      '.........##.........',
-      '.........##.........',
-      '.........##.........',
-      '.........##.........',
-      '....................',
-      '....................',
-      '...............###..',
-      '...............###..',
-      '####################',
-    ],
-  },
-  // Level 15: Đếm ngược 6 giây
-  {
-    name: 'Đếm ngược 6 giây',
-    tag: 'chạy đua với thời gian',
+    name: 'Đồng hồ định mệnh',
+    tag: 'chạy đua thời gian',
     icon: '⏱️',
     difficulty: 'Cực hạn',
-    hint: 'Công tắc hẹn giờ 6.5 giây! Nhấn nút, tiếng còi đếm ngược vang lên, cả hai dắt tay nhau phi nước đại qua cổng trước khi sập!',
+    hint: 'Tiếng còi đếm ngược 8 giây vang lên! Cả hai dắt tay nhau phi nước đại qua các rào chắn trước khi cửa sập đóng chặt!',
     theme: 'golden',
     ropeMax: 400,
     spawn: [{ x: 96, y: 640 }, { x: 160, y: 640 }],
     goal: { x: 1120, y: 640, w: 130, h: 190 },
-    plates: [{"id":"timer_btn","kind":"button","x":224,"y":396.8,"w":52,"h":52,"timer":6.5}],
-    doors: [{"x":960,"y":384,"w":80,"h":256,"needs":["timer_btn"]}],
+    plates: [{ id: 'timer_btn', kind: 'button', x: 256, y: 460, w: 52, timer: 8.5 }],
+    doors: [{ x: 960, y: 384, w: 80, h: 256, needs: ['timer_btn'] }],
     tiles: [
       '....................',
       '....................',
@@ -507,10 +575,14 @@
       '##########......####',
     ],
   },
-  // Level 16: Đêm đen soi bóng
+
+  // =========================================================================
+  // MÀN 16: Đêm đen soi bóng (Bóng tối & Trái Tim)
+  // Màn chơi bóng tối: Trái Tim là nguồn sáng duy nhất soi lối
+  // =========================================================================
   {
     name: 'Đêm đen soi bóng',
-    tag: 'ánh sáng tình yêu',
+    tag: 'ánh sáng con tim',
     icon: '🕯️',
     difficulty: 'Cực hạn',
     hint: 'Màn đêm buông xuống, chỉ Trái Tim và tình yêu quanh hai bạn mới thấu suốt đường đi. Luôn ôm Tim đi sát nhau để soi đường!',
@@ -519,7 +591,7 @@
     darkness: true,
     spawn: [{ x: 96, y: 640 }, { x: 160, y: 640 }],
     goal: { x: 1120, y: 640, w: 130, h: 190 },
-    heart: { x: 192, y: 566 },
+    heart: { x: 288, y: 566 },
     tiles: [
       '....................',
       '....................',
@@ -534,10 +606,14 @@
       '####...^^....^^..###',
     ],
   },
-  // Level 17: Tia sáng phân sắc
+
+  // =========================================================================
+  // MÀN 17: Tia sáng phân sắc (Laser hồng & xanh)
+  // Laser hồng Bông đi qua, laser xanh Bắp đi qua
+  // =========================================================================
   {
     name: 'Tia sáng phân sắc',
-    tag: 'bảo vệ lẫn nhau',
+    tag: 'sắc màu tình yêu',
     icon: '⚡',
     difficulty: 'Cực hạn',
     hint: 'Laser hồng chỉ cho Bông qua, laser xanh cho Bắp qua. Bông dũng cảm qua laser hồng ấn nút tắt laser xanh cứu bạn!',
@@ -545,8 +621,11 @@
     ropeMax: 400,
     spawn: [{ x: 96, y: 640 }, { x: 160, y: 640 }],
     goal: { x: 1120, y: 640, w: 130, h: 190 },
-    lasers: [{"x":448,"y":256,"w":14,"h":384,"color":"pink"},{"x":832,"y":256,"w":14,"h":384,"color":"blue","needs":"blue_off"}],
-    plates: [{"id":"blue_off","kind":"button","x":608,"y":396.8,"w":52,"h":52,"latchOn":true}],
+    lasers: [
+      { x: 448, y: 448, w: 16, h: 192, color: 'pink' },
+      { x: 768, y: 448, w: 16, h: 192, color: 'blue', needs: ['blue_off'] },
+    ],
+    plates: [{ id: 'blue_off', kind: 'button', x: 608, y: 440, w: 52, latchOn: true }],
     tiles: [
       '....................',
       '....................',
@@ -561,56 +640,64 @@
       '####################',
     ],
   },
-  // Level 18: Băng giá & Bão gió
+
+  // =========================================================================
+  // MÀN 18: Bão tuyết & Bập bênh (Băng giá + Gió lốc)
+  // Trượt băng lao vào bập bênh phóng thẳng vào luồng bão tuyết nhặt Tim
+  // =========================================================================
   {
     name: 'Băng giá & Bão gió',
-    tag: 'bão tuyết cuồng nhiệt',
-    icon: '🏔️',
+    tag: 'vượt ngàn sóng gió',
+    icon: '❄️',
     difficulty: 'Cực hạn',
     hint: 'Trượt băng tốc độ cao lao vào bập bênh, phóng thẳng vào luồng bão tuyết bay vút lên trời nhặt Trái Tim trên đỉnh mây!',
     theme: 'mint',
     ropeMax: 440,
     spawn: [{ x: 96, y: 640 }, { x: 160, y: 640 }],
-    goal: { x: 1120, y: 384, w: 135, h: 190 },
-    heart: { x: 704, y: 128 },
-    seesaw: { x: 380, y: 640, w: 180 },
-    vents: [{"x":608,"y":64,"w":256,"h":576,"power":1850}],
+    goal: { x: 1120, y: 384, w: 130, h: 190 },
+    heart: { x: 704, y: 160 },
+    seesaw: { x: 512, y: 596, w: 190, h: 20 },
+    vents: [{ x: 672, y: 192, w: 128, h: 448, power: 1800 }],
     tiles: [
       '....................',
       '....................',
-      '....................',
-      '....................',
-      '....................',
-      '....................',
-      '..###...........####',
-      '..###...........####',
-      '..###...........####',
-      '..~~~~..........####',
-      '######..........####',
+      '................####',
+      '................####',
+      '................####',
+      '................####',
+      '................####',
+      '................####',
+      '.......~~~~.....####',
+      '....~~~~~~~.....####',
+      '######.####.....####',
     ],
   },
-  // Level 19: Vực thẳm thời gian
+
+  // =========================================================================
+  // MÀN 19: Vực thẳm thời gian (Băng chuyền + Portal + Cửa hẹn giờ)
+  // Tổ hợp cao cấp: Băng chuyền ngược, cổng dịch chuyển và đồng hồ đếm ngược
+  // =========================================================================
   {
     name: 'Vực thẳm thời gian',
-    tag: 'thử thách cực hạn',
+    tag: 'thử thách đỉnh cao',
     icon: '⏳',
     difficulty: 'Bậc thầy',
-    hint: 'Băng chuyền ngược, cổng thời không và đồng hồ đếm ngược! Bông lên cổng kích hoạt 7s, cả hai ôm Tim lao ngược dòng vào đích!',
+    hint: 'Băng chuyền ngược, cổng thời không và đồng hồ đếm ngược! Bông lên cổng kích hoạt 7.5s, cả hai ôm Tim lao ngược dòng vào đích!',
     theme: 'golden',
     ropeMax: 440,
     spawn: [{ x: 96, y: 640 }, { x: 160, y: 640 }],
-    goal: { x: 1120, y: 640, w: 135, h: 190 },
+    goal: { x: 1120, y: 640, w: 130, h: 190 },
     heart: { x: 128, y: 566 },
-    portals: [{"a":{"x":256,"y":576},"b":{"x":512,"y":256}}],
-    plates: [{"id":"final_timer","kind":"button","x":512,"y":204.8,"w":52,"h":52,"timer":7.5}],
-    doors: [{"x":896,"y":384,"w":80,"h":256,"needs":["final_timer"]}],
+    portals: [{ a: { x: 256, y: 576 }, b: { x: 512, y: 256 } }],
+    plates: [{ id: 'final_timer', kind: 'button', x: 512, y: 200, w: 52, timer: 7.5 }],
+    doors: [{ x: 896, y: 384, w: 80, h: 256, needs: ['final_timer'] }],
     tiles: [
       '....................',
       '....................',
       '....................',
+      '.......###..........',
+      '.......###..........',
       '....................',
-      '.......###..........',
-      '.......###..........',
       '....................',
       '....................',
       '.....<<<<<<<<<......',
@@ -618,7 +705,11 @@
       '#####<<<<<<<<<######',
     ],
   },
-  // Level 20: Lâu đài định mệnh
+
+  // =========================================================================
+  // MÀN 20: Lâu đài định mệnh (Đại kết cục)
+  // Hai tòa tháp đôi hoa hồng. Bông leo tháp trái, Bắp leo tháp phải mở Cổng Lễ Đường
+  // =========================================================================
   {
     name: 'Lâu đài định mệnh',
     tag: 'chạm tới hạnh phúc',
@@ -630,8 +721,11 @@
     spawn: [{ x: 608, y: 640 }, { x: 672, y: 640 }],
     goal: { x: 576, y: 640, w: 140, h: 190 },
     heart: { x: 640, y: 544 },
-    plates: [{"id":"castle_left","kind":"plate","x":179.2,"y":256,"w":70,"latchOn":true},{"id":"castle_right","kind":"plate","x":1056,"y":256,"w":70,"latchOn":true}],
-    doors: [{"x":576,"y":384,"w":128,"h":256,"needs":["castle_left","castle_right"]}],
+    plates: [
+      { id: 'castle_left', kind: 'plate', x: 180, y: 256, w: 70, latchOn: true },
+      { id: 'castle_right', kind: 'plate', x: 1056, y: 256, w: 70, latchOn: true },
+    ],
+    doors: [{ x: 576, y: 384, w: 128, h: 256, needs: ['castle_left', 'castle_right'] }],
     tiles: [
       '....................',
       '....................',
@@ -646,7 +740,7 @@
       '####################',
     ],
   },
-  ];
+];
 
   // ------------------------------------------------------------------ themes
   const THEMES = {
@@ -768,8 +862,12 @@
           if (G.players[0]) G.players[0].jumpBuffer = 0.16;
         }
       } else {
-        if (code === KEYS[0].jump && G.players[0]) G.players[0].jumpBuffer = 0.14;
-        if (code === KEYS[1].jump && G.players[1]) G.players[1].jumpBuffer = 0.14;
+        if (code === KEYS[0].jump && G.players[0]) G.players[0].jumpBuffer = 0.16;
+        if (code === KEYS[1].jump && G.players[1]) G.players[1].jumpBuffer = 0.16;
+        if (code === 'Space') {
+          if (G.players[0]) G.players[0].jumpBuffer = 0.16;
+          if (G.players[1] && !held.has('ArrowUp')) G.players[1].jumpBuffer = 0.16;
+        }
       }
       if (code === 'KeyR' && e.altKey) { restartLevel(); }
     } else if (G.mode === 'clear') {
@@ -789,6 +887,10 @@
     } else {
       if (code === KEYS[0].jump && G.players[0]) cutJump(G.players[0]);
       if (code === KEYS[1].jump && G.players[1]) cutJump(G.players[1]);
+      if (code === 'Space') {
+        if (G.players[0]) cutJump(G.players[0]);
+        if (G.players[1] && !held.has('ArrowUp')) cutJump(G.players[1]);
+      }
     }
   });
   window.addEventListener('blur', () => {
@@ -1271,7 +1373,19 @@
         }
       } else {
         const k = KEYS[p.i];
-        dir = (held.has(k.right) ? 1 : 0) - (held.has(k.left) ? 1 : 0);
+        const manualDir = (held.has(k.right) ? 1 : 0) - (held.has(k.left) ? 1 : 0);
+        if (p.i === 1 && manualDir === 0 && (held.has('Space') || (ps[0] && Math.hypot(ps[0].x - p.x, ps[0].y - p.y) > (G.ropeMax || 300) * 0.82))) {
+          // Companion Follow Assist: P2 dắt tay theo P1 khi giữ Space hoặc khi dây tơ hồng kéo căng
+          const distToP1 = ps[0].x - p.x;
+          if (Math.abs(distToP1) > 52) {
+            dir = Math.sign(distToP1);
+          }
+          if (ps[0].vy < -260 && p.onGround && Math.random() < 0.3) {
+            p.jumpBuffer = 0.16;
+          }
+        } else {
+          dir = manualDir;
+        }
       }
 
       if (p.anchored) {
@@ -1525,19 +1639,28 @@
       const bw = b.anchored ? 0 : 1;
       const sum = aw + bw;
       if (sum > 0) {
-        a.x += nx * over * (aw / sum);
-        a.y += ny * over * (aw / sum);
-        b.x -= nx * over * (bw / sum);
-        b.y -= ny * over * (bw / sum);
+        // Đàn hồi mềm mại: triệt tiêu hiện tượng giật cục giật màn hình
+        const relax = over > 24 ? 0.95 : 0.85;
+        a.x += nx * over * (aw / sum) * relax;
+        a.y += ny * over * (aw / sum) * relax;
+        b.x -= nx * over * (bw / sum) * relax;
+        b.y -= ny * over * (bw / sum) * relax;
+
+        // Triệt tiêu vận tốc ly tâm dọc sợi dây
         const rel = (b.vx - a.vx) * nx + (b.vy - a.vy) * ny;
         if (rel > 0) {
-          a.vx += nx * rel * (aw / sum);
-          a.vy += ny * rel * (aw / sum);
-          b.vx -= nx * rel * (bw / sum);
-          b.vy -= ny * rel * (bw / sum);
+          a.vx += nx * rel * (aw / sum) * 0.86;
+          a.vy += ny * rel * (aw / sum) * 0.86;
+          b.vx -= nx * rel * (bw / sum) * 0.86;
+          b.vy -= ny * rel * (bw / sum) * 0.86;
         }
+
+        // Lực kéo đàn hồi tự nhiên mượt mà
+        const pullSpring = Math.min(2200, over * 40);
+        a.vx += nx * pullSpring * (aw / sum) * STEP;
+        b.vx -= nx * pullSpring * (bw / sum) * STEP;
       }
-      if (over > 9 && G.tautCd <= 0) {
+      if (over > 12 && G.tautCd <= 0) {
         G.tautCd = 2.4;
         G.levelTauts++;
         G.totalTauts++;
