@@ -114,10 +114,12 @@
   {
     name: 'Làm quen',
     tag: 'bước đầu gắn kết',
-    hint: 'Hai bạn bị buộc lại bởi Sợi Dây Tơ Hồng. Cùng nhau bước đi, vượt qua mỏm đá và nhảy qua hố chông đầu tiên!',
+    icon: '🪢',
+    difficulty: 'Nhập môn',
+    hint: 'Hai bạn bị buộc lại bởi Sợi Dây Tơ Hồng. Cùng nhau bước đi, vượt qua mỏm đá thảo nguyên và nhảy qua hố hoa gai đầu tiên!',
     theme: 'day',
     ropeMax: 340,
-    spawn: [{ x: 100, y: 640 }, { x: 180, y: 640 }],
+    spawn: [{ x: 96, y: 640 }, { x: 160, y: 640 }],
     goal: { x: 1120, y: 640, w: 130, h: 190 },
     tiles: [
       '....................',
@@ -127,20 +129,22 @@
       '....................',
       '....................',
       '....................',
-      '....................',
-      '.......##...........',
-      '.......##....^^.....',
-      '#########....#######',
+      '.......####.........',
+      '.......####.........',
+      '###########...^^....',
+      '###########...######',
     ],
   },
   // Level 2: Cõng nhau
   {
     name: 'Cõng nhau',
     tag: 'bật nhảy tình yêu',
-    hint: 'Vách đá cao 4 tầng chắn lối! Hãy cõng nhau (nhảy lên đầu bạn đời) để được BOOST nhảy cực cao đập nút mở cổng!',
+    icon: '👟',
+    difficulty: 'Cơ bản',
+    hint: 'Bức tường thành cổ cao 4 tầng chắn lối! Bông làm bệ đỡ, Bắp nhảy lên đầu để được BOOST vút lên đập nút mở cổng!',
     theme: 'day',
     ropeMax: 360,
-    spawn: [{ x: 100, y: 640 }, { x: 180, y: 640 }],
+    spawn: [{ x: 96, y: 640 }, { x: 160, y: 640 }],
     goal: { x: 1120, y: 640, w: 130, h: 190 },
     plates: [{"id":"p1","kind":"button","x":480,"y":307.2,"w":52,"h":52,"latchOn":true}],
     doors: [{"x":768,"y":384,"w":96,"h":256,"needs":["p1"]}],
@@ -162,10 +166,12 @@
   {
     name: 'Bế em',
     tag: 'ôm trọn yêu thương',
-    hint: 'Trái Tim Tình Yêu đã xuất hiện! Hai bạn phải luôn đi sát cạnh nhau để cùng nâng niu Trái Tim vượt các bậc đá về đích.',
+    icon: '💖',
+    difficulty: 'Khéo léo',
+    hint: 'Trái Tim Tình Yêu đã xuất hiện! Hai bạn phải luôn đi sát cạnh nhau để cùng nâng niu Trái Tim vượt các bậc đá hoa về đích.',
     theme: 'golden',
     ropeMax: 340,
-    spawn: [{ x: 100, y: 640 }, { x: 180, y: 640 }],
+    spawn: [{ x: 96, y: 640 }, { x: 160, y: 640 }],
     goal: { x: 1120, y: 640, w: 130, h: 190 },
     heart: { x: 288, y: 566 },
     tiles: [
@@ -186,10 +192,12 @@
   {
     name: 'Bập bênh',
     tag: 'nhịp điệu phối hợp',
-    hint: 'Bông đứng sẵn ở đầu bập bênh, Bắp leo mỏm đá cao nhảy dậm thật mạnh xuống đầu kia phóng Bông bay vút lên vách đá cao!',
+    icon: '🪵',
+    difficulty: 'Khéo léo',
+    hint: 'Bông đứng sẵn ở đầu bập bênh, Bắp leo mỏm đá cao nhảy dậm thật mạnh xuống đầu kia phóng Bông bay vút lên cao nguyên!',
     theme: 'golden',
     ropeMax: 380,
-    spawn: [{ x: 100, y: 640 }, { x: 180, y: 640 }],
+    spawn: [{ x: 96, y: 640 }, { x: 160, y: 640 }],
     goal: { x: 1120, y: 384, w: 130, h: 190 },
     seesaw: { x: 360, y: 640, w: 190 },
     tiles: [
@@ -210,10 +218,12 @@
   {
     name: 'Về nhà',
     tag: 'đồng tâm hiệp lực',
+    icon: '⛩️',
+    difficulty: 'Khéo léo',
     hint: 'Hai cánh cổng sắt liên hoàn. Hãy phân chia nhau: người mở cổng trước, người mở cổng sau để cùng nhau về mái ấm.',
     theme: 'mint',
     ropeMax: 360,
-    spawn: [{ x: 100, y: 640 }, { x: 180, y: 640 }],
+    spawn: [{ x: 96, y: 640 }, { x: 160, y: 640 }],
     goal: { x: 1120, y: 640, w: 130, h: 190 },
     plates: [{"id":"p1","kind":"button","x":288,"y":460.8,"w":52,"h":52,"latchOn":true},{"id":"p2","kind":"button","x":736,"y":460.8,"w":52,"h":52,"latchOn":true}],
     doors: [{"x":512,"y":384,"w":80,"h":256,"needs":["p1"]},{"x":960,"y":384,"w":80,"h":256,"needs":["p2"]}],
@@ -235,10 +245,12 @@
   {
     name: 'Đu dây vực sâu',
     tag: 'neo chặt lòng tin',
-    hint: 'Vực thẳm không có đáy! Nhấn S / Mũi tên xuống để CẮM MỎ NEO cho bạn mình đu dây tơ hồng qua mỏm đá giữa vực!',
+    icon: '🧗',
+    difficulty: 'Thử thách',
+    hint: 'Vực thẳm sâu hun hút! Nhấn S / Mũi tên xuống để CẮM MỎ NEO cho bạn mình đu dây tơ hồng qua mỏm đá giữa vực!',
     theme: 'sunset',
     ropeMax: 400,
-    spawn: [{ x: 100, y: 512 }, { x: 180, y: 512 }],
+    spawn: [{ x: 96, y: 512 }, { x: 160, y: 512 }],
     goal: { x: 1120, y: 512, w: 130, h: 190 },
     tiles: [
       '....................',
@@ -258,6 +270,8 @@
   {
     name: 'Bậc thang đôi',
     tag: 'từng bước nhịp nhàng',
+    icon: '🏝️',
+    difficulty: 'Thử thách',
     hint: 'Những hòn đảo lơ lửng trên biển chông nhọn. Nhảy từng nhịp một, đừng chạy quá xa kẻo kéo bạn mình rơi xuống vực!',
     theme: 'mint',
     ropeMax: 350,
@@ -281,10 +295,12 @@
   {
     name: 'Nguyện ước bên nhau',
     tag: 'chạm tới vì sao',
+    icon: '⭐',
+    difficulty: 'Thử thách',
     hint: 'Bập bênh phóng người yêu lên đỉnh mây nhặt Trái Tim, sau đó cắm mỏ neo đu dây qua vực sâu về đích!',
     theme: 'night',
     ropeMax: 420,
-    spawn: [{ x: 100, y: 640 }, { x: 180, y: 640 }],
+    spawn: [{ x: 96, y: 640 }, { x: 160, y: 640 }],
     goal: { x: 1120, y: 640, w: 130, h: 190 },
     heart: { x: 640, y: 140.8 },
     seesaw: { x: 360, y: 640, w: 190 },
@@ -306,6 +322,8 @@
   {
     name: 'Thử thách mê cung',
     tag: 'chia đôi ngả đường',
+    icon: '🗝️',
+    difficulty: 'Thử thách',
     hint: 'Mê cung 2 tầng chia đôi ngả đường. Người tầng dưới né chông ấn nút mở cửa tầng trên, người tầng trên mở cổng tầng dưới!',
     theme: 'lavender',
     ropeMax: 400,
@@ -331,10 +349,12 @@
   {
     name: 'Bất biến tình yêu',
     tag: 'cột mốc thử thách',
-    hint: 'Tháp Đồng Hồ sừng sững! Phóng bập bênh lên tầng 2, boost jump lên tầng 3 lấy Tim và chuông tháp mở cổng!',
+    icon: '🕰️',
+    difficulty: 'Nâng cao',
+    hint: 'Tháp Chuông sừng sững! Phóng bập bênh lên tầng 2, boost jump lên tầng 3 lấy Tim và gõ chuông tháp mở cổng!',
     theme: 'golden',
     ropeMax: 430,
-    spawn: [{ x: 100, y: 640 }, { x: 180, y: 640 }],
+    spawn: [{ x: 96, y: 640 }, { x: 160, y: 640 }],
     goal: { x: 1120, y: 640, w: 130, h: 190 },
     heart: { x: 640, y: 96 },
     seesaw: { x: 340, y: 640, w: 180 },
@@ -358,6 +378,8 @@
   {
     name: 'Đường trượt băng tuyết',
     tag: 'trượt băng vèo vèo',
+    icon: '⛸️',
+    difficulty: 'Nâng cao',
     hint: 'Sàn băng cực trơn! Trượt nhanh như bay nhưng cẩn thận nhấn S / Mũi tên xuống hãm phanh mỏ neo kẻo lao xuống hố chông!',
     theme: 'mint',
     ropeMax: 380,
@@ -381,6 +403,8 @@
   {
     name: 'Gió cuốn bay cao',
     tag: 'cưỡi gió lượn mây',
+    icon: '🌪️',
+    difficulty: 'Nâng cao',
     hint: 'Cột gió bão khổng lồ đẩy hai bạn bay vút lên trời! Cùng nhau nhảy vào luồng gió, lượn né chông đáp sang vách đá đối diện.',
     theme: 'day',
     ropeMax: 420,
@@ -405,6 +429,8 @@
   {
     name: 'Băng chuyền ngược dòng',
     tag: 'ngược dòng thử thách',
+    icon: '⚙️',
+    difficulty: 'Nâng cao',
     hint: 'Băng chuyền cuốn ngược rất mạnh! Một người cắm neo làm trụ, người kia nhảy lên bục đá đạp nút mở cổng sắt.',
     theme: 'sunset',
     ropeMax: 400,
@@ -430,6 +456,8 @@
   {
     name: 'Cổng thời không',
     tag: 'vượt qua không gian',
+    icon: '🌌',
+    difficulty: 'Thử thách',
     hint: 'Bức tường chia cách đôi bờ! Bước vào Cổng Thời Không để dịch chuyển sang phòng bên cạnh đập nút mở toang cánh cửa lớn.',
     theme: 'night',
     ropeMax: 400,
@@ -456,6 +484,8 @@
   {
     name: 'Đếm ngược 6 giây',
     tag: 'chạy đua với thời gian',
+    icon: '⏱️',
+    difficulty: 'Cực hạn',
     hint: 'Công tắc hẹn giờ 6.5 giây! Nhấn nút, tiếng còi đếm ngược vang lên, cả hai dắt tay nhau phi nước đại qua cổng trước khi sập!',
     theme: 'golden',
     ropeMax: 400,
@@ -481,6 +511,8 @@
   {
     name: 'Đêm đen soi bóng',
     tag: 'ánh sáng tình yêu',
+    icon: '🕯️',
+    difficulty: 'Cực hạn',
     hint: 'Màn đêm buông xuống, chỉ Trái Tim và tình yêu quanh hai bạn mới thấu suốt đường đi. Luôn ôm Tim đi sát nhau để soi đường!',
     theme: 'night',
     ropeMax: 360,
@@ -506,6 +538,8 @@
   {
     name: 'Tia sáng phân sắc',
     tag: 'bảo vệ lẫn nhau',
+    icon: '⚡',
+    difficulty: 'Cực hạn',
     hint: 'Laser hồng chỉ cho Bông qua, laser xanh cho Bắp qua. Bông dũng cảm qua laser hồng ấn nút tắt laser xanh cứu bạn!',
     theme: 'lavender',
     ropeMax: 400,
@@ -531,6 +565,8 @@
   {
     name: 'Băng giá & Bão gió',
     tag: 'bão tuyết cuồng nhiệt',
+    icon: '🏔️',
+    difficulty: 'Cực hạn',
     hint: 'Trượt băng tốc độ cao lao vào bập bênh, phóng thẳng vào luồng bão tuyết bay vút lên trời nhặt Trái Tim trên đỉnh mây!',
     theme: 'mint',
     ropeMax: 440,
@@ -557,6 +593,8 @@
   {
     name: 'Vực thẳm thời gian',
     tag: 'thử thách cực hạn',
+    icon: '⏳',
+    difficulty: 'Bậc thầy',
     hint: 'Băng chuyền ngược, cổng thời không và đồng hồ đếm ngược! Bông lên cổng kích hoạt 7s, cả hai ôm Tim lao ngược dòng vào đích!',
     theme: 'golden',
     ropeMax: 440,
@@ -584,6 +622,8 @@
   {
     name: 'Lâu đài định mệnh',
     tag: 'chạm tới hạnh phúc',
+    icon: '🏰',
+    difficulty: 'Đại kết cục',
     hint: 'Đại Lâu Đài Tình Yêu ngập tràn hoa hồng! Bông leo tháp trái, Bắp leo tháp phải kích hoạt 2 công tắc mở Cổng Lễ Đường kết duyên!',
     theme: 'day',
     ropeMax: 460,
@@ -2101,6 +2141,8 @@
   function drawLevelTiles(t) {
     const th = G.theme;
     const L = G.level;
+
+    // Lớp nền gạch chính
     for (let y = 0; y < ROWS; y++) {
       for (let x = 0; x < COLS; x++) {
         const c = tileAt(L, x, y);
@@ -2111,248 +2153,405 @@
         else if (c === '<') drawConveyorTile(x, y, t, -1);
       }
     }
-    // viền trên của đất + cỏ
+
+    // Viền trên cỏ xanh/hoa rủ mềm mại (Organic Lush Grass Crest)
     for (let y = 0; y < ROWS; y++) {
       for (let x = 0; x < COLS; x++) {
         if (tileAt(L, x, y) !== '#') continue;
         if (tileAt(L, x, y - 1) === '#') continue;
         const px = x * T, py = y * T;
+        const leftHas = tileAt(L, x - 1, y) === '#';
+        const rightHas = tileAt(L, x + 1, y) === '#';
+
+        // Lớp cỏ gợn sóng chính
         ctx.fillStyle = th.grass;
-        ctx.fillRect(px, py, T, 15);
-        ctx.fillStyle = th.grassDark;
-        ctx.fillRect(px, py + 15, T, 2);
-        if (tileAt(L, x - 1, y) !== '#') {
-          ctx.fillStyle = 'rgba(0,0,0,.06)';
-          ctx.fillRect(px, py, 4, T);
+        ctx.beginPath();
+        ctx.moveTo(px, py + 16);
+        ctx.lineTo(px, py + 4);
+        if (!leftHas) ctx.quadraticCurveTo(px, py, px + 6, py);
+        else ctx.lineTo(px, py);
+        
+        ctx.lineTo(rightHas ? px + T : px + T - 6, py);
+        if (!rightHas) ctx.quadraticCurveTo(px + T, py, px + T, py + 4);
+        ctx.lineTo(px + T, py + 16);
+        // viền đáy lượn sóng tự nhiên
+        for (let s = T; s >= 0; s -= 16) {
+          const wave = Math.sin((x * T + s) * 0.15) * 3;
+          ctx.lineTo(px + s, py + 15 + wave);
         }
-        if (tileAt(L, x + 1, y) !== '#') {
-          ctx.fillStyle = 'rgba(0,0,0,.06)';
-          ctx.fillRect(px + T - 4, py, 4, T);
+        ctx.closePath();
+        ctx.fill();
+
+        // Viền bóng dưới lớp cỏ
+        ctx.fillStyle = th.grassDark;
+        ctx.fillRect(px, py + 16, T, 2.5);
+
+        // Hoa dại lay động trên đỉnh cỏ
+        const flowerSeed = (x * 47 + y * 97) % 5;
+        if (flowerSeed === 1 || flowerSeed === 3) {
+          const fx = px + 16 + flowerSeed * 8;
+          const sway = Math.sin(t * 3 + x) * 1.5;
+          ctx.fillStyle = flowerSeed === 1 ? '#ffaec9' : '#fff3a8';
+          ellipse(fx + sway, py - 3, 3.5, 3.5);
+          ctx.fill();
+          ctx.fillStyle = '#ffffff';
+          ellipse(fx + sway, py - 3, 1.5, 1.5);
+          ctx.fill();
+        }
+
+        // Bóng đổ mép trái/phải nếu là bờ vực
+        if (!leftHas) {
+          ctx.fillStyle = 'rgba(0,0,0,.08)';
+          ctx.fillRect(px, py + 4, 4, T - 4);
+        }
+        if (!rightHas) {
+          ctx.fillStyle = 'rgba(0,0,0,.08)';
+          ctx.fillRect(px + T - 4, py + 4, 4, T - 4);
         }
       }
     }
   }
+
   function drawDirtTile(x, y, th) {
     const px = x * T, py = y * T;
+    // Nền đất ấm áp
     ctx.fillStyle = th.dirt;
     ctx.fillRect(px, py, T, T);
+
+    // Vân đá ngầm sỏi sọc
     ctx.fillStyle = th.dirtDark;
-    // đá lấm tấm, xác định theo vị trí
     const h = (x * 73856093) ^ (y * 19349663);
     for (let i = 0; i < 3; i++) {
       const a = Math.abs(Math.sin(h + i * 12.9898)) * 0.5 + 0.5;
       const b = Math.abs(Math.sin(h * 1.7 + i * 4.1)) * 0.5 + 0.5;
-      ctx.globalAlpha = 0.35;
-      ellipse(px + 8 + a * (T - 16), py + 22 + b * (T - 30), 2.5, 1.8);
+      ctx.globalAlpha = 0.32;
+      ellipse(px + 8 + a * (T - 16), py + 22 + b * (T - 30), 3, 2);
       ctx.fill();
     }
+    // Vân sọc địa tầng nằm ngang
+    ctx.globalAlpha = 0.12;
+    ctx.fillRect(px, py + 28, T, 3);
+    ctx.fillRect(px + 4, py + 46, T - 8, 2);
     ctx.globalAlpha = 1;
   }
+
+  // Chông Gai Tinh Thể Pha Lê Thạch Anh (Amethyst & Rose Quartz Gemstone Spikes)
   function drawSpikes(x, y, t) {
     const px = x * T, py = y * T;
-    ctx.fillStyle = 'rgba(70,40,60,.18)';
-    ctx.fillRect(px + 6, py + T - 8, T - 12, 8);
-    ctx.fillStyle = 'rgba(255,95,140,.16)';
-    ellipse(px + T / 2, py + T - 6, T * 0.42, 5);
+
+    // Chân đế kim loại mạ đồng bảo vệ
+    ctx.fillStyle = '#2d1b33';
+    rr(px + 4, py + T - 8, T - 8, 8, 3);
     ctx.fill();
+    ctx.fillStyle = 'rgba(255, 77, 132, 0.25)';
+    ellipse(px + T / 2, py + T - 5, T * 0.44, 4);
+    ctx.fill();
+
+    // 3 tinh thể pha lê giác cắt sắc nét
     for (let i = 0; i < 3; i++) {
       const sx = px + 8 + i * 17;
-      const base = py + T - 4;
+      const base = py + T - 6;
+      const tipY = py + 16 + (i === 1 ? 0 : 5);
+      const tipX = sx + 7;
+
+      // Hào quang nguy hiểm quanh mũi chông
+      ctx.fillStyle = 'rgba(244, 63, 94, 0.12)';
+      ellipse(tipX, tipY + 4, 9, 12);
+      ctx.fill();
+
+      // Mặt trái tinh thể (tối hơn)
       ctx.beginPath();
       ctx.moveTo(sx, base);
-      ctx.lineTo(sx + 7, py + 22);
-      ctx.lineTo(sx + 14, base);
+      ctx.lineTo(tipX, tipY);
+      ctx.lineTo(tipX, base);
       ctx.closePath();
-      const g = ctx.createLinearGradient(sx, py + 22, sx, base);
-      g.addColorStop(0, '#fff6ff');
-      g.addColorStop(0.55, '#d4cdf0');
-      g.addColorStop(1, '#8d86b8');
-      ctx.fillStyle = g;
+      const gLeft = ctx.createLinearGradient(sx, tipY, sx, base);
+      gLeft.addColorStop(0, '#fbcfe8');
+      gLeft.addColorStop(0.5, '#db2777');
+      gLeft.addColorStop(1, '#831843');
+      ctx.fillStyle = gLeft;
       ctx.fill();
-      ctx.strokeStyle = 'rgba(60,45,80,.35)';
-      ctx.lineWidth = 1.5;
+
+      // Mặt phải tinh thể (sáng hơn, phản chiếu)
+      ctx.beginPath();
+      ctx.moveTo(tipX, tipY);
+      ctx.lineTo(sx + 14, base);
+      ctx.lineTo(tipX, base);
+      ctx.closePath();
+      const gRight = ctx.createLinearGradient(sx + 7, tipY, sx + 7, base);
+      gRight.addColorStop(0, '#ffffff');
+      gRight.addColorStop(0.4, '#f472b6');
+      gRight.addColorStop(1, '#9d174d');
+      ctx.fillStyle = gRight;
+      ctx.fill();
+
+      // Viền sắc cạnh tinh thể
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.75)';
+      ctx.lineWidth = 1.2;
+      ctx.beginPath();
+      ctx.moveTo(sx, base);
+      ctx.lineTo(tipX, tipY);
+      ctx.lineTo(sx + 14, base);
       ctx.stroke();
+
+      // Đốm sáng lóe lên ở đỉnh chông nhọn
+      const glint = Math.sin(t * 5 + i * 2) > 0.6;
+      if (glint) {
+        ctx.fillStyle = '#ffffff';
+        ellipse(tipX, tipY, 2, 2);
+        ctx.fill();
+      }
     }
-    ctx.fillStyle = 'rgba(255,255,255,.35)';
-    ctx.fillRect(px + 6, py + T - 6, T - 12, 2);
   }
 
+  // Sàn Băng Tuyết Pha Lê (Glacial Crystal Ice)
   function drawIceTile(x, y, t) {
     const px = x * T, py = y * T;
     const grad = ctx.createLinearGradient(px, py, px, py + T);
-    grad.addColorStop(0, '#e0f2fe');
-    grad.addColorStop(0.5, '#bae6fd');
-    grad.addColorStop(1, '#7dd3fc');
+    grad.addColorStop(0, '#f0f9ff');
+    grad.addColorStop(0.4, '#bae6fd');
+    grad.addColorStop(1, '#38bdf8');
     ctx.fillStyle = grad;
-    ctx.fillRect(px, py, T, T);
+    rr(px, py, T, T, 4);
+    ctx.fill();
 
-    ctx.fillStyle = 'rgba(255, 255, 255, 0.75)';
-    ctx.fillRect(px, py, T, 5);
+    // Vệt sáng lấp lánh phản quang (Sheen)
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.85)';
+    ctx.fillRect(px, py, T, 4);
 
-    ctx.strokeStyle = 'rgba(255, 255, 255, 0.4)';
-    ctx.lineWidth = 1.5;
+    // Vết nứt tinh thể băng nghệ thuật
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.55)';
+    ctx.lineWidth = 1.6;
     ctx.beginPath();
-    ctx.moveTo(px + 8, py + 14);
-    ctx.lineTo(px + 24, py + 42);
-    ctx.moveTo(px + 36, py + 10);
-    ctx.lineTo(px + 52, py + 38);
+    ctx.moveTo(px + 8, py + 12);
+    ctx.lineTo(px + 22, py + 36);
+    ctx.lineTo(px + 30, py + 30);
+    ctx.moveTo(px + 36, py + 8);
+    ctx.lineTo(px + 50, py + 42);
     ctx.stroke();
 
-    ctx.fillStyle = 'rgba(12, 74, 110, 0.15)';
-    ctx.fillRect(px, py + T - 4, T, 4);
+    // Bụi tuyết bay
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.75)';
+    ellipse(px + 14, py + 22, 1.8, 1.8); ctx.fill();
+    ellipse(px + 44, py + 32, 1.5, 1.5); ctx.fill();
   }
 
+  // Băng Chuyền Cơ Khí Steampunk (Mechanical Conveyor Belt)
   function drawConveyorTile(x, y, t, dir) {
     const px = x * T, py = y * T;
-    ctx.fillStyle = '#334155';
-    ctx.fillRect(px, py, T, T);
-
+    // Khung kim loại đúc đồng
     ctx.fillStyle = '#1e293b';
-    ctx.fillRect(px, py, T, 16);
+    rr(px, py, T, T, 4);
+    ctx.fill();
 
+    // Mặt đường ray cơ khí
+    ctx.fillStyle = '#0f172a';
+    ctx.fillRect(px, py + 2, T, 16);
+
+    // Mũi tên neon chuyển động mượt mà
     const offset = ((t * 90 * dir) % 20 + 20) % 20;
     ctx.strokeStyle = '#38bdf8';
-    ctx.lineWidth = 2.5;
+    ctx.lineWidth = 2.8;
     ctx.lineCap = 'round';
     ctx.lineJoin = 'round';
 
     for (let ox = -20; ox <= T + 20; ox += 20) {
       const cx = px + ox + offset;
-      if (cx >= px + 4 && cx <= px + T - 4) {
+      if (cx >= px + 6 && cx <= px + T - 6) {
         ctx.beginPath();
         if (dir > 0) {
-          ctx.moveTo(cx - 4, py + 4);
-          ctx.lineTo(cx + 2, py + 8);
-          ctx.lineTo(cx - 4, py + 12);
+          ctx.moveTo(cx - 4, py + 5);
+          ctx.lineTo(cx + 3, py + 10);
+          ctx.lineTo(cx - 4, py + 15);
         } else {
-          ctx.moveTo(cx + 4, py + 4);
-          ctx.lineTo(cx - 2, py + 8);
-          ctx.lineTo(cx + 4, py + 12);
+          ctx.moveTo(cx + 4, py + 5);
+          ctx.lineTo(cx - 3, py + 10);
+          ctx.lineTo(cx + 4, py + 15);
         }
         ctx.stroke();
       }
     }
 
-    ctx.fillStyle = '#64748b';
-    ellipse(px + 16, py + 38, 9, 9); ctx.fill();
-    ellipse(px + T - 16, py + 38, 9, 9); ctx.fill();
-    ctx.fillStyle = '#94a3b8';
-    ellipse(px + 16, py + 38, 4, 4); ctx.fill();
-    ellipse(px + T - 16, py + 38, 4, 4); ctx.fill();
+    // Bánh răng xoay tròn ở hai đầu
+    const rot = t * 6 * dir;
+    for (const bx of [px + 16, px + T - 16]) {
+      const by = py + 38;
+      ctx.save();
+      ctx.translate(bx, by);
+      ctx.rotate(rot);
+      ctx.fillStyle = '#475569';
+      ellipse(0, 0, 9, 9); ctx.fill();
+      // răng cưa
+      ctx.strokeStyle = '#94a3b8';
+      ctx.lineWidth = 3;
+      ctx.beginPath();
+      ctx.moveTo(-10, 0); ctx.lineTo(10, 0);
+      ctx.moveTo(0, -10); ctx.lineTo(0, 10);
+      ctx.stroke();
+      // trục giữa
+      ctx.fillStyle = '#cbd5e1';
+      ellipse(0, 0, 4, 4); ctx.fill();
+      ctx.restore();
+    }
   }
 
+  // Cột Gió Lốc Thần Tiên (Zephyr Air Updraft Vent)
   function drawWindVent(v, t) {
     const by = v.y + v.h - 16;
-    ctx.fillStyle = '#475569';
-    rr(v.x + 4, by, v.w - 8, 16, 4); ctx.fill();
-    ctx.fillStyle = '#94a3b8';
-    ctx.fillRect(v.x + 10, by + 3, v.w - 20, 3);
-    ctx.fillRect(v.x + 10, by + 8, v.w - 20, 3);
+    // Bệ phát gió mạ kim loại
+    ctx.fillStyle = '#334155';
+    rr(v.x + 4, by, v.w - 8, 16, 6); ctx.fill();
+    ctx.fillStyle = '#38bdf8';
+    ctx.fillRect(v.x + 10, by + 4, v.w - 20, 2);
+    ctx.fillRect(v.x + 10, by + 9, v.w - 20, 2);
 
     ctx.save();
+    // Vùng gió thần tiên phát sáng
     const grad = ctx.createLinearGradient(v.x, by, v.x, v.y);
-    grad.addColorStop(0, 'rgba(165, 243, 252, 0.45)');
-    grad.addColorStop(0.7, 'rgba(186, 230, 253, 0.25)');
-    grad.addColorStop(1, 'rgba(224, 242, 254, 0.02)');
+    grad.addColorStop(0, 'rgba(56, 189, 248, 0.42)');
+    grad.addColorStop(0.65, 'rgba(186, 230, 253, 0.22)');
+    grad.addColorStop(1, 'rgba(224, 242, 254, 0.01)');
     ctx.fillStyle = grad;
     ctx.fillRect(v.x + 6, v.y, v.w - 12, v.h - 16);
 
-    ctx.strokeStyle = 'rgba(255, 255, 255, 0.65)';
-    ctx.lineWidth = 2;
-    for (let i = 0; i < 3; i++) {
-      const lx = v.x + 14 + i * ((v.w - 28) / 2);
-      const shift = ((t * 220 + i * 70) % (v.h - 24));
+    // Các dải lụa gió uốn lượn hình sin và cánh hoa bay bổng
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.75)';
+    ctx.lineWidth = 2.2;
+    for (let i = 0; i < 4; i++) {
+      const lx = v.x + 14 + i * ((v.w - 28) / 3);
+      const shift = ((t * 240 + i * 80) % (v.h - 24));
       const ly = by - shift;
+      const wave = Math.sin(t * 6 + i) * 6;
       ctx.beginPath();
       ctx.moveTo(lx, ly);
-      ctx.lineTo(lx, ly - 28);
+      ctx.quadraticCurveTo(lx + wave, ly - 16, lx, ly - 32);
       ctx.stroke();
+
+      // Cánh hoa/bụi tiên lấp lánh
+      ctx.fillStyle = i % 2 === 0 ? '#fbcfe8' : '#e0f2fe';
+      ellipse(lx + wave, ly - 16, 2.5, 2.5);
+      ctx.fill();
     }
     ctx.restore();
   }
 
+  // Cổng Thời Không Lượng Tử (Astral Celestial Vortex Portal)
   function drawPortalRing(cx, cy, color1, color2, t) {
     ctx.save();
     const pulse = Math.sin(t * 4) * 3;
-    const rx = 22 + pulse;
-    const ry = 36 + pulse * 0.6;
+    const rx = 24 + pulse;
+    const ry = 38 + pulse * 0.6;
 
-    const aura = ctx.createRadialGradient(cx, cy, 6, cx, cy, rx + 14);
+    // Hào quang vũ trụ tỏa rộng
+    const aura = ctx.createRadialGradient(cx, cy, 6, cx, cy, rx + 16);
     aura.addColorStop(0, color1);
     aura.addColorStop(0.7, color2);
     aura.addColorStop(1, 'rgba(0,0,0,0)');
     ctx.fillStyle = aura;
     ctx.beginPath();
-    ctx.ellipse(cx, cy, rx + 14, ry + 14, 0, 0, Math.PI * 2);
+    ctx.ellipse(cx, cy, rx + 16, ry + 16, 0, 0, Math.PI * 2);
     ctx.fill();
 
-    ctx.fillStyle = '#0f172a';
+    // Tâm không gian đen huyền bí
+    ctx.fillStyle = '#090d16';
     ctx.beginPath();
     ctx.ellipse(cx, cy, rx, ry, 0, 0, Math.PI * 2);
     ctx.fill();
 
+    // Vòng rune xoay ngoài
     ctx.strokeStyle = color1;
     ctx.lineWidth = 3.5;
     ctx.beginPath();
     ctx.ellipse(cx, cy, rx, ry, t * 2, 0, Math.PI * 2);
     ctx.stroke();
 
-    ctx.fillStyle = '#ffffff';
-    ellipse(cx + Math.cos(t * 5) * (rx * 0.4), cy + Math.sin(t * 5) * (ry * 0.4), 3, 3);
-    ctx.fill();
+    // Vòng rune xoay trong ngược chiều
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.85)';
+    ctx.lineWidth = 1.8;
+    ctx.beginPath();
+    ctx.ellipse(cx, cy, rx * 0.65, ry * 0.65, -t * 3, 0, Math.PI * 2);
+    ctx.stroke();
+
+    // Vì sao lấp lánh quay quanh tâm
+    for (let s = 0; s < 3; s++) {
+      const ang = t * 4 + s * ((Math.PI * 2) / 3);
+      const px = cx + Math.cos(ang) * (rx * 0.5);
+      const py = cy + Math.sin(ang) * (ry * 0.5);
+      ctx.fillStyle = '#ffffff';
+      ellipse(px, py, 2.5, 2.5);
+      ctx.fill();
+    }
 
     ctx.restore();
   }
 
   function drawPortal(pt, t) {
-    drawPortalRing(pt.a.x, pt.a.y, '#f43f5e', 'rgba(244, 63, 94, 0.25)', t);
-    drawPortalRing(pt.b.x, pt.b.y, '#06b6d4', 'rgba(6, 182, 212, 0.25)', t + Math.PI);
+    drawPortalRing(pt.a.x, pt.a.y, '#f43f5e', 'rgba(244, 63, 94, 0.3)', t);
+    drawPortalRing(pt.b.x, pt.b.y, '#06b6d4', 'rgba(6, 182, 212, 0.3)', t + Math.PI);
   }
 
+  // Rào Chắn Laser Công Nghệ Cao (Neon Beam Deflector)
   function drawLaser(lz, t) {
     ctx.save();
     const isOff = !!lz.opened;
     const col = lz.color === 'pink' ? '#ff3377' : (lz.color === 'blue' ? '#00b4d8' : '#ef4444');
-    const glowCol = lz.color === 'pink' ? 'rgba(255, 51, 119, 0.45)' : (lz.color === 'blue' ? 'rgba(0, 180, 216, 0.45)' : 'rgba(239, 68, 68, 0.45)');
+    const glowCol = lz.color === 'pink' ? 'rgba(255, 51, 119, 0.5)' : (lz.color === 'blue' ? 'rgba(0, 180, 216, 0.5)' : 'rgba(239, 68, 68, 0.5)');
 
+    // Chân đế kim loại phát laser
     ctx.fillStyle = '#1e293b';
-    ctx.fillRect(lz.x - 4, lz.y, lz.w + 8, 8);
-    ctx.fillRect(lz.x - 4, lz.y + lz.h - 8, lz.w + 8, 8);
+    rr(lz.x - 5, lz.y, lz.w + 10, 10, 3); ctx.fill();
+    rr(lz.x - 5, lz.y + lz.h - 10, lz.w + 10, 10, 3); ctx.fill();
 
     if (isOff) {
+      // Đèn báo xanh an toàn
       ctx.fillStyle = '#22c55e';
-      ellipse(lz.x + lz.w / 2, lz.y + 4, 2.5, 2.5); ctx.fill();
-      ellipse(lz.x + lz.w / 2, lz.y + lz.h - 4, 2.5, 2.5); ctx.fill();
+      ellipse(lz.x + lz.w / 2, lz.y + 5, 3, 3); ctx.fill();
+      ellipse(lz.x + lz.w / 2, lz.y + lz.h - 5, 3, 3); ctx.fill();
       ctx.restore();
       return;
     }
 
-    const beamW = lz.w + Math.sin(t * 18) * 2;
+    // Đèn báo năng lượng nguy hiểm
+    ctx.fillStyle = col;
+    ellipse(lz.x + lz.w / 2, lz.y + 5, 3.5, 3.5); ctx.fill();
+    ellipse(lz.x + lz.w / 2, lz.y + lz.h - 5, 3.5, 3.5); ctx.fill();
+
+    const beamW = lz.w + Math.sin(t * 20) * 2;
     const cx = lz.x + lz.w / 2;
 
+    // Hào quang laser nở rộng
     ctx.fillStyle = glowCol;
-    ctx.fillRect(cx - beamW * 1.5, lz.y + 8, beamW * 3, lz.h - 16);
+    ctx.fillRect(cx - beamW * 1.6, lz.y + 10, beamW * 3.2, lz.h - 20);
 
+    // Lõi laser màu chủ đạo
     ctx.fillStyle = col;
-    ctx.fillRect(cx - beamW / 2, lz.y + 8, beamW, lz.h - 16);
+    ctx.fillRect(cx - beamW / 2, lz.y + 10, beamW, lz.h - 20);
 
+    // Lõi plasma trắng tinh khiết
     ctx.fillStyle = '#ffffff';
-    ctx.fillRect(cx - 1.5, lz.y + 8, 3, lz.h - 16);
+    ctx.fillRect(cx - 2, lz.y + 10, 4, lz.h - 20);
 
-    if (Math.random() < 0.3) {
-      const py = lz.y + rnd(10, lz.h - 10);
-      ellipse(cx + rnd(-5, 5), py, 2, 2);
+    // Hạt điện từ phát tán
+    if (Math.random() < 0.35) {
+      const py = lz.y + rnd(12, lz.h - 12);
+      ctx.fillStyle = '#ffffff';
+      ellipse(cx + rnd(-6, 6), py, 2, 2);
       ctx.fill();
     }
     ctx.restore();
   }
 
+  // Tối ưu hóa Darkness (Cached Canvas)
+  let darknessCanvas = null;
   function drawDarkness(t) {
     ctx.save();
-    const overlayCanvas = document.createElement('canvas');
-    overlayCanvas.width = W;
-    overlayCanvas.height = H;
-    const octx = overlayCanvas.getContext('2d');
+    if (!darknessCanvas) {
+      darknessCanvas = document.createElement('canvas');
+      darknessCanvas.width = W;
+      darknessCanvas.height = H;
+    }
+    const octx = darknessCanvas.getContext('2d');
+    octx.clearRect(0, 0, W, H);
 
     octx.fillStyle = 'rgba(10, 15, 28, 0.94)';
     octx.fillRect(0, 0, W, H);
@@ -2361,8 +2560,8 @@
 
     for (const p of G.players) {
       const pcx = p.x + p.w / 2, pcy = p.y + p.h / 2;
-      const rad = 175 + Math.sin(t * 3 + p.i) * 6;
-      const g = octx.createRadialGradient(pcx, pcy, 30, pcx, pcy, rad);
+      const rad = 185 + Math.sin(t * 3 + p.i) * 6;
+      const g = octx.createRadialGradient(pcx, pcy, 35, pcx, pcy, rad);
       g.addColorStop(0, 'rgba(0,0,0,1)');
       g.addColorStop(0.7, 'rgba(0,0,0,0.85)');
       g.addColorStop(1, 'rgba(0,0,0,0)');
@@ -2374,18 +2573,31 @@
 
     if (G.goal) {
       const gcx = G.goal.x + G.goal.w / 2, gcy = G.goal.y + G.goal.h / 2;
-      const g = octx.createRadialGradient(gcx, gcy, 20, gcx, gcy, 120);
-      g.addColorStop(0, 'rgba(0,0,0,0.9)');
+      const g = octx.createRadialGradient(gcx, gcy, 20, gcx, gcy, 130);
+      g.addColorStop(0, 'rgba(0,0,0,0.95)');
       g.addColorStop(1, 'rgba(0,0,0,0)');
       octx.fillStyle = g;
       octx.beginPath();
-      octx.arc(gcx, gcy, 120, 0, Math.PI * 2);
+      octx.arc(gcx, gcy, 130, 0, Math.PI * 2);
       octx.fill();
     }
 
-    ctx.drawImage(overlayCanvas, 0, 0);
+    if (G.heart) {
+      const hx = G.heart.x, hy = G.heart.y;
+      const g = octx.createRadialGradient(hx, hy, 15, hx, hy, 140);
+      g.addColorStop(0, 'rgba(0,0,0,1)');
+      g.addColorStop(1, 'rgba(0,0,0,0)');
+      octx.fillStyle = g;
+      octx.beginPath();
+      octx.arc(hx, hy, 140, 0, Math.PI * 2);
+      octx.fill();
+    }
+
+    octx.globalCompositeOperation = 'source-over';
+    ctx.drawImage(darknessCanvas, 0, 0);
     ctx.restore();
   }
+
   function drawDecorBack(t) {
     const th = G.theme;
     // hoa
@@ -3551,11 +3763,18 @@
       btn.className = 'level-card-btn' + (idx === G.levelIndex ? ' active' : '');
       const starsEarned = (rec.stars && rec.stars[idx]) || 0;
       const starText = '★'.repeat(starsEarned) + '☆'.repeat(3 - starsEarned);
+      const icon = lvl.icon || '🌸';
+      const numStr = '#' + (idx + 1).toString().padStart(2, '0');
+      const diff = lvl.difficulty || 'Thử thách';
 
       btn.innerHTML = `
-        <span class="lvl-num">${idx + 1}</span>
+        <div class="lvl-header">
+          <span class="lvl-num">${numStr}</span>
+          <span class="lvl-icon">${icon}</span>
+        </div>
         <span class="lvl-name">${lvl.name}</span>
         <span class="lvl-tag">${lvl.tag || ''}</span>
+        <span class="lvl-diff">${diff}</span>
         <span class="lvl-stars">${starText}</span>
       `;
 
